@@ -1,0 +1,160 @@
+<!--Main Navigation-->
+<header>
+  <!-- Sidebar -->
+  
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">OnlineCourses</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+<nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+    <div class="position-sticky">
+      <div class="list-group list-group-flush mx-3 mt-4">
+        <a href="/" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+          <i class="fas fa-home fa-fw me-3"></i><span>Accueil</span>
+        </a>
+        <a href="/admin" class="list-group-item list-group-item-action py-2 ripple active" aria-current="true">
+          <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Dashboard</span>
+        </a>
+        <a href="/cours" class="list-group-item list-group-item-action py-2 ripple">
+          <i class="fa-solid fa-school fa-fw me-3"></i><span>Cours</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+  </div>
+</div>
+<!-- Sidebar -->
+
+  <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <div class="container-fluid">
+      <button class="navbar-toggler" id="offcanvasExample" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="fas fa-bars"></i></button>
+
+      <a class="navbar-brand" id="offcanvasExample" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">Menu</a>
+      <ul class="navbar-nav ms-auto d-flex flex-row">
+        <li class="nav-item dropdown">
+          <a class="nav-link me-3 me-lg-0 dropdown-toggle arrow" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+            <i class="flag flag-france m-0"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" href="#" style="color: black !important;"><i class="flag flag-france"></i>Français
+                <i class="fa fa-check text-success ms-2"></i></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+              <a class="dropdown-item" href="#" style="color: black !important;"><i class="flag flag-uk"></i>English</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+            <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="22" alt="" loading="lazy" />
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="/profil"  style="color: black !important;">Mon profil</a></li>
+            <li><a class="dropdown-item" href="#" style="color: black !important">Paramètres</a></li>
+            <li><a class="dropdown-item" href="#" style="color: black !important;">Déconnexion</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>   
+</header>
+
+<!--Main layout-->
+<main style="margin-top: 58px">
+  <div class="container pt-4 main_admin">
+    <div class="main_text_admin mt-4">
+      <h1>Tableau de bord</h1>
+    </div>
+
+<table class="table align-middle mb-0 mt-5 bg-white tableau_cours">
+  <thead class="bg-light">
+    <tr>
+      <th>Titre</th>
+      <th>Auteur</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <div class="d-flex align-items-center">
+          <div class="ms-3">
+            <p class="fw-bold mb-1">Apprendre le développement Web</p>
+          </div>
+        </div>
+      </td>
+      <td>
+        <p class="text-muted mb-0">John Doe</p>
+      </td>
+      <td>
+        <p class="text-muted mb-0">Apprenez le développement web front-end</p>
+      </td>
+      <td>
+        <button type="button" class="btn btn-primary btn-sm me-3">Voir</button>
+        {{!-- Bouton Modifier --}}
+        <button type="button" class="btn btn-secondary btn-sm me-3" data-bs-toggle="modal" data-bs-target="#exampleModal3">Modifier</button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modifier</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Titre">
+                  </div>
+                    <div class="mb-3">
+                      <input type="text" class="form-control" placeholder="Auteur">
+                  </div>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Description">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-danger">Modifier</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{!-- Fin Bouton modifier --}}
+        
+      {{!-- Bouton supprimer --}}
+      <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal2">Supprimer</button>
+      <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Supprimer</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Souhaitez-vous vraiment supprimer ?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+              <button type="button" class="btn btn-danger">Supprimer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{!-- Fin bouton supprimer --}}
+
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+</main>
+<!--Main layout-->

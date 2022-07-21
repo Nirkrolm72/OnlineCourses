@@ -1,0 +1,136 @@
+<nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <div class="container-fluid">
+      <button class="navbar-toggler" id="offcanvasExample" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="fas fa-bars"></i></button>
+
+      <a class="navbar-brand" href="/" type="button">OnlineCourses</a>
+      <ul class="navbar-nav ms-auto d-flex flex-row">
+        <li class="nav-item me-3 me-lg-0">
+          <a class="nav-link" href="{{github}}" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link me-3 me-lg-0 dropdown-toggle arrow" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+            <i class="flag flag-france m-0"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" href="#" style="color: black !important;"><i class="flag flag-france"></i>Français
+                <i class="fa fa-check text-success ms-2"></i></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+              <a class="dropdown-item" href="#" style="color: black !important;"><i class="flag flag-uk"></i>English</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+            <img src="{{avatar}}" class="rounded-circle" height="22" alt="" loading="lazy" />
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="/profil"  style="color: black !important;">Mon profil</a></li>
+            <li><a class="dropdown-item" href="#" style="color: black !important">Paramètres</a></li>
+            <li><a class="dropdown-item" href="#" style="color: black !important;">Déconnexion</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>   
+
+<section style="background-color: #eee;">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4 d-flex justify-content-center">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="/">Acceuil</a></li>
+            <li class="breadcrumb-item"><a href="/profil">Profil utilisateur</a></li>
+            <li class="breadcrumb-item"><a href="/securite_du_compte">Sécurité du compte</a></li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+{{!- https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp}}
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="{{avatar}}" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px; box-shadow: 5px 5px 15px 5px #000000;">
+            <h5 class="my-3">{{prenom}} {{nom}}</h5>
+            <p class="text-muted mb-1">{{fonction}}</p> {{! métier}}
+            <p class="text-muted mb-4">{{ville}}, {{pays}}</p>
+            <p class="text-muted">Status : {{status}}</p>
+            <a class="btn btn-danger" href="/deconnexion" name="deconnexion">Déconnexion</a>
+          </div>
+        </div>
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body p-0">
+            <ul class="list-group list-group-flush rounded-3">
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                <p class="mb-0">{{github}}</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                <p class="mb-0">{{twitter}}</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                <p class="mb-0">{{instagram}}</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                <p class="mb-0">{{facebook}}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Nom complet</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{prenom}} {{nom}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{email}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Téléphone</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{telephone}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Adresse</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{adresse}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

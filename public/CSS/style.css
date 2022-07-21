@@ -1,0 +1,545 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/************** GENERAL *********************/
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+/************** FIN GENERAL *********************/
+
+/************** NAVBAR *********************/
+
+.navbar {
+    background-color: #7A3776 !important;
+}
+
+.search_bar{
+    width: 512px;
+    outline: none;
+}
+
+.formulaire{
+    display: flex !important;
+    flex-direction: end !important;
+}
+
+/* .btn{
+    min-width: 150px;
+    background-color: #26C6DA !important;
+    color: black;
+    border: none;
+} */
+.navbar-brand{
+    color: white !important;
+}
+
+.navbar ul li a{
+    color: white !important;
+}
+
+.navbar .dropdown-item{
+  color: black!important;
+}
+/************** FIN NAVBAR *********************/
+
+/************** HEADER *********************/
+header{
+    position: relative;
+}
+
+.text-white{
+    margin-top: 100px;
+    z-index: 11;
+}
+
+.main_text{
+    width: 600px;
+    color: white;
+    text-align: center;
+}
+
+.overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(122,55,118,1) 35%, rgba(0,212,255,1) 100%);
+    opacity: 0.7;
+}
+
+/************** FIN HEADER *********************/
+
+/************** MINIATURES *********************/
+
+.titre_principale{
+    text-align: center;
+    margin-top: 50px;
+    color: #A435F1;
+}
+
+.container img{
+    margin-top: 50px;
+}
+
+/************** FIN MINIATURES *********************/
+
+/************** CONTACT *********************/
+.titre_contact{
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    color: #A435F1;
+}
+
+.nom_Prenom{
+    width: 500px;
+    height: 80px;
+    border-radius: 10px;
+    border-color: #A435F1;
+    outline: none;
+}
+
+.nom_Prenom::placeholder{
+    color: #A435F1;
+}
+
+.email{
+    width: 500px;
+    height: 80px;
+    border-radius: 10px;
+    border-color: #A435F1;
+    outline: none;
+}
+
+.email::placeholder{
+    color: #A435F1;
+}
+
+.objet{
+    width: 1160px;
+    height: 80px;
+    margin-top: 20px;
+    border-radius: 10px;
+    border-color: #A435F1;
+    outline: none;
+}
+
+.objet::placeholder{
+    color: #A435F1;
+}
+
+.description{
+    width: 1160px;
+    margin-top: 20px;
+    border-radius: 10px;
+    border-color: #A435F1;
+    outline: none;
+}
+
+.description::placeholder{
+    color: #A435F1;
+}
+
+.btn_envoyer{
+    width: 310px;
+    height: 38px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+    background-color: #26C6DA;
+    color: white;
+    outline: none;
+}
+
+/************** FIN CONTACT *********************/
+
+/************** CONNECTION *********************/
+
+.background-radial-gradient {
+    background-color: hsl(218, 41%, 15%);
+    background-image: radial-gradient(650px circle at 0% 0%,
+        hsl(218, 41%, 35%) 15%,
+        hsl(218, 41%, 30%) 35%,
+        hsl(218, 41%, 20%) 75%,
+        hsl(218, 41%, 19%) 80%,
+        transparent 100%),
+      radial-gradient(1250px circle at 100% 100%,
+        hsl(218, 41%, 45%) 15%,
+        hsl(218, 41%, 30%) 35%,
+        hsl(218, 41%, 20%) 75%,
+        hsl(218, 41%, 19%) 80%,
+        transparent 100%);
+  }
+
+  #radius-shape-1 {
+    height: 220px;
+    width: 220px;
+    top: -60px;
+    left: -130px;
+    background: radial-gradient(#44006b, #ad1fff);
+    overflow: hidden;
+  }
+
+  #radius-shape-2 {
+    border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+    bottom: -60px;
+    right: -110px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(#44006b, #ad1fff);
+    overflow: hidden;
+  }
+
+  .bg-glass {
+    background-color: hsla(0, 0%, 100%, 0.9) !important;
+    backdrop-filter: saturate(200%) blur(25px);
+  }
+
+  .title_connexion{
+    text-align: center;
+    color: #A435F1;
+  }
+
+input:placeholder-shown{
+    color: black;
+  }
+
+/************** FIN CONNECTION *********************/
+
+/************** INSCRIPTION *********************/
+
+.background-radial-gradient {
+    background-color: hsl(218, 41%, 15%);
+    background-image: radial-gradient(650px circle at 0% 0%,
+        hsl(218, 41%, 35%) 15%,
+        hsl(218, 41%, 30%) 35%,
+        hsl(218, 41%, 20%) 75%,
+        hsl(218, 41%, 19%) 80%,
+        transparent 100%),
+      radial-gradient(1250px circle at 100% 100%,
+        hsl(218, 41%, 45%) 15%,
+        hsl(218, 41%, 30%) 35%,
+        hsl(218, 41%, 20%) 75%,
+        hsl(218, 41%, 19%) 80%,
+        transparent 100%);
+  }
+
+  #radius-shape-1 {
+    height: 220px;
+    width: 220px;
+    top: -60px;
+    left: -130px;
+    background: radial-gradient(#44006b, #ad1fff);
+    overflow: hidden;
+  }
+
+  #radius-shape-2 {
+    border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+    bottom: -60px;
+    right: -110px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(#44006b, #ad1fff);
+    overflow: hidden;
+  }
+
+  .bg-glass {
+    background-color: hsla(0, 0%, 100%, 0.9) !important;
+    backdrop-filter: saturate(200%) blur(25px);
+  }
+
+  .title_inscription{
+    text-align: center;
+    color: #A435F1;
+  }
+
+/************** FIN INSCRIPTION *********************/
+
+/************** 404 *********************/
+#notfound {
+    position: relative;
+    height: 100vh;
+  }
+  
+  #notfound .notfound-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/bg.jpg');
+    background-size: cover;
+  }
+  
+  #notfound .notfound-bg:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(122,55,118,1) 35%, rgba(0,212,255,1) 100%);
+    opacity: 0.7;
+  }
+  
+  #notfound .notfound {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+  
+  .notfound {
+    max-width: 910px;
+    width: 100%;
+    line-height: 1.4;
+    text-align: center;
+  }
+  
+  .notfound .notfound-404 {
+    position: relative;
+    height: 200px;
+  }
+  
+  .notfound .notfound-404 h1 {
+    font-family: 'Montserrat', sans-serif;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    font-size: 220px;
+    font-weight: 900;
+    margin: 0px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+  }
+  
+  .notfound h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    margin-top: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .notfound .home-btn, .notfound .contact-btn {
+    font-family: 'Montserrat', sans-serif;
+    display: inline-block;
+    font-weight: 700;
+    text-decoration: none;
+    background-color: transparent;
+    border: 2px solid transparent;
+    text-transform: uppercase;
+    padding: 13px 25px;
+    font-size: 18px;
+    border-radius: 40px;
+    margin: 7px;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
+  }
+  
+  .notfound .home-btn:hover, .notfound .contact-btn:hover {
+    opacity: 0.9;
+  }
+  
+  .notfound .home-btn {
+    color: rgba(255, 0, 36, 0.7);
+    background: #fff;
+  }
+  
+  .notfound .contact-btn {
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .notfound-social {
+    margin-top: 25px;
+  }
+  
+  .notfound-social>a {
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    width: 40px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0px 6px;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
+  }
+  .notfound-social>a:hover {
+    color: rgba(255, 0, 36, 0.7);
+    background-color: #fff;
+    border-radius: 50%;
+  }
+  
+  @media only screen and (max-width: 767px) {
+    .notfound .notfound-404 h1 {
+      font-size: 182px;
+    }
+  }
+  
+  @media only screen and (max-width: 480px) {
+    .notfound .notfound-404 {
+      height: 146px;
+    }
+    .notfound .notfound-404 h1 {
+      font-size: 146px;
+    }
+    .notfound h2 {
+      font-size: 16px;
+    }
+    .notfound .home-btn, .notfound .contact-btn {
+      font-size: 14px;
+    }
+  }
+  
+/************** FIN 404 *********************/
+
+.main_admin{
+  width: 100%;
+  height: 100vh;
+}
+/************** ADMIN MAIN *********************/
+
+.main_text_admin{
+  text-align: center;
+  color: black;
+}
+
+.visit_card{
+  width: 200px;
+  height: 100px;
+  margin-left: 100px;
+  background-color: white;
+  color: black;
+  box-shadow: 5px 10px 5px #000000;
+  text-align: center;
+}
+
+/************** FIN ADMIN MAIN *********************/
+
+/************** ADMIN COURS *********************/
+
+#container {
+  width: 1000px;
+  margin: 20px auto;
+}
+.ck-editor__editable[role="textbox"] {
+  /* editing area */
+  min-height: 200px;
+}
+.ck-content .image {
+  /* block images */
+  max-width: 80%;
+  margin: 20px auto;
+}
+
+/************** FIN ADMIN COURS *********************/
+
+
+
+
+
+
+
+
+
+
+/************** FOOTER *********************/
+
+footer{
+    width: 100%;
+    height: 400px;
+    background-color: #7A3776;
+    color: white;
+}
+
+footer .footer{
+    width: 460px;
+    text-align: center;
+}
+
+footer ul{
+    display: flex;
+}
+
+footer .link ul li{
+    list-style: none;
+}
+
+footer .link ul li a{
+    margin-right: 20px;
+    text-decoration: none;
+    color: white;
+}
+
+/************** FIN FOOTER *********************/
+
+@media screen and (max-width: 768px){
+  .search_bar{
+    display: none;
+  }
+
+  .text_para1{
+    font-size: 10px;
+  }
+
+  .link{
+    font-size: 10px;
+  }
+
+  .contact{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nom_Prenom{
+    width: 100vw;
+  }
+
+  .email{
+    width: 100vw;
+  }
+
+  .objet{
+    width: 100vw;
+  }
+
+  .description{
+    width: 100vw;
+  }
+
+  .social_network_btn{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+}
