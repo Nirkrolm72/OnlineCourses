@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
+const passport = require('passport-google-oidc');
+const GoogleStrategy = require('passport-google-oauth2');
 const app = express();
 
 
@@ -49,9 +51,9 @@ app.get('/inscription', function(req, res){
 
 app.get('/deconnexion', function(req, res){
   if(!req.session){
-    req.session.destroy(function(err){
-      res.redirect('/');
-    });
+    delete(req.session);
+    console.log('Vous êtes déconnecté');
+    res.redirect('/');
   }
   else{
     res.redirect('/');
@@ -62,8 +64,8 @@ app.get('/profil', function(req, res){
     res.render('profil', {title: 'Profil', layout:'profil'});
 });
 
-app.get('/securite_du_compte', function(req, res){
-    res.render('securite_du_compte', {title: 'Securite_du_compte', layout:'securite_du_compte'});
+app.get('/parametres', function(req, res){
+    res.render('parametres', {title: 'Parametres', layout:'parametres'});
 });
 
 app.get('/admin', function(req, res){
@@ -118,38 +120,15 @@ app.post('/inscription', async function(req, res){
 });
 
 
+
+
+
+
+
+
+
 // Système de connexion
-app.use(session({
-	secret: 'Nirkrolm',
-	resave: true,
-	saveUninitialized: true
-}));
 
-
-app.post('/connexion', async function(req, res) {
-	var email = req.body.email;
-	var password = req.body.password;
-  
-	if (email && password) {
-		db.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], function(error, results, fields) {
-			if (results.length > 0) {
-				req.session.loggedin = true;
-				req.session.email = email;
-        console.log('Vous êtes maintenant connecté');
-				res.redirect('/profil');
-			} 
-      else{
-				res.send('Email ou mot de passe incorrect');
-        res.redirect('/connexion');
-			}	
-			res.end();
-		});
-	} else {
-    
-		res.send('Veuillez entrer un email et un mot de passe');
-		res.end();
-	}
-});
 
 
 
