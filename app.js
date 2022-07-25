@@ -4,6 +4,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
 const bcrypt = require('bcrypt');
+const methodOverride = require('method-override');
 const nodemailer = require('nodemailer');
 const passport = require('passport-google-oidc');
 const GoogleStrategy = require('passport-google-oauth2');
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 const db = require('./database/database');
 const { request } = require('http');
 const { response } = require('express');
+const SMTPTransport = require('nodemailer/lib/smtp-transport');
 db.connect(function(err){
   if(err) throw err;
   console.log('Connecté à la base de donnée');
@@ -61,7 +63,10 @@ app.get('/deconnexion', function(req, res){
 });
 
 app.get('/profil', function(req, res){
-    res.render('profil', {title: 'Profil', layout:'profil'});
+    db.query('SELECT * FROM users', function(err, data){
+      if(err) throw err;
+      res.render('profil', {title: 'Profil', layout:'profil', db:data});
+    });
 });
 
 app.get('/parametres', function(req, res){
@@ -73,7 +78,23 @@ app.get('/admin', function(req, res){
 });
 
 app.get('/user', function(req, res){
-    res.render('user', {title: 'Utilisateur', layout:"user"});
+    db.query('SELECT prenom, email, status FROM users', function(err, data){
+      if(err) throw err;
+      res.render('user', {title: 'Utilisateur', layout:"user", db:data});
+      
+    });
+});
+
+app.get('/user/:id', function(req, res){
+  res.render('user', {title: 'Utilisateur', layout:"user", db:data});
+});
+
+app.put('/user/:id', function(req, res){
+  res.render('user', {title: 'Utilisateur', layout:"user", db:data});
+});
+
+app.delete('/user/:id', function(req, res){
+
 });
 
 app.get('/formateur', function(req, res){
@@ -88,7 +109,8 @@ app.get('/seeCourses', function(req, res){
     res.render('seeCourses', {title: 'Cours', layout:"cours"});
 });
 
-// Système d'inscription
+
+// Système d'inscription => POST
 app.post('/inscription', async function(req, res){
 
     var value = req.body.password;
@@ -120,14 +142,35 @@ app.post('/inscription', async function(req, res){
 });
 
 
+// METHODE UPDATE => PUT
+app.put('/user/:id', (req, res) => {
+  const { id } = req.params.id;
+  const { prenom, email, status } = req.body;
 
+  db.query(`UPDATE users SET prenom="${prenom}", email="${email}", status"${status}" WHERE id=${id};`, function(err, data){
+    if(err){
+      console.log('erreur update');
+    }
+    console.log('update réussi');
+    res.redirect('/admin');
+  });
+});
 
+// METHODE DELETE => DELETE
+app.delete('/user/:id', (req, res) => {
+  const { id } = req.params;
 
+  db.query(`DELETE FROM users WHERE id=${id}`, function(err, data){
+    if(err){
+      console.log('erreur');
+    }
+    else{
+      console.log('supression réussie');
+      res.redirect('/admin');
+    }
+  });
+});
 
-
-
-
-// Système de connexion
 
 
 

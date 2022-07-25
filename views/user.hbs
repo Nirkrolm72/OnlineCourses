@@ -81,14 +81,16 @@
       <h1>Utilisateur</h1>
     </div>
 
+{{#each db}}
+<table class=" container table align-middle mb-0 mt-5 bg-white tableau_cours">
 
-<table class="table align-middle mb-0 mt-5 bg-white tableau_cours">
   <thead class="bg-light">
-     
+
+  
     <tr>
-      <th>Nom</th>
+      <th>Prénom</th>
       <th>E-Mail</th>
-      <th>Rôle</th>
+      <th>Status</th>
       <th>Action</th>
     </tr>
 
@@ -99,20 +101,21 @@
       <td>
         <div class="d-flex align-items-center">        
           <div class="ms-3">  
-            <p class="fw-bold mb-1">{{prenom}} {{nom}}</p>
+            <p class="fw-bold mb-1">{{this.prenom}}</p>
           </div>
         </div>   
       </td>
       <td>
-        <p class="text-muted mb-0">{{email}}</p>
+        <p class="text-muted mb-0">{{this.email}}</p>
       </td>
       <td>
-        <p class="text-muted mb-0">{{role}}</p>
+        <p class="text-muted mb-0">{{this.status}}</p>
       </td>
       <td>
         {{!-- Bouton Modifier --}}
         <button type="button" class="btn btn-secondary btn-sm me-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Modifier</button>
         <!-- Modal -->
+      <form action="/user/{{this.id}}?_method=PUT" method="post">
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -121,21 +124,21 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <form>
+                
                   <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Nom">
+                    <input type="text" name="prenom" class="form-control" placeholder="Prénom">
                   </div>
                     <div class="mb-3">
-                      <input type="text" class="form-control" placeholder="E-Mail">
+                      <input type="text" name="email" class="form-control" placeholder="E-Mail">
                   </div>
                   <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Rôle">
+                    <input type="text" name="status" class="form-control" placeholder="Status">
                   </div>
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-danger">Modifier</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-secondary">Modifier</button>
               </div>
             </div>
           </div>
@@ -143,6 +146,7 @@
       {{!-- Fin Bouton modifier --}}
 
       {{!-- Bouton supprimer --}}
+    <form action="/user/{{this.id}}?_method=DELETE" method="post">
       <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal2">Supprimer</button>
       <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -156,18 +160,21 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-              <button type="button" class="btn btn-danger">Supprimer</button>
+              
+                <button type="submit" class="btn btn-danger">Supprimer</button>
             </div>
           </div>
         </div>
       </div>
+      </form>
+
       {{!-- Fin bouton supprimer --}}
     </tr>
   </tbody>
-
+ 
 </table>
 
   </div>
-
+{{/each}}
 </main>
 <!--Main layout-->
