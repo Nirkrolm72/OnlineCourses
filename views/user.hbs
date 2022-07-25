@@ -80,7 +80,7 @@
     <div class="main_text_admin mt-4">
       <h1>Utilisateur</h1>
     </div>
-
+{{#if db}}
 {{#each db}}
 <table class=" container table align-middle mb-0 mt-5 bg-white tableau_cours">
 
@@ -97,6 +97,7 @@
   </thead>
 
   <tbody>
+    
     <tr>
       <td>
         <div class="d-flex align-items-center">        
@@ -176,5 +177,9 @@
 
   </div>
 {{/each}}
+
+{{else}}
+<h1>Problème</h1>
+{{/if}}
 </main>
 <!--Main layout-->

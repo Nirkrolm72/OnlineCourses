@@ -1,6 +1,7 @@
 const express = require('express');
 const {engine} = require('express-handlebars');
 const session = require('express-session');
+const cookie = require('cookie-parser');
 const bodyParser = require('body-parser');
 const path = require('path');
 const bcrypt = require('bcrypt');
@@ -51,22 +52,13 @@ app.get('/inscription', function(req, res){
     res.render('inscription', {title: 'Inscription'});
 });
 
-app.get('/deconnexion', function(req, res){
-  if(!req.session){
-    delete(req.session);
-    console.log('Vous êtes déconnecté');
-    res.redirect('/');
-  }
-  else{
-    res.redirect('/');
-  }
-});
+
 
 app.get('/profil', function(req, res){
-    db.query('SELECT * FROM users', function(err, data){
-      if(err) throw err;
+  db.query('SELECT * FROM users', function(err, data){
+    if(err) throw err;
       res.render('profil', {title: 'Profil', layout:'profil', db:data});
-    });
+  });
 });
 
 app.get('/parametres', function(req, res){
@@ -78,24 +70,40 @@ app.get('/admin', function(req, res){
 });
 
 app.get('/user', function(req, res){
-    db.query('SELECT prenom, email, status FROM users', function(err, data){
+    db.query('SELECT prenom, email, status, id FROM users', function(err, data){
       if(err) throw err;
       res.render('user', {title: 'Utilisateur', layout:"user", db:data});
       
     });
 });
 
-app.get('/user/:id', function(req, res){
-  res.render('user', {title: 'Utilisateur', layout:"user", db:data});
+
+app.put('/user/:id', (req, res) => {
+  const { id } = req.params.id;
+  const { prenom, email, status } = req.body;
+  
+  // Edition de l'article par rapport a son id
+  db.query(`UPDATE users SET prenom="${prenom}", email="${email}", status="${status}", WHERE id=${id};`, function(err, data){
+    if(err) throw err;
+
+    // Redirection vers la page admin
+    res.redirect('/user');
+  });
 });
 
-app.put('/user/:id', function(req, res){
-  res.render('user', {title: 'Utilisateur', layout:"user", db:data});
-});
 
-app.delete('/user/:id', function(req, res){
+/*app.delete('/user/:id', (req,res) => {
+  const { id } = req.params;
 
-});
+  // Supression de l'article par rapport a son id
+  db.query(`DELETE FROM user WHERE id=${id}`, function(err, data){
+    if(err) throw err
+
+    // Redirection vers la page admin
+    res.redirect('/admin');
+  })
+});*/
+
 
 app.get('/formateur', function(req, res){
   res.render('formateur', {title: 'Formateur', layout:"formateur"});
@@ -141,40 +149,46 @@ app.post('/inscription', async function(req, res){
     });
 });
 
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(session({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false 
+}));
 
-// METHODE UPDATE => PUT
-app.put('/user/:id', (req, res) => {
-  const { id } = req.params.id;
-  const { prenom, email, status } = req.body;
+// cookie parser middleware
+app.use(cookie());
 
-  db.query(`UPDATE users SET prenom="${prenom}", email="${email}", status"${status}" WHERE id=${id};`, function(err, data){
-    if(err){
-      console.log('erreur update');
-    }
-    console.log('update réussi');
-    res.redirect('/admin');
-  });
+//username and password
+const myusername = "guyonbrandon72@gmail.com";
+const mypassword = "admin";
+
+// a variable to save a session
+var sessions;
+
+app.post('/connexion',(req,res) => {
+  if(req.body.email == myusername && req.body.password == mypassword){
+      sessions=req.session;
+      sessions.userid=req.body.username;
+      console.log(req.session)
+      res.redirect("/profil");
+  }
+  else{
+      res.send('Invalid username or password');
+  }
 });
 
-// METHODE DELETE => DELETE
-app.delete('/user/:id', (req, res) => {
-  const { id } = req.params;
-
-  db.query(`DELETE FROM users WHERE id=${id}`, function(err, data){
-    if(err){
-      console.log('erreur');
-    }
-    else{
-      console.log('supression réussie');
-      res.redirect('/admin');
-    }
-  });
+app.get('/deconnexion', function(req, res){
+  if(!req.session){
+    delete(req.session);
+    console.log('Vous êtes déconnecté');
+    res.redirect('/');
+  }
+  else{
+    res.redirect('/');
+  }
 });
-
-
-
-
-
 
 
 
