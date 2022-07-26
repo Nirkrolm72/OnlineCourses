@@ -74,13 +74,28 @@
 
 <!--Main Navigation-->
 
-<div class="container">
-        <div class="course-title mt-5" style="text-align: center;">
+<div class="container mt-5">
+  <form action="/cours" method="post">
+        <div class="course-title pt-3" style="text-align: center;">
             <h1>Créer un cours</h1>
         </div>
-      
+        
+        <div class="titre d-flex justify-content-center mt-3">
+          <input type="text" name="titre" id="titre" placeholder="Titre" style="width: 100%;">
+        </div>
 
-    <div id="editor"></div>
+        
+
+        <div class="decription d-flex justify-content-center mb-5 mt-3">
+          <input type="text" name="description" id="description" placeholder="Description" style="width: 100%;">
+        </div>
+
+        <div class="date d-flex justify-content-center mt-5">
+          <input type="date" name="date" id="date">
+        </div>
+
+    <textarea id="editor" name="contenu"></textarea>
+
     <script>
             // This sample still does not showcase all CKEditor 5 features (!)
             // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
@@ -228,6 +243,7 @@
 </div>
   
 
-<div class="btn_save d-flex justify-content-center mt-3 mb-5">
-    <button type="button" class="btn btn-primary">Sauvegarder</button>
-</div>
+  <div class="btn_save d-flex justify-content-center mt-3 mb-5">
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+  </div>
+</form>

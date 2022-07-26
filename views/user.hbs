@@ -80,6 +80,7 @@
     <div class="main_text_admin mt-4">
       <h1>Utilisateur</h1>
     </div>
+ {{!-- Condition qui vérifie si il y a des datas dans la base de données    --}}
 {{#if db}}
 {{#each db}}
 <table class=" container table align-middle mb-0 mt-5 bg-white tableau_cours">
@@ -177,9 +178,9 @@
 
   </div>
 {{/each}}
-
+{{!-- Sinon on affiche un message --}}
 {{else}}
-<h1>Problème</h1>
+<h1 style="text-align: center;">Base de donnée vide</h1>
 {{/if}}
 </main>
 <!--Main layout-->

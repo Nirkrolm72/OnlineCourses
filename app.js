@@ -5,6 +5,7 @@ const cookie = require('cookie-parser');
 const bodyParser = require('body-parser');
 const path = require('path');
 const bcrypt = require('bcrypt');
+const jsonwebtoken = require('jsonwebtoken');
 const methodOverride = require('method-override');
 const nodemailer = require('nodemailer');
 const passport = require('passport-google-oidc');
@@ -16,11 +17,15 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// Config méthode override
+app.use(methodOverride('_method'));
+
 // Base de donnée
 const db = require('./database/database');
 const { request } = require('http');
 const { response } = require('express');
 const SMTPTransport = require('nodemailer/lib/smtp-transport');
+
 db.connect(function(err){
   if(err) throw err;
   console.log('Connecté à la base de donnée');
@@ -77,32 +82,50 @@ app.get('/user', function(req, res){
     });
 });
 
-
+// Modification utilisateur
 app.put('/user/:id', (req, res) => {
-  const { id } = req.params.id;
+  const { id } = req.params;
   const { prenom, email, status } = req.body;
   
-  // Edition de l'article par rapport a son id
-  db.query(`UPDATE users SET prenom="${prenom}", email="${email}", status="${status}", WHERE id=${id};`, function(err, data){
+  if(req.body.prenom){
+    db.query(`UPDATE users SET prenom="${prenom}" WHERE id=${id};`, function(err, data){
+      if(err) throw err;
+      res.redirect('/user');
+    });
+  }
+  else if(req.body.email){
+    db.query(`UPDATE users SET email="${email}" WHERE id=${id};`, function(err, data){
+      if(err) throw err;
+      res.redirect('/user');   
+    });
+  }
+  else if(req.body.status){
+    db.query(`UPDATE users SET status="${status}" WHERE id=${id};`, function(err, data){
+      if(err) throw err;
+      res.redirect('/user'); 
+    });
+  }
+  else{
+      // Edition de l'user par rapport a son id
+    db.query(`UPDATE users SET prenom="${prenom}", email="${email}", status="${status}" WHERE id=${id};`, function(err, data){
+      if(err) throw err;
+      res.redirect('/user');
+    });
+ }
+});
+
+
+app.delete('/user/:id', (req,res) => {
+  const { id } = req.params;
+
+  // Supression de l'article par rapport a son id
+  db.query(`DELETE FROM users WHERE id=${id}`, function(err, data){
     if(err) throw err;
 
     // Redirection vers la page admin
     res.redirect('/user');
-  });
-});
-
-
-/*app.delete('/user/:id', (req,res) => {
-  const { id } = req.params;
-
-  // Supression de l'article par rapport a son id
-  db.query(`DELETE FROM user WHERE id=${id}`, function(err, data){
-    if(err) throw err
-
-    // Redirection vers la page admin
-    res.redirect('/admin');
   })
-});*/
+});
 
 
 app.get('/formateur', function(req, res){
@@ -110,13 +133,36 @@ app.get('/formateur', function(req, res){
 });
 
 app.get('/cours', function(req, res){
-    res.render('cours', {title: 'Cours', layout:"cours"});
+  res.render('cours', {title: 'Cours', layout:"cours"});
+});
+
+
+
+
+app.post('/cours', function(req, res){
+  const data = {
+    'titre': req.body.titre,
+    'description': req.body.description,
+    'date': req.body.date,
+    'contenu': req.body.contenu
+  }
+
+  const insertion = "INSERT INTO `cours` SET ?";
+  db.query(insertion, data, (err, rows, fields) =>{
+    if(err){
+      console.log(err);
+    }
+    else{
+      console.log("Insertion effectuée avec succès");
+      res.render('cours', {title: 'Cours', layout:"cours", db:data});
+    }
+  })
+  //res.render('cours', {title: 'Cours', layout:"cours"});
 });
 
 app.get('/seeCourses', function(req, res){
-    res.render('seeCourses', {title: 'Cours', layout:"cours"});
+  res.render('seeCourses', {title: 'Cours', layout:"cours"});
 });
-
 
 // Système d'inscription => POST
 app.post('/inscription', async function(req, res){
@@ -158,26 +204,15 @@ app.use(session({
 }));
 
 // cookie parser middleware
-app.use(cookie());
-
-//username and password
-const myusername = "guyonbrandon72@gmail.com";
-const mypassword = "admin";
+app.use(cookie('mycookie'));
 
 // a variable to save a session
 var sessions;
 
-app.post('/connexion',(req,res) => {
-  if(req.body.email == myusername && req.body.password == mypassword){
-      sessions=req.session;
-      sessions.userid=req.body.username;
-      console.log(req.session)
-      res.redirect("/profil");
-  }
-  else{
-      res.send('Invalid username or password');
-  }
-});
+// app.post('/connexion', (req,res) => {
+//   const {email, password} = req.body;
+
+// });
 
 app.get('/deconnexion', function(req, res){
   if(!req.session){

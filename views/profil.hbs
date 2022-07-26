@@ -1,7 +1,7 @@
 <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
     <div class="container-fluid">
       <button class="navbar-toggler" id="offcanvasExample" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="fas fa-bars"></i></button>
-{{#each db}}
+
       <a class="navbar-brand" href="/" type="button">OnlineCourses</a>
       <ul class="navbar-nav ms-auto d-flex flex-row">
         <li class="nav-item me-3 me-lg-0">
@@ -27,7 +27,7 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-            <img src="{{avatar}}" class="rounded-circle" height="22" alt="" loading="lazy" />
+            <img src="{{this.avatar}}" class="rounded-circle" height="22" alt="" loading="lazy" />
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="/profil"  style="color: black !important;">Mon profil</a></li>
@@ -46,17 +46,18 @@
           <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="/">Acceuil</a></li>
             <li class="breadcrumb-item"><a href="/profil">Profil utilisateur</a></li>
-            <li class="breadcrumb-item"><a href="/securite_du_compte">Paramètres</a></li>
+            <li class="breadcrumb-item"><a href="/parametres">Paramètres</a></li>
           </ol>
         </nav>
       </div>
     </div>
 {{!- https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp}}
+{{#with db}}
     <div class="row">
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="{{avatar}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; box-shadow: 5px 5px 15px 5px #000000;">
+            <img src="{{this.avatar}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; box-shadow: 5px 5px 15px 5px #000000;">
             <h5 class="my-3">{{this.prenom}} {{this.nom}}</h5>
             <p class="text-muted mb-1">{{this.fonction}}</p> {{! métier}}
             <p class="text-muted mb-4">{{this.ville}}, {{this.pays}}</p>
@@ -131,5 +132,5 @@
       </div>
     </div>
   </div>
-  {{/each}}
+  {{/with}}
 </section>
