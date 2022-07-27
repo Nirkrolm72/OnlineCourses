@@ -49,14 +49,12 @@ app.get('/', function(req, res){
 });
 
 app.get('/connexion', function(req, res){
-    res.render('connexion', {title: 'Connexion', session: req.session});
+    res.render('connexion', {title: 'Connexion'});
 });
 
 app.get('/inscription', function(req, res){
-
     res.render('inscription', {title: 'Inscription'});
 });
-
 
 
 app.get('/profil', function(req, res){
@@ -71,7 +69,48 @@ app.get('/parametres', function(req, res){
 });
 
 app.get('/admin', function(req, res){
-  res.render('admin', {title: 'admin', layout:"admin"});
+  db.query('select id, titre, prenom, description from users inner join cours on users.id = cours.id_cours', function(err, data){
+    if(err) throw err;
+    res.render('admin', {title: 'admin', layout:"admin", db:data});
+  });
+});
+
+app.put('/admin/:id_user', (req, res) => {
+  const { id_user } = req.params;
+  const {titre, prenom, description} = req.body;
+
+  if(req.body.titre){
+    db.query(`UPDATE cours SET titre="${titre}" WHERE id_user=${id_user}`, function(err, data){
+      if(err) throw err;
+      res.redirect('/admin');
+    });
+  }
+  else if(req.body.prenom){
+    db.query(`UPDATE cours SET prenom="${prenom}" WHERE id=${id_user}`, function(err, data){
+      if(err) throw err;
+      res.redirect('/admin');
+    });
+  }
+  else if(req.body.description){
+    db.query(`UPDATE cours SET description="${description}" WHERE id=${id_user}`, function(err, data){
+      if(err) throw err;
+      res.redirect('/admin');
+    });
+  }
+  else{
+    db.query(`UPDATE cours SET titre="${titre}", prenom="${prenom}", description=${description} WHERE id=${id_user}`, function(err, data){
+      if(err) throw err;
+      res.redirect('/admin');
+    });
+  }
+});
+
+app.delete('/admin/:id_cours', (req, res) => {
+  const { id_coursœ } = req.params;
+  db.query(`DELETE FROM cours WHERE id_cours="${id_cours}"`, (err, data) => {
+    if(err) throw err;
+    res.redirect('/admin');
+  });
 });
 
 app.get('/user', function(req, res){
@@ -144,7 +183,8 @@ app.post('/cours', function(req, res){
     'titre': req.body.titre,
     'description': req.body.description,
     'date': req.body.date,
-    'contenu': req.body.contenu
+    'contenu': req.body.contenu,
+    'id_user': 1
   }
 
   const insertion = "INSERT INTO `cours` SET ?";

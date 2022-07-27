@@ -74,18 +74,17 @@
 
 <!--Main layout-->
 <main style="margin-top: 58px">
-  <div class="container pt-4 main_admin">
+  <div class="container-fluid pt-4 main_admin">
     <div class="main_text_admin mt-4">
       <h1>Tableau de bord</h1>
     </div>
-    <div class="visit_card mt-5">
-      <h3>Visite <i class="fa-solid fa-eye"></i></h3>
-      <p>{{visite}}</p>
-    </div>
+{{#if db}}
 
+{{#each db}}
 <table class="table align-middle mb-0 mt-5 bg-white tableau_cours">
   <thead class="bg-light">
     <tr>
+      <th>ID</th>
       <th>Titre</th>
       <th>Auteur</th>
       <th>Description</th>
@@ -97,19 +96,27 @@
       <td>
         <div class="d-flex align-items-center">
           <div class="ms-3">
-            <p class="fw-bold mb-1">{{titre}}</p>
+            <p class="fw-bold mb-1">{{this.id}}</p>
           </div>
         </div>
       </td>
       <td>
-        <p class="text-muted mb-0">{{auteur}}</p>
+        <div class="d-flex align-items-center">
+          <div class="ms-3">
+            <p class="fw-bold mb-1">{{this.titre}}</p>
+          </div>
+        </div>
       </td>
       <td>
-        <p class="text-muted mb-0">{{description}}</p>
+        <p class="text-muted mb-0">{{this.prenom}}</p>
+      </td>
+      <td>
+        <p class="text-muted mb-0">{{this.description}}</p>
       </td>
       <td>
         <button type="button" class="btn btn-primary btn-sm me-3">Voir</button>
         {{!-- Bouton Modifier --}}
+      <form action="/admin/{{this.id}}?_method=PUT" method="post">
         <button type="button" class="btn btn-secondary btn-sm me-3" data-bs-toggle="modal" data-bs-target="#exampleModal3">Modifier</button>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -134,15 +141,17 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-danger">Modifier</button>
+                <button type="submit" class="btn btn-danger">Modifier</button>
               </div>
             </div>
           </div>
         </div>
+      </form>
       {{!-- Fin Bouton modifier --}}
         
       {{!-- Bouton supprimer --}}
       <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal2">Supprimer</button>
+      
       <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -155,16 +164,25 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-              <button type="button" class="btn btn-danger">Supprimer</button>
+              <form action="/admin/{{this.id_user}}?_method=DELETE" method="post">
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+              </form>
             </div>
           </div>
         </div>
+      
       </div>
       {{!-- Fin bouton supprimer --}}
 
     </tr>
   </tbody>
 </table>
+{{/each}}
+{{!-- Sinon on affiche un message --}}
+{{else}}
+<h1>Base de donnée vide</h1>
+{{/if}}
+
   </div>
 
 </main>
