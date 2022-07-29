@@ -19,18 +19,21 @@
         <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
         <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
 
+        {{#if flash}}
+        <h3 style="color:red;">{{this.flash}}</h3>
+        {{/if}}
         <div class="card bg-glass">
           <div class="card-body px-4 py-5 px-md-5">
             <form action="/connexion" method="post">
               <h2 class="title_connexion">Connexion</h2>
               <!-- Email input -->
               <div class="form-outline mb-4 input_connexion">
-                <input type="email" id="email" name="email" class="form-control input_connexion" placeholder="E-Mail"/>
+                <input type="email" id="email" name="email" class="form-control input_connexion" placeholder="E-Mail" />
               </div>
 
               <!-- Password input -->
               <div class="form-outline mb-4 ">
-                <input type="password" id="password" name="password" class="form-control input_connexion" placeholder="Mot de passe"/>
+                <input type="password" id="password" name="password" class="form-control input_connexion" placeholder="Mot de passe" />
               </div>
 
               <!-- Submit button -->
@@ -41,9 +44,12 @@
               <!-- Register buttons -->
               <div class="text-center">
                 <p>ou connectez-vous avec les réseaux</p>
-                <a class="btn btn-primary social_network_btn" href="#!" role="button"><i class="fab fa-facebook me-2"></i>Facebook</a>
-                <a class="btn btn-primary social_network_btn" href="#!" role="button"><i class="fab fa-google me-2"></i>Google</a>
-                <a class="btn btn-primary social_network_btn" href="#!" role="button"><i class="fab fa-apple me-2"></i>Apple</a>
+                <a class="btn btn-primary social_network_btn" href="#!" role="button"><i
+                    class="fab fa-facebook me-2"></i>Facebook</a>
+                <a class="btn btn-primary social_network_btn" href="#!" role="button"><i
+                    class="fab fa-google me-2"></i>Google</a>
+                <a class="btn btn-primary social_network_btn" href="#!" role="button"><i
+                    class="fab fa-apple me-2"></i>Apple</a>
                 <p class="mt-2">Vous n'avez pas de compte ? <a href="/inscription"> Inscrivez-vous</a></p>
               </div>
             </form>
