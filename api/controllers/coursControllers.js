@@ -2,7 +2,7 @@ exports.cours = (req, res) => {
     res.render('cours', { title: 'Cours', layout: "cours" });
 }
 
-exports.postCours = async (req, res) => {
+const postCours = async (req, res) => {
     const data = {
         'titre': req.body.titre,
         'description': req.body.description,
@@ -22,4 +22,8 @@ exports.postCours = async (req, res) => {
             res.redirect('/cours');
         }
     });
+}
+
+module.exports = {
+    postCours
 }

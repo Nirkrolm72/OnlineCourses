@@ -1,10 +1,10 @@
 const bcrypt = require('bcrypt');
 
-exports.get = (req, res) => {
+exports.inscription = (req, res) => {
     res.render('inscription', { title: 'Inscription' });
 }
 
-exports.register = async (req,res)=>{
+const inscripUser = async (req,res)=>{
     var value = req.body.password;
     const salt = await bcrypt.genSalt(10);
     value = await bcrypt.hash(value, salt);
@@ -31,4 +31,8 @@ exports.register = async (req,res)=>{
             res.redirect('/profil');
         }
     });
+}
+
+module.exports = {
+    inscripUser
 }

@@ -2,14 +2,14 @@ exports.admin = (req, res) => {
     res.render('admin', { title: 'admin', layout: "admin" });
 }
 
-exports.get = async (req, res) => {
+const getUsers = async (req, res) => {
     await db.query('select id, titre, prenom, description from users inner join cours on users.id = cours.id_cours', function (err, data) {
         if (err) throw err;
         res.render('admin', { title: 'admin', layout: "admin", db: data });
     });
 }
 
-exports.adminUpdate = async (req, res) => {
+const updateUser = async (req, res) => {
     const { id_user } = req.params;
     const { titre, prenom, description } = req.body;
 
@@ -39,10 +39,16 @@ exports.adminUpdate = async (req, res) => {
     }
 }
 
-exports.adminSupprimer = async (req, res) => {
+const deleteUser = async (req, res) => {
     const { id_cours } = req.params;
     db.query(`DELETE FROM cours WHERE id_cours="${id_cours}"`, (err, data) => {
         if (err) throw err;
         res.redirect('/admin');
     });
+}
+
+module.exports = {
+    getUsers,
+    updateUser,
+    deleteUser
 }
