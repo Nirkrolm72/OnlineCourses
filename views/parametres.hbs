@@ -1,11 +1,11 @@
 <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
     <div class="container-fluid">
       <button class="navbar-toggler" id="offcanvasExample" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="fas fa-bars"></i></button>
-
+{{#if user}}
       <a class="navbar-brand" href="/" type="button">OnlineCourses</a>
       <ul class="navbar-nav ms-auto d-flex flex-row">
         <li class="nav-item me-3 me-lg-0">
-          <a class="nav-link" href="https://github.com/Nirkrolm72" target="_blank">
+          <a class="nav-link" href="{{user.github}}" target="_blank">
             <i class="fab fa-github"></i>
           </a>
         </li>
@@ -27,7 +27,7 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-            <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="22" alt="" loading="lazy" />
+            <img src="{{user.avatar}}" class="rounded-circle" height="22" alt="" loading="lazy" />
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="/profil"  style="color: black !important;">Mon profil</a></li>
@@ -56,12 +56,12 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="{{avatar}}" alt="avatar"
+            <img src="{{user.avatar}}" alt="avatar"
               class="rounded-circle img-fluid" style="width: 150px; box-shadow: 5px 5px 15px 5px #000000;">
-            <h5 class="my-3">{{prenom}} {{nom}}</h5>
-            <p class="text-muted mb-1">{{fonction}}</p>
-            <p class="text-muted mb-4">{{ville}}, {{pays}}</p>
-            <p class="text-muted">Status : {{status}}</p>
+            <h5 class="my-3">{{user.prenom}} {{user.nom}}</h5>
+            <p class="text-muted mb-1">{{user.fonction}}</p>
+            <p class="text-muted mb-4">{{user.ville}}, {{user.pays}}</p>
+            <p class="text-muted">Status : {{user.status}}</p>
             <a class="btn btn-danger" href="/deconnexion">Déconnexion</a>
           </div>
         </div>
@@ -70,19 +70,19 @@
             <ul class="list-group list-group-flush rounded-3">
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                <p class="mb-0">{{github}}</p>
+                <p class="mb-0">{{user.github}}</p>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                <p class="mb-0">{{twitter}}</p>
+                <p class="mb-0">{{user.twitter}}</p>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                <p class="mb-0">{{instagram}}</p>
+                <p class="mb-0">{{user.instagram}}</p>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                <p class="mb-0">{{facebook}}</p>
+                <p class="mb-0">{{user.facebook}}</p>
               </li>
             </ul>
           </div>
@@ -96,7 +96,7 @@
                 <p class="mb-0">Nom complet</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{prenom}} {{nom}}</p>
+                <p class="text-muted mb-0">{{user.prenom}} {{user.nom}}</p>
               </div>
             </div>
             <hr>
@@ -105,7 +105,7 @@
                 <p class="mb-0">Email</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{email}}</p>
+                <p class="text-muted mb-0">{{user.email}}</p>
               </div>
             </div>
             <hr>
@@ -123,7 +123,7 @@
                 <p class="mb-0">Téléphone</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{telephone}}</p>
+                <p class="text-muted mb-0">{{user.telephone}}</p>
               </div>
             </div>
             <hr>
@@ -132,7 +132,7 @@
                 <p class="mb-0">Adresse</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{adresse}}, {{codePostale}} {{ville}}</p>
+                <p class="text-muted mb-0">{{user.adresse}}, {{user.codePostale}} {{user.ville}}</p>
               </div>
             </div>
           </div>
@@ -176,6 +176,7 @@
           </div>
         </div>
       {{!-- Fin Bouton modifier --}}
+{{/if}}
       </div>
     </div>
   </div>

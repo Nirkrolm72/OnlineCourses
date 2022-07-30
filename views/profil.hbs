@@ -1,7 +1,7 @@
 <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
     <div class="container-fluid">
       <button class="navbar-toggler" id="offcanvasExample" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="fas fa-bars"></i></button>
-
+{{#if user}}
       <a class="navbar-brand" href="/" type="button">OnlineCourses</a>
       <ul class="navbar-nav ms-auto d-flex flex-row">
         <li class="nav-item me-3 me-lg-0">
@@ -52,16 +52,16 @@
       </div>
     </div>
 {{!- https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp}}
-{{#with db}}
+
     <div class="row">
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="{{this.avatar}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; box-shadow: 5px 5px 15px 5px #000000;">
-            <h5 class="my-3">{{this.prenom}} {{this.nom}}</h5>
-            <p class="text-muted mb-1">{{this.fonction}}</p> {{! métier}}
-            <p class="text-muted mb-4">{{this.ville}}, {{this.pays}}</p>
-            <p class="text-muted">Status : {{this.status}}</p>
+            <img src="{{user.avatar}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; box-shadow: 5px 5px 15px 5px #000000;">
+            <h5 class="my-3">{{user.prenom}} {{user.nom}}</h5>
+            <p class="text-muted mb-1">{{user.fonction}}</p> {{! métier}}
+            <p class="text-muted mb-4">{{user.ville}}, {{user.pays}}</p>
+            <p class="text-muted">Status : {{user.status}}</p>
             <a class="btn btn-danger" href="/deconnexion" name="deconnexion">Déconnexion</a>
           </div>
         </div>
@@ -70,19 +70,19 @@
             <ul class="list-group list-group-flush rounded-3">
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                <p class="mb-0">{{this.github}}</p>
+                <p class="mb-0">{{user.github}}</p>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                <p class="mb-0">{{this.twitter}}</p>
+                <p class="mb-0">{{user.twitter}}</p>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                <p class="mb-0">{{this.instagram}}</p>
+                <p class="mb-0">{{user.instagram}}</p>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                <p class="mb-0">{{this.facebook}}</p>
+                <p class="mb-0">{{user.facebook}}</p>
               </li>
             </ul>
           </div>
@@ -96,7 +96,7 @@
                 <p class="mb-0">Nom complet</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{this.prenom}} {{this.nom}}</p>
+                <p class="text-muted mb-0">{{user.prenom}} {{user.nom}}</p>
               </div>
             </div>
             <hr>
@@ -105,7 +105,7 @@
                 <p class="mb-0">Email</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{this.email}}</p>
+                <p class="text-muted mb-0">{{user.email}}</p>
               </div>
             </div>
             <hr>
@@ -114,7 +114,7 @@
                 <p class="mb-0">Téléphone</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{this.telephone}}</p>
+                <p class="text-muted mb-0">{{user.telephone}}</p>
               </div>
             </div>
             <hr>
@@ -123,14 +123,43 @@
                 <p class="mb-0">Adresse</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{this.adresse}}</p>
+                <p class="text-muted mb-0">{{user.adresse}}, {{user.codePostal}} {{user.ville}}</p>
               </div>
             </div>
           </div>
         </div>
-
+        {{!-- Bouton Modifier --}}
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-secondary btn-sm me-3" data-bs-toggle="modal" data-bs-target="#exampleModal3">Modifier</button>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modifier</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Changer le numéro de téléphone">
+                  </div>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Changer l'adresse">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-danger">Modifier</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{!-- Fin Bouton modifier --}}
+{{/if}}
       </div>
     </div>
   </div>
-  {{/with}}
 </section>

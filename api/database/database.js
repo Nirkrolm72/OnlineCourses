@@ -4,7 +4,7 @@ const mysql = require('mysql');
 db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'kali',
+  password: 'Br26an07don1997//',
   database: 'OnlineCourses'
 });
 
