@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-const  {
-    connectUser
-} = require('../api/controllers/connexionControllers');
+const connexionControllers = require('../api/controllers/connexionControllers');
 
+router.get('/', connexionControllers.connexion);
 
-router.post('/', connectUser);
+// router.post('/', connexionControllers.connectUser ) = {
+//     console.log('Coucou');
+// }
 
 
 module.exports = router;

@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const {
-    postCours
-} = require('../api/controllers/coursControllers');
+const coursControllers = require('../api/controllers/coursControllers'); 
 
-router.post('/', postCours);
+router.get('/', coursControllers.cours);
+
+router.post('/', coursControllers.postCours);
 
 module.exports = router;

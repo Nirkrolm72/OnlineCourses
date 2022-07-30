@@ -3,11 +3,6 @@ exports.connexion = (req, res) => {
 }
 
 
-const connectUser = (req, res) => {
-    // Faire la fonction de connexion
-}
-
-
-module.exports = {
-    connectUser
+exports.connectUser = (req, res) => {
+    console.log('coucou');
 }

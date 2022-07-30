@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const  {
-    inscripUser
-} = require('../api/controllers/inscriptionControllers');
+const inscriptionControllers = require('../api/controllers/inscriptionControllers');
 
-router.post('/', inscripUser);
+router.get('/', inscriptionControllers.inscription);
 
 module.exports = router;

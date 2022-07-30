@@ -2,7 +2,7 @@ exports.cours = (req, res) => {
     res.render('cours', { title: 'Cours', layout: "cours" });
 }
 
-const postCours = async (req, res) => {
+exports.postCours = async (req, res) => {
     const data = {
         'titre': req.body.titre,
         'description': req.body.description,
@@ -15,15 +15,10 @@ const postCours = async (req, res) => {
     await db.query(insertion, data, (err, rows, fields) => {
         if (err) {
             console.log(err.message);
-            res.send(err);
         }
         else {
             console.log('Insertion effectuée avec succès');
             res.redirect('/cours');
         }
     });
-}
-
-module.exports = {
-    postCours
 }

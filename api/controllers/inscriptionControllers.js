@@ -32,7 +32,3 @@ const inscripUser = async (req,res)=>{
         }
     });
 }
-
-module.exports = {
-    inscripUser
-}

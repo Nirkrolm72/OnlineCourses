@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const {
-    getSeeCourses
-} = require('../api/controllers/seeCoursesControllers');
+const seeCoursesControllers = require('../api/controllers/seeCoursesControllers');
 
-router.get('/', getSeeCourses);
+router.get('/', seeCoursesControllers.seeCourses);
+
+router.get('/', seeCoursesControllers.getSeeCourses);
 
 module.exports = router;

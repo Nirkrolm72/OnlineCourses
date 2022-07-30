@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const  {
-    getUser
-} = require('../api/controllers/parametresControllers');
+const parametresControllers = require('../api/controllers/parametresControllers');
 
-router.get('/', getUser);
+//router.get('/', parametresControllers.parametres);
+router.get('/', parametresControllers.getUser);
 
 module.exports = router;

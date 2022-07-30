@@ -1,8 +1,8 @@
-const express = require('express');
-const bcrypt = require('bcrypt');
-const bodyParser = require('body-parser');
-const methodOverride = require('method-override');
-const router = express.Router();
+// const express = require('express');
+// const bcrypt = require('bcrypt');
+// const bodyParser = require('body-parser');
+// const methodOverride = require('method-override');
+// const router = express.Router();
 
 // // connexion avec la base de donnée
 // const db = require('./api/database/database');
@@ -24,7 +24,7 @@ const router = express.Router();
 // const { formateur } = require('./api/controllers/formateurControllers');
 // const { cours, postCours } = require('./api/controllers/coursControllers');
 // const { seeCourses } = require('./api/controllers/seeCoursesControllers');
- const { home } = require('./api/controllers/homeControllers');
+ //const { home } = require('./api/controllers/homeControllers');
 
 
 // /****************************MIDDLEWARES******************************* */
@@ -40,7 +40,7 @@ const router = express.Router();
 
 
 // // Page d'accueil
-router.route('/').get(home);
+//router.route('/').get(home);
 
 // /******************Page Inscription****************************/
 // router.route('/connexion').get(connexion);
@@ -95,4 +95,4 @@ router.route('/').get(home);
 
 
 
- module.exports = router;
+ //module.exports = router;

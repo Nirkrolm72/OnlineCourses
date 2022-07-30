@@ -2,14 +2,14 @@ exports.user = (req, res) => {
     res.render('user', { title: 'Utilisateur', layout: "user" });
 }
 
-const getUsers = async (req, res) => {
+exports.getUsers = async (req, res) => {
     await db.query('SELECT prenom, email, status, id FROM users', function (err, data) {
         if (err) throw err;
         res.render('user', { title: 'Utilisateur', layout: "user", db: data });
     });
 }
 
-const updateUser = async (req, res) => {
+exports.updateUser = async (req, res) => {
     const { id } = req.params;
     const { prenom, email, status } = req.body;
     
@@ -40,7 +40,7 @@ const updateUser = async (req, res) => {
     }
 }
 
-const deleteUser = async (req, res) => {
+exports.deleteUser = async (req, res) => {
     const { id } = req.params;
 
     // Supression de l'utilisateur par rapport à son ID
@@ -50,10 +50,4 @@ const deleteUser = async (req, res) => {
         // Redirection vers la page user
         res.redirect('/user');
     });
-}
-
-module.exports = {
-    getUsers,
-    updateUser,
-    deleteUser
 }

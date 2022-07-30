@@ -1,18 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
-const {
+const adminControllers = require('../api/controllers/adminControllers');
 
-    getUsers,
-    updateUser,
-    deleteUser
+//router.get('/', adminControllers.admin);
 
-} = require('../api/controllers/adminControllers');
+router.get('/', adminControllers.getUsers);
 
-router.get('/', getUsers);
+router.put('/:id', adminControllers.updateUser);
 
-router.put('/:id', updateUser);
-
-router.delete('/:id', deleteUser);
+router.delete('/:id', adminControllers.deleteUser);
 
 module.exports = router;
