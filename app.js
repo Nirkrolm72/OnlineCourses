@@ -10,7 +10,6 @@ const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const methodOverride = require('method-override');
 const nodemailer = require('nodemailer');
-const multer = require('multer');
 
 
 // Routes
@@ -52,6 +51,9 @@ const { postCours} = require('./api/controllers/coursControllers');
 const { updateUser, deleteUser} = require('./api/controllers/adminControllers');
 const { connectUser } = require('./api/controllers/connexionControllers');
 const { deconnexion } = require('./api/controllers/deconnexionControllers');
+
+// Middleware
+const multer = require('./api/middlewares/multer');
 
 require('./api/database/database');
 
@@ -99,7 +101,6 @@ app.use(
   })
 );
 
-// Multer
 
 
 app.use('*', (req, res, next) => {
@@ -117,7 +118,7 @@ app.use('/connexion', connexion_routes);
 app.post('/connexion', connexion_routes, connectUser);
 
 app.use('/inscription' ,inscription_routes);
-app.post('/inscription', inscription_routes, inscripUser);
+app.post('/inscription',  multer, inscription_routes, inscripUser);
 
 
 app.use('/admin', admin_routes);
