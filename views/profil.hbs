@@ -31,7 +31,7 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="/profil"  style="color: black !important;">Mon profil</a></li>
-            <li><a class="dropdown-item" href="#" style="color: black !important;">Déconnexion</a></li>
+            <li><a class="dropdown-item" href="/deconnexion" style="color: black !important;">Déconnexion</a></li>
           </ul>
         </li>
       </ul>
@@ -51,7 +51,6 @@
         </nav>
       </div>
     </div>
-{{!- https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp}}
 
     <div class="row">
       <div class="col-lg-4">
@@ -128,36 +127,6 @@
             </div>
           </div>
         </div>
-        {{!-- Bouton Modifier --}}
-        <div class="d-flex justify-content-center">
-          <button type="button" class="btn btn-secondary btn-sm me-3" data-bs-toggle="modal" data-bs-target="#exampleModal3">Modifier</button>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modifier</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form>
-                  <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Changer le numéro de téléphone">
-                  </div>
-                  <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Changer l'adresse">
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-danger">Modifier</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      {{!-- Fin Bouton modifier --}}
 {{/if}}
       </div>
     </div>

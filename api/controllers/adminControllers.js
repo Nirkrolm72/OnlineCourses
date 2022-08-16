@@ -3,7 +3,7 @@ exports.admin = (req, res) => {
 }
 
 exports.getUsers = async (req, res) => {
-    await db.query('select id, titre, prenom, description from users inner join cours on users.id = cours.id_cours', function (err, data) {
+    await db.query('select users.id, cours.titre, users.prenom, cours.description from users right join cours on users.id = cours.id_user;', function (err, data) {
         if (err) throw err;
         res.render('admin', { title: 'admin', layout: "admin", db: data });
     });

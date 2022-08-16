@@ -10,6 +10,7 @@ const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const methodOverride = require('method-override');
 const nodemailer = require('nodemailer');
+const multer = require('multer');
 
 
 // Routes
@@ -44,6 +45,7 @@ const { response } = require('express');
 const SMTPTransport = require('nodemailer/lib/smtp-transport');
 
 // Controllers
+const { getProfilUser } = require('./api/controllers/profilControllers');
 const { getUser } = require('./api/controllers/parametresControllers');
 const { inscripUser } = require('./api/controllers/inscriptionControllers');
 const { postCours} = require('./api/controllers/coursControllers');
@@ -97,6 +99,9 @@ app.use(
   })
 );
 
+// Multer
+
+
 app.use('*', (req, res, next) => {
   res.locals.user = req.session.user;
   next();
@@ -113,6 +118,7 @@ app.post('/connexion', connexion_routes, connectUser);
 
 app.use('/inscription' ,inscription_routes);
 app.post('/inscription', inscription_routes, inscripUser);
+
 
 app.use('/admin', admin_routes);
 app.put('/admin', admin_routes, updateUser);
@@ -132,7 +138,7 @@ app.use('/seeCourses', seeCourses_routes);
 
 app.use('/user', user_routes);
 
-app.post('/', deconnexion_routes, deconnexion);
+app.get('/deconnexion', deconnexion_routes, deconnexion);
 
 app.use('*', function (req, res) {
   res.status(404).render("404", {

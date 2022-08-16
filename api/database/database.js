@@ -3,7 +3,7 @@ const mysql = require('mysql');
 // Création de la connexion à la base de données
 db = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
+  user: 'dev',
   password: 'Br26an07don1997//',
   database: 'OnlineCourses'
 });

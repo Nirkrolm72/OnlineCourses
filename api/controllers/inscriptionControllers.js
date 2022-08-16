@@ -4,7 +4,7 @@ exports.inscription = (req, res) => {
     res.render('inscription', { title: 'Inscription' });
 }
 
-exports.inscripUser = async (req,res)=>{
+exports.inscripUser = async (req,res) => {
     var value = req.body.password;
     const salt = await bcrypt.genSalt(10);
     value = await bcrypt.hash(value, salt);
@@ -16,6 +16,8 @@ exports.inscripUser = async (req,res)=>{
         'password': value,
         'avatar': req.body.avatar,
         'ville': req.body.ville,
+        'adresse': req.body.adresse,
+        'codePostal': req.body.codePostal,
         'pays': req.body.pays,
         'status': req.body.status
     }

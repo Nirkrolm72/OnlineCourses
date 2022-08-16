@@ -19,11 +19,13 @@
         <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
         <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
 
-{{#if flash}}
-<h3 style="color:red;">{{this.flash}}</h3>
-{{/if}}
 
         <div class="card bg-glass">
+
+          {{#if flash}}
+          <h3 style="color:red;">{{this.flash}}</h3>
+          {{/if}}
+          
           <div class="card-body px-4 py-5 px-md-5">
             <form action="/connexion" method="post">
               <h2 class="title_connexion">Connexion</h2>
@@ -34,7 +36,8 @@
 
               <!-- Password input -->
               <div class="form-outline mb-4 ">
-                <input type="password" id="password" name="password" class="form-control input_connexion" placeholder="Mot de passe" />
+                <input type="password" id="password" name="password" class="form-control input_connexion"
+                  placeholder="Mot de passe" />
               </div>
 
               <!-- Submit button -->
