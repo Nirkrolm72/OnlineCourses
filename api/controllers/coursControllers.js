@@ -9,7 +9,7 @@ exports.postCours = async (req, res) => {
         'description': req.body.description,
         'date': req.body.date,
         'contenu': req.body.contenu,
-        'id_user': req.session.user // Avec les sessions id_user dynamique
+        'id_user': req.session.user.id // Avec les sessions id_user dynamique
     }
 
     const insertion = "INSERT INTO cours SET ?";

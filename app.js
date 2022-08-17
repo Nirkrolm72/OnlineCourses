@@ -10,7 +10,7 @@ const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const methodOverride = require('method-override');
 const nodemailer = require('nodemailer');
-
+const multer = require('multer');
 
 // Routes
 const home_routes = require('./routes/home');
@@ -51,9 +51,10 @@ const { postCours} = require('./api/controllers/coursControllers');
 const { updateUser, deleteUser} = require('./api/controllers/adminControllers');
 const { connectUser } = require('./api/controllers/connexionControllers');
 const { deconnexion } = require('./api/controllers/deconnexionControllers');
+const { getSeeCourses } = require('./api/controllers/seeCoursesControllers');
 
 // Middleware
-const multer = require('./api/middlewares/multer');
+//const multer = require('./api/middlewares/multer');
 
 require('./api/database/database');
 
@@ -101,6 +102,16 @@ app.use(
   })
 );
 
+// multer
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './images')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+var upload = multer({ storage: storage })
 
 
 app.use('*', (req, res, next) => {
@@ -114,12 +125,18 @@ app.get('/', function(req, res){
   res.render('home');
 });
 
+
+
 app.use('/connexion', connexion_routes);
 app.post('/connexion', connexion_routes, connectUser);
 
-app.use('/inscription' ,inscription_routes);
-app.post('/inscription',  multer, inscription_routes, inscripUser);
+app.use('/inscription', inscription_routes);
+app.post('/inscription', inscription_routes, inscripUser);
 
+app.post('/upload', upload.single('avatar'), function (req, res) {
+  console.log('Image reçu');
+  res.redirect('/profil');
+});
 
 app.use('/admin', admin_routes);
 app.put('/admin', admin_routes, updateUser);
@@ -135,7 +152,8 @@ app.use('/parametres', parametres_routes);
 
 app.use('/profil', profil_routes);
 
-app.use('/seeCourses', seeCourses_routes);
+app.get('/seeCourses', seeCourses_routes, getSeeCourses);
+
 
 app.use('/user', user_routes);
 

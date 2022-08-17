@@ -16,8 +16,8 @@ exports.inscripUser = async (req,res) => {
         'password': value,
         'avatar': req.body.avatar,
         'ville': req.body.ville,
-        //'adresse': req.body.adresse,
-        //'codePostal': req.body.codePostal,
+        'adresse': req.body.adresse,
+        'codePostal': req.body.codePostal,
         'pays': req.body.pays,
         'status': req.body.status
     }

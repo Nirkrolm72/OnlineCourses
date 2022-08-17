@@ -63,7 +63,7 @@
 
         <div class="card bg-glass">
           <div class="card-body px-4 py-5 px-md-5">
-            <form action="/inscription" method="post">
+            <form action="/inscription" method="post" enctype="multipart/form-data">
               <h2 class="title_inscription">Inscription</h2>
               <!-- 2 column grid layout with text inputs for the first and last names -->
               <div class="row">
@@ -90,22 +90,20 @@
               </div>
 
               <div class="form-outline mb-4">
-                <input type="file" id="avatar" class="form-control" name="avatar" placeholder="Choisir une image"
-                  accept="image/png, image/jpeg, image/jpg, image/svg" />
-
+                  <input type="file" id="avatar" class="form-control" name="avatar" placeholder="Choisir une image" accept="image/png, image/jpeg, image/jpg, image/svg" />
               </div>
 
               <div class="form-outline mb-4">
                 <input type="text" id="ville" class="form-control" name="ville" placeholder="Ville" />
               </div>
 
-              {{!-- <div class="form-outline mb-4">
+              <div class="form-outline mb-4">
                 <input type="text" id="adresse" class="form-control" name="adresse" placeholder="Adresse" />
               </div>
 
               <div class="form-outline mb-4">
                 <input type="text" id="codePostal" class="form-control" name="codePostal" placeholder="codePostal" />
-              </div> --}}
+              </div>
 
               <div class="form-outline mb-4">
                 <input type="text" id="pays" class="form-control" name="pays" placeholder="Pays" />
