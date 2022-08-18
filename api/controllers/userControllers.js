@@ -3,11 +3,13 @@ exports.user = (req, res) => {
 }
 
 exports.getUsers = async (req, res) => {
-    await db.query('SELECT prenom, email, status, id FROM users', function (err, data) {
+    await db.query('SELECT id, prenom, email, status, is_admin, is_formateur, is_ban, is_verified FROM users', function (err, data) {
         if (err) throw err;
         res.render('user', { title: 'Utilisateur', layout: "user", db: data });
     });
 }
+
+
 
 exports.updateUser = async (req, res) => {
     const { id } = req.params;

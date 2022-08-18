@@ -19,10 +19,11 @@ exports.inscripUser = async (req,res) => {
         'adresse': req.body.adresse,
         'codePostal': req.body.codePostal,
         'pays': req.body.pays,
-        'status': req.body.status
+        'status': req.body.status,
+        
     }
 
-    const insertion = "INSERT INTO users SET ?";
+    const insertion = "INSERT INTO users SET ?, is_admin = 0, is_formateur = 0, is_ban = 0, is_verified = 0";
     db.query(insertion, data, (err, rows, fields) => {
         if (err) {
             console.log(err.message);

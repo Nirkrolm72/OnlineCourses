@@ -10,7 +10,7 @@ const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const methodOverride = require('method-override');
 const nodemailer = require('nodemailer');
-const multer = require('multer');
+//const multer = require('multer');
 
 // Routes
 const home_routes = require('./routes/home');
@@ -37,6 +37,7 @@ app.use(bodyParser.json());
 
 // Config méthode override
 app.use(methodOverride('_method'));
+
 
 // Base de donnée
 const { request } = require('http');
@@ -84,6 +85,7 @@ db = mysql.createConnection(configDB);
 
 // Config ASYNC
 const util = require("util");
+const cookieParser = require('cookie-parser');
 db.query = util.promisify(db.query).bind(db);
 
 db.connect((err) => {
@@ -102,16 +104,6 @@ app.use(
   })
 );
 
-// multer
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './images')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname)
-  }
-})
-var upload = multer({ storage: storage })
 
 
 app.use('*', (req, res, next) => {
@@ -132,11 +124,6 @@ app.post('/connexion', connexion_routes, connectUser);
 
 app.use('/inscription', inscription_routes);
 app.post('/inscription', inscription_routes, inscripUser);
-
-app.post('/upload', upload.single('avatar'), function (req, res) {
-  console.log('Image reçu');
-  res.redirect('/profil');
-});
 
 app.use('/admin', admin_routes);
 app.put('/admin', admin_routes, updateUser);

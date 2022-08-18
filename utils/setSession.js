@@ -15,9 +15,10 @@ exports.setSession = async function (req, res, email) {
       adresse: user.adresse,
       codePostal: user.codePostal,
       pays: user.pays,
-      status: user.status
-      // 'isAdmin': user.isAdmin
+      status: user.status,
+      isAdmin: user.is_admin
     };
   
     res.redirect('/profil')
   }
+  
