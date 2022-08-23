@@ -7,23 +7,18 @@ exports.inscription = (req, res) => {
 exports.inscripUser = async (req,res) => {
     var value = req.body.password;
     const salt = await bcrypt.genSalt(10);
-    value = await bcrypt.hash(value, salt);
+    value = bcrypt.hash(value, salt);
 
     var data = {
         'nom': req.body.nom,
         'prenom': req.body.prenom,
         'email': req.body.email,
-        'password': value,
+        'password': req.body.password,
         'avatar': req.body.avatar,
-        'ville': req.body.ville,
-        'adresse': req.body.adresse,
-        'codePostal': req.body.codePostal,
-        'pays': req.body.pays,
-        'status': req.body.status,
-        
     }
 
-    const insertion = "INSERT INTO users SET ?, is_admin = 0, is_formateur = 0, is_ban = 0, is_verified = 0";
+    const insertion = "INSERT INTO users SET ?, is_admin = 0, is_visiteur = 0, is_verified = 0";
+    console.log(req.body)
     db.query(insertion, data, (err, rows, fields) => {
         if (err) {
             console.log(err.message);

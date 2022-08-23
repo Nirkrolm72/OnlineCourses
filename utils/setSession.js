@@ -11,11 +11,6 @@ exports.setSession = async function (req, res, email) {
       prenom: user.prenom,
       nom: user.nom,
       avatar: user.avatar,
-      ville: user.ville,
-      adresse: user.adresse,
-      codePostal: user.codePostal,
-      pays: user.pays,
-      status: user.status,
       isAdmin: user.is_admin
     };
   

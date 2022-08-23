@@ -63,7 +63,7 @@
 
         <div class="card bg-glass">
           <div class="card-body px-4 py-5 px-md-5">
-            <form action="/inscription" method="post">
+            <form action="/inscription" method="post" enctype="multipart/form-data">
               <h2 class="title_inscription">Inscription</h2>
               <!-- 2 column grid layout with text inputs for the first and last names -->
               <div class="row">
@@ -90,38 +90,9 @@
               </div>
 
               <div class="form-outline mb-4">
-                  <input type="file" id="avatar" class="form-control" name="avatar" placeholder="Choisir une image" accept="image/png, image/jpeg, image/jpg, image/svg" />
+                  <input type="file" id="avatar" class="form-control" name="avatar" placeholder="Choisir une image" />
               </div>
-
-              <div class="form-outline mb-4">
-                <input type="text" id="ville" class="form-control" name="ville" placeholder="Ville" />
-              </div>
-
-              <div class="form-outline mb-4">
-                <input type="text" id="adresse" class="form-control" name="adresse" placeholder="Adresse" />
-              </div>
-
-              <div class="form-outline mb-4">
-                <input type="text" id="codePostal" class="form-control" name="codePostal" placeholder="codePostal" />
-              </div>
-
-              <div class="form-outline mb-4">
-                <input type="text" id="pays" class="form-control" name="pays" placeholder="Pays" />
-              </div>
-
-              <!-- Default radio -->
-              <div class="btn_radio d-flex justify-content-center mb-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="status" value="Etudiant" id="flexRadioDefault1" />
-                  <label class="form-check-label" for="status">Etudiant</label>
-                </div>
-
-                <!-- Default checked radio -->
-                <div class="form-check ms-3">
-                  <input class="form-check-input" type="radio" name="status" value="Formateur" id="flexRadioDefault2" />
-                  <label class="form-check-label" for="status">Formateur</label>
-                </div>
-              </div>
+              
               <!-- Submit button -->
               <div class="btn_center d-flex justify-content-center">
                 <!--<button type="submit" class="btn btn-primary btn-block mb-4">S'inscrire</button>-->

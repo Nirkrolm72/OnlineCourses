@@ -117,7 +117,7 @@ app.get('/', function(req, res){
   res.render('home');
 });
 
-
+const upload = require('./api/config/multer');
 
 app.use('/connexion', connexion_routes);
 app.post('/connexion', connexion_routes, connectUser);
@@ -137,7 +137,7 @@ app.use('/formateur', formateur_routes);
 
 app.use('/parametres', parametres_routes);
 
-app.use('/profil', profil_routes);
+app.use('/profil', upload.single('imageAvatar'), profil_routes, getProfilUser);
 
 app.get('/seeCourses', seeCourses_routes, getSeeCourses);
 
