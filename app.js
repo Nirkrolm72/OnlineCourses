@@ -118,6 +118,7 @@ app.get('/', function(req, res){
 });
 
 const upload = require('./api/config/multer');
+const { isAdmin } = require('./api/middlewares/admin.middleware');
 
 app.use('/connexion', connexion_routes);
 app.post('/connexion', connexion_routes, connectUser);
@@ -125,9 +126,9 @@ app.post('/connexion', connexion_routes, connectUser);
 app.use('/inscription', inscription_routes);
 app.post('/inscription', inscription_routes, inscripUser);
 
-app.use('/admin', admin_routes);
-app.put('/admin', admin_routes, updateUser);
-app.delete('/admin', admin_routes, deleteUser);
+app.use('/admin', isAdmin, admin_routes);
+app.put('/admin', isAdmin, admin_routes, updateUser);
+app.delete('/admin',isAdmin, admin_routes, deleteUser);
 
 
 app.use('/cours', cours_routes);

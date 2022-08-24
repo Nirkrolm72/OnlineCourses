@@ -125,20 +125,12 @@
 
           <td>
             {{!-- <p class="text-muted mb-0">{{this.is_admin}}</p> --}}
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1">
-              <label class="form-check-label" for="flexRadioDefault1">Admin</label>
-            </div>
-
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault2">
-              <label class="form-check-label" for="flexRadioDefault2">Visiteur</label>
-            </div>
-
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault4" id="flexRadioDefault4">
-              <label class="form-check-label" for="flexRadioDefault4">Verified</label>
-            </div>
+            <label for="">Admin</label>
+            <input type="checkbox" id="isAdmin{{ user.id }}" name="isAdmin" />
+            <label for="">Visiteur</label>
+            <input type="checkbox" id="isVisiteur{{ user.id }}" name="isVisiteur" />
+            <label for="">Verified</label>
+            <input type="checkbox" id="isVerified{{ user.id }}" name="isVerified" />
           </td>
           <td>
             {{!-- Bouton Modifier --}}
@@ -164,6 +156,14 @@
                       </div>
                       <div class="mb-3">
                         <input type="text" name="status" class="form-control" placeholder="Status">
+                      </div>
+                      <div class="mb-3">
+                        <label for="">Admin</label>
+                        <input type="checkbox" id="isAdmin{{ user.id }}" name="isAdmin" />
+                        <label for="">Visiteur</label>
+                        <input type="checkbox" id="isVisiteur{{ user.id }}" name="isVisiteur" />
+                        <label for="">Verified</label>
+                        <input type="checkbox" id="isVerified{{ user.id }}" name="isVerified" />
                       </div>
             </form>
   </div>
@@ -214,3 +214,23 @@
   {{/if}}
 </main>
 <!--Main layout-->
+
+<script>
+  // isAdmin
+  const isAdmin{{ user.id }} = document.getElementById('isAdmin{{ user.id }}')
+  const adm{{ user.id }} = { { isAdmin } }
+  if (adm{ { user.id } } === 1 ) isAdmin{ { user.id } }.checked = true
+
+  // isVerified
+  const isVerified{{ user.id }} = document.getElementById('isVerified{{ user.id }}')
+  const vrf{{ user.id }} = { { isVerified } }
+  if (vrf{ { user.id } } === 1 ) isVerified{ { user.id } }.checked = true
+
+  // isBann
+  const isBann{{ user.id }} = document.getElementById('isBann{{ user.id }}')
+  const bann{{ user.id }} = { { isBann } }
+  if (bann{ { user.id } } === 1 ) isBann{ { user.id } }.checked = true
+
+
+  console.log('ma variable modal: ', typeof adm{{ user.id }}, adm{{ user.id }})
+</script>

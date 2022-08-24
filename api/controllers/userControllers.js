@@ -27,19 +27,13 @@ exports.updateUser = async (req, res) => {
             res.redirect('/user');
         });
     }
-    else if (req.body.status) {
-        await db.query(`UPDATE users SET status="${status}" WHERE id=${id};`, function (err, data) {
-            if (err) throw err;
-            res.redirect('/user');
-        });
-    }
-    else {
-        // Edition de l'user par rapport a son id
-        await db.query(`UPDATE users SET prenom="${prenom}", email="${email}", status="${status}" WHERE id=${id};`, function (err, data) {
-            if (err) throw err;
-            res.redirect('/user');
-        });
-    }
+    // else {
+    //     // Edition de l'user par rapport a son id
+    //     await db.query(`UPDATE users SET prenom="${prenom}", email="${email}" WHERE id=${id};`, function (err, data) {
+    //         if (err) throw err;
+    //         res.redirect('/user');
+    //     });
+    // }
 }
 
 exports.deleteUser = async (req, res) => {
