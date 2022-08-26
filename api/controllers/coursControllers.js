@@ -19,7 +19,7 @@ exports.postCours = async (req, res) => {
         }
         else {
             console.log('Insertion effectuée avec succès');
-            res.redirect('/cours');
+            res.redirect('/admin');
         }
     });
 }

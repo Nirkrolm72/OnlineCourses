@@ -149,14 +149,14 @@
                     <div class="modal-body">
 
                       <div class="mb-3">
-                        <input type="text" name="prenom" class="form-control" placeholder="Prénom">
+                        <input type="text" name="prenom" class="form-control" placeholder="Prénom"
+                          value="{{user.prenom}}">
                       </div>
                       <div class="mb-3">
-                        <input type="text" name="email" class="form-control" placeholder="E-Mail">
+                        <input type="text" name="email" class="form-control" placeholder="E-Mail"
+                          value="{{user.email}}">
                       </div>
-                      <div class="mb-3">
-                        <input type="text" name="status" class="form-control" placeholder="Status">
-                      </div>
+
                       <div class="mb-3">
                         <label for="">Admin</label>
                         <input type="checkbox" id="isAdmin{{ user.id }}" name="isAdmin" />
@@ -221,16 +221,10 @@
   const adm{{ user.id }} = { { isAdmin } }
   if (adm{ { user.id } } === 1 ) isAdmin{ { user.id } }.checked = true
 
-  // isVerified
-  const isVerified{{ user.id }} = document.getElementById('isVerified{{ user.id }}')
-  const vrf{{ user.id }} = { { isVerified } }
-  if (vrf{ { user.id } } === 1 ) isVerified{ { user.id } }.checked = true
+  // isVerified 
+  const isVisiteur{{ user.id }} = document.getElementById('isVisiteur{{ user.id }}')
+  const vst{{ user.id }} = {{ isVisiteur }} 
+  if ( vst{{ user.id }} === 1 ) isVisiteur{{ user.id }}.checked = true
 
-  // isBann
-  const isBann{{ user.id }} = document.getElementById('isBann{{ user.id }}')
-  const bann{{ user.id }} = { { isBann } }
-  if (bann{ { user.id } } === 1 ) isBann{ { user.id } }.checked = true
-
-
-  console.log('ma variable modal: ', typeof adm{{ user.id }}, adm{{ user.id }})
 </script>
+

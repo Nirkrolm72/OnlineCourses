@@ -19,7 +19,7 @@ exports.inscripUser = async (req, res) => {
     bcrypt.hash(password, saltRounds, function (err, hash) {
         // const insertion = `INSERT INTO users SET nom="${nom}", prenom="${prenom}", email="${email}", password="${password}", avatar="${avatar}", is_admin = 0, is_visiteur = 0, is_verified = 0`;
         
-    db.query(`INSERT INTO users (nom, prenom, email, password, avatar, is_admin, is_visiteur, is_verified) VALUES ('${nom}', '${prenom}', '${email}', '${hash}', '${avatar}', 0, 0, 0);`, data, (err, rows, fields) => {
+    db.query(`INSERT INTO users (nom, prenom, email, password, avatar, isAdmin, isVisiteur, isVerified) VALUES ('${nom}', '${prenom}', '${email}', '${hash}', '${avatar}', 0, 0, 0);`, data, (err, rows, fields) => {
             if (err) {
                 
                 console.log(err.message);

@@ -19,14 +19,12 @@ const admin_routes = require('./routes/admin');
 const connexion_routes = require('./routes/connexion');
 const cours_routes = require('./routes/cours');
 const inscription_routes = require('./routes/inscription');
-const formateur_routes = require('./routes/formateur');
+const visiteur_routes = require('./routes/visiteur');
 const parametres_routes = require('./routes/parametres');
 const profil_routes = require('./routes/profil');
 const seeCourses_routes = require('./routes/seeCourses');
 const deconnexion_routes = require('./routes/deconnexion');
 
-// Import des middlewares
-//const { isAdmin } = require('./api/middlewares/authSession');
 
 // Déstructuration de process.env
 const { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_USER, PORT_NODE } = process.env;
@@ -53,6 +51,7 @@ const { updateUser, deleteUser} = require('./api/controllers/adminControllers');
 const { connectUser } = require('./api/controllers/connexionControllers');
 const { deconnexion } = require('./api/controllers/deconnexionControllers');
 const { getSeeCourses } = require('./api/controllers/seeCoursesControllers');
+const { visiteur } = require('./api/controllers/visiteurControllers');
 
 // Middleware
 //const multer = require('./api/middlewares/multer');
@@ -119,6 +118,7 @@ app.get('/', function(req, res){
 
 const upload = require('./api/config/multer');
 const { isAdmin } = require('./api/middlewares/admin.middleware');
+const { isVisiteur } = require('./api/middlewares/visiteur.middleware');
 
 app.use('/connexion', connexion_routes);
 app.post('/connexion', connexion_routes, connectUser);
@@ -131,19 +131,19 @@ app.put('/admin', isAdmin, admin_routes, updateUser);
 app.delete('/admin',isAdmin, admin_routes, deleteUser);
 
 
-app.use('/cours', cours_routes);
-app.post('cours', cours_routes, postCours);
+app.use('/cours', isAdmin, cours_routes);
+app.post('/cours', isAdmin, cours_routes, postCours);
 
-app.use('/formateur', formateur_routes);
+app.use('/visiteur', visiteur_routes);
 
 app.use('/parametres', parametres_routes);
 
-app.use('/profil', upload.single('imageAvatar'), profil_routes, getProfilUser);
+app.use('/profil', profil_routes, getProfilUser);
 
-app.get('/seeCourses', seeCourses_routes, getSeeCourses);
+app.get('/seeCourses', isVisiteur, seeCourses_routes, getSeeCourses);
 
 
-app.use('/user', user_routes);
+app.use('/user', isAdmin, user_routes);
 
 app.get('/deconnexion', deconnexion_routes, deconnexion);
 

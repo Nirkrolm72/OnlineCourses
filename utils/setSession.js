@@ -11,9 +11,8 @@ exports.setSession = async function (req, res, email) {
       prenom: user.prenom,
       nom: user.nom,
       avatar: user.avatar,
-      isAdmin: user.is_admin,
-      isVisiteur: user.is_visiteur,
-      isVerified: user.is_verified  
+      isAdmin: user.isAdmin,
+      isVisiteur: user.isVisiteur,
     };
   
     res.redirect('/profil')

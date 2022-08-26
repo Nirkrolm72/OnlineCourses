@@ -1,9 +1,11 @@
+const { query } = require("express");
+
 exports.user = (req, res) => {
     res.render('user', { title: 'Utilisateur', layout: "user" });
 }
 
 exports.getUsers = async (req, res) => {
-    await db.query('SELECT id, prenom, email, is_admin, is_visiteur, is_verified FROM users', function (err, data) {
+    await db.query('SELECT id, prenom, email, isAdmin, isVisiteur, isVerified FROM users', function (err, data) {
         if (err) throw err;
         res.render('user', { title: 'Utilisateur', layout: "user", db: data });
     });
@@ -13,8 +15,8 @@ exports.getUsers = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
     const { id } = req.params;
-    const { prenom, email, status } = req.body;
-    
+    const { prenom, email } = req.body;
+
     if (req.body.prenom) {
         await db.query(`UPDATE users SET prenom="${prenom}" WHERE id=${id};`, function (err, data) {
             if (err) throw err;
@@ -26,14 +28,15 @@ exports.updateUser = async (req, res) => {
             if (err) throw err;
             res.redirect('/user');
         });
+
+        // else {
+        //     // Edition de l'user par rapport a son id
+        //     await db.query(`UPDATE users SET prenom="${prenom}", email="${email}" WHERE id=${id};`, function (err, data) {
+        //         if (err) throw err;
+        //         res.redirect('/user');
+        //     });
+        // }
     }
-    // else {
-    //     // Edition de l'user par rapport a son id
-    //     await db.query(`UPDATE users SET prenom="${prenom}", email="${email}" WHERE id=${id};`, function (err, data) {
-    //         if (err) throw err;
-    //         res.redirect('/user');
-    //     });
-    // }
 }
 
 exports.deleteUser = async (req, res) => {
@@ -47,3 +50,4 @@ exports.deleteUser = async (req, res) => {
         res.redirect('/user');
     });
 }
+

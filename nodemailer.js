@@ -1,5 +1,5 @@
 // Nodemailer
-/*app.post('/', function(req, res){
+app.post('/', function(req, res){
   const {sujet, email, nomEtPrenom, description} = req.body;
 
   console.log(req.body);
@@ -35,4 +35,4 @@
       res.render('home');
     }
   });
-});*/
+});
