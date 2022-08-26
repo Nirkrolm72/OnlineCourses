@@ -1,28 +1,63 @@
-<nav class="navbar navbar-expand-lg bg-light">
+{{!-- <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">OnlineCourses</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Catégorie
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Développement Web</a></li>
-            <li><a class="dropdown-item" href="#">Développement Mobile</a></li>
-            <li><a class="dropdown-item" href="#">Développement de jeux</a></li>
-            <li><a class="dropdown-item" href="#">Langages de programmation</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control search_bar" type="search" placeholder="Rechercher" aria-label="Search">
-        <a class="btn btn-primary ms-2" href="/connexion">Se connecter</a>
-        <a class="btn btn-primary ms-2" href="/inscription">S'inscrire</a>
-      </form>
+      <a class="btn btn-primary ms-2" href="/connexion">Se connecter</a>
+      <a class="btn btn-primary ms-2" href="/inscription">S'inscrire</a>
     </div>
   </div>
+</nav> --}}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="changeColor">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">OnlineCourses</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link left" aria-current="page" href="#">Formations</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link left" href="#">Cours</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link left" href="#">Blog</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link left" aria-current="page" href="/connexion">Connexion</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-primary" href="/inscription">Commencer</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
 </nav>
+
+<script>
+$(function () {
+  $(document).scroll(function () {
+    var $nav = $(".navbar-fixed-top");
+    $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+  });
+});
+</script>

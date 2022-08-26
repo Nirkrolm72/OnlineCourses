@@ -4,7 +4,7 @@ const { setSession } = require('../../utils/setSession');
 const { db } = require('../database/database');
 
 exports.connexion = (req, res) => {
-    res.render('connexion', { title: 'Connexion' });
+    res.render('connexion', { title: 'Connexion', layout: 'connexion' });
 }
 
 //const setSession = require("./utils/setSession");

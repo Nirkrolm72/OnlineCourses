@@ -37,6 +37,7 @@ exports.updateUser = async (req, res) => {
             res.redirect('/admin');
         });
     }
+
 }
 
 exports.deleteUser = async (req, res) => {

@@ -17,6 +17,7 @@ const home_routes = require('./routes/home');
 const user_routes = require('./routes/users');
 const admin_routes = require('./routes/admin');
 const connexion_routes = require('./routes/connexion');
+const mdpOublie_routes = require('./routes/mdpOublie');
 const cours_routes = require('./routes/cours');
 const inscription_routes = require('./routes/inscription');
 const visiteur_routes = require('./routes/visiteur');
@@ -24,6 +25,7 @@ const parametres_routes = require('./routes/parametres');
 const profil_routes = require('./routes/profil');
 const seeCourses_routes = require('./routes/seeCourses');
 const deconnexion_routes = require('./routes/deconnexion');
+const contact_routes = require('./routes/contact');
 
 
 // Déstructuration de process.env
@@ -52,6 +54,8 @@ const { connectUser } = require('./api/controllers/connexionControllers');
 const { deconnexion } = require('./api/controllers/deconnexionControllers');
 const { getSeeCourses } = require('./api/controllers/seeCoursesControllers');
 const { visiteur } = require('./api/controllers/visiteurControllers');
+const { mdpOublie } = require('./api/controllers/mdp_oublieControllers');
+const { contact } = require('./api/controllers/contactController');
 
 // Middleware
 //const multer = require('./api/middlewares/multer');
@@ -118,7 +122,7 @@ app.get('/', function(req, res){
 
 const upload = require('./api/config/multer');
 const { isAdmin } = require('./api/middlewares/admin.middleware');
-const { isVisiteur } = require('./api/middlewares/visiteur.middleware');
+const {isVisiteur} = require('./api/middlewares/visiteur.middleware');
 
 app.use('/connexion', connexion_routes);
 app.post('/connexion', connexion_routes, connectUser);
@@ -134,7 +138,7 @@ app.delete('/admin',isAdmin, admin_routes, deleteUser);
 app.use('/cours', isAdmin, cours_routes);
 app.post('/cours', isAdmin, cours_routes, postCours);
 
-app.use('/visiteur', visiteur_routes);
+//app.use('/visiteur', visiteur_routes);
 
 app.use('/parametres', parametres_routes);
 
@@ -142,10 +146,13 @@ app.use('/profil', profil_routes, getProfilUser);
 
 app.get('/seeCourses', isVisiteur, seeCourses_routes, getSeeCourses);
 
+app.use('/mdpOublie', mdpOublie_routes);
 
 app.use('/user', isAdmin, user_routes);
 
 app.get('/deconnexion', deconnexion_routes, deconnexion);
+
+app.use('/contact', contact_routes);
 
 app.use('*', function (req, res) {
   res.status(404).render("404", {

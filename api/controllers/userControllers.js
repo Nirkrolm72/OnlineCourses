@@ -37,6 +37,14 @@ exports.updateUser = async (req, res) => {
         //     });
         // }
     }
+
+    // const {isVisiteur} = require('../middlewares/visiteur.middleware');
+    // if(req.session.user.isVisiteur){
+    //     db.query(`UPDATE users SET isVisiteur = 1 WHERE id="${req.session.user.id}"`, function(err, data){
+    //         if(err) throw err;
+    //         res.redirect('/user');
+    //     })
+    // }
 }
 
 exports.deleteUser = async (req, res) => {
