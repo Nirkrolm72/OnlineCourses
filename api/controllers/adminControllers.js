@@ -47,3 +47,4 @@ exports.deleteUser = async (req, res) => {
         res.redirect('/admin');
     });
 }
+

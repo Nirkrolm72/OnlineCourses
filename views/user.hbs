@@ -29,55 +29,7 @@
     </div>
   </div>
   <!-- Sidebar -->
-
-  <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-    <div class="container-fluid">
-      <button class="navbar-toggler" id="offcanvasExample" type="button" data-mdb-toggle="collapse"
-        data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"
-        data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i
-          class="fas fa-bars"></i></button>
-
-      <a class="navbar-brand" id="offcanvasExample" type="button" data-mdb-toggle="collapse"
-        data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"
-        data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">Menu</a>
-      <ul class="navbar-nav ms-auto d-flex flex-row">
-        <li class="nav-item me-3 me-lg-0">
-          <a class="nav-link" href="https://github.com/Nirkrolm72" target="_blank">
-            <i class="fab fa-github"></i>
-          </a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link me-3 me-lg-0 dropdown-toggle arrow" href="#" id="navbarDropdown" role="button"
-            data-mdb-toggle="dropdown" aria-expanded="false">
-            <i class="flag flag-france m-0"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <li>
-              <a class="dropdown-item" href="#" style="color: black !important;"><i
-                  class="flag flag-france"></i>Français
-                <i class="fa fa-check text-success ms-2"></i></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-            <a class="dropdown-item" href="#" style="color: black !important;"><i class="flag flag-uk"></i>English</a>
-        </li>
-      </ul>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink"
-          role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-          <img src="{{user.avatar}}" class="rounded-circle" height="22" alt="" loading="lazy" />
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-          <li><a class="dropdown-item" href="/profil" style="color: black !important;">Mon profil</a></li>
-          <li><a class="dropdown-item" href="#" style="color: black !important">Paramètres</a></li>
-          <li><a class="dropdown-item" href="/deconnexion" style="color: black !important;">Déconnexion</a></li>
-        </ul>
-      </li>
-      </ul>
-    </div>
-  </nav>
+{{>navAdmin}}
 </header>
 
 <!--Main layout-->

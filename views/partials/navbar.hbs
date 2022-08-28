@@ -45,19 +45,10 @@
           <a class="nav-link left" aria-current="page" href="/connexion">Connexion</a>
         </li>
         <li class="nav-item">
-          <a class="btn btn-primary" href="/inscription">Commencer</a>
+          <a class="btn btn-primary btnCommencer" href="/inscription">Commencer</a>
         </li>
       </ul>
     </div>
 
   </div>
 </nav>
-
-<script>
-$(function () {
-  $(document).scroll(function () {
-    var $nav = $(".navbar-fixed-top");
-    $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
-  });
-});
-</script>

@@ -45,7 +45,7 @@ const { response } = require('express');
 const SMTPTransport = require('nodemailer/lib/smtp-transport');
 
 // Controllers
-const { getProfilUser } = require('./api/controllers/profilControllers');
+const { getProfilUser, updateProfil} = require('./api/controllers/profilControllers');
 const { getUser } = require('./api/controllers/parametresControllers');
 const { inscripUser } = require('./api/controllers/inscriptionControllers');
 const { postCours} = require('./api/controllers/coursControllers');
@@ -143,6 +143,7 @@ app.post('/cours', isAdmin, cours_routes, postCours);
 app.use('/parametres', parametres_routes);
 
 app.use('/profil', profil_routes, getProfilUser);
+app.post('/profil', profil_routes, updateProfil);
 
 app.get('/seeCourses', isVisiteur, seeCourses_routes, getSeeCourses);
 

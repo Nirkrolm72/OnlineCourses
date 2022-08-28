@@ -1,74 +1,63 @@
-<nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-    <div class="container-fluid">
-      <button class="navbar-toggler" id="offcanvasExample" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="fas fa-bars"></i></button>
-{{#if user}}
-      <a class="navbar-brand" href="/" type="button">OnlineCourses</a>
-      <ul class="navbar-nav ms-auto d-flex flex-row">
-        <li class="nav-item me-3 me-lg-0">
-          <a class="nav-link" href="{{this.github}}" target="_blank">
-            <i class="fab fa-github"></i>
-          </a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link me-3 me-lg-0 dropdown-toggle arrow" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-            <i class="flag flag-france m-0"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <li>
-              <a class="dropdown-item" href="#" style="color: black !important;"><i class="flag flag-france"></i>Français
-                <i class="fa fa-check text-success ms-2"></i></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-              <a class="dropdown-item" href="#" style="color: black !important;"><i class="flag flag-uk"></i>English</a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-            <img src="{{user.avatar}}" class="rounded-circle" height="22" alt="" loading="lazy" />
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="/profil"  style="color: black !important;">Mon profil</a></li>
-            <li><a class="dropdown-item" href="/deconnexion" style="color: black !important;">Déconnexion</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </nav>   
+
+{{>navConnected}}
+
 
 <section style="background-color: #eee;">
   <div class="container py-5">
     <div class="row">
       <div class="col">
-        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4 d-flex justify-content-center">
+        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4 mt-5">
           <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="/">Acceuil</a></li>
-            <li class="breadcrumb-item"><a href="/profil">Profil utilisateur</a></li>
-            <li class="breadcrumb-item"><a href="/parametres">Paramètres</a></li>
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Profil</li>
           </ol>
         </nav>
       </div>
     </div>
-
+{{#if user}}
     <div class="row">
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="../assets/ressources/avatar.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; box-shadow: 5px 5px 15px 5px #000000;">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;">
             <h5 class="my-3">{{user.prenom}} {{user.nom}}</h5>
-            <a class="btn btn-danger" href="/deconnexion" name="deconnexion">Déconnexion</a>
+            <p class="text-muted mb-1">{{user.metier}}</p>
+            <p class="text-muted mb-4">{{user.ville}}, {{user.pays}}</p>
+            <div class="d-flex justify-content-center mb-2">
+              <a type="submit" href="/deconnxion" class="btn btn-danger">Déconnexion</a>
+            </div>
           </div>
         </div>
-
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body p-0">
+            <ul class="list-group list-group-flush rounded-3">
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                <p class="mb-0">{{user.github}}</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                <p class="mb-0">{{user.twitter}}</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                <p class="mb-0">{{user.instagram}}</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                <p class="mb-0">{{user.facebook}}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
       <div class="col-lg-8">
         <div class="card mb-4">
           <div class="card-body">
             <div class="row">
               <div class="col-sm-3">
-                <p class="mb-0">Nom complet</p>
+                <p class="mb-0">Nom Complet</p>
               </div>
               <div class="col-sm-9">
                 <p class="text-muted mb-0">{{user.prenom}} {{user.nom}}</p>
@@ -83,11 +72,131 @@
                 <p class="text-muted mb-0">{{user.email}}</p>
               </div>
             </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Mobile</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{user.mobile}}</p>
+              </div>
             </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Addresse</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{user.adresse}}</p>
+              </div>
             </div>
           </div>
         </div>
-{{/if}}
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Modifier
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifier</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/profil/{{user.id}}?_method=PUT" method="post">
+          <div class="mb-3">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+          </div>
+          <div class="mb-3">
+              <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Téléphone">
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Adresse">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+      </div>
+    
+    </div>
+  </div>
+</div>
+  {{/if}}
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+                <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
+                </p>
+                <p class="mb-1" style="font-size: .77rem;">Web Design</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
+                <div class="progress rounded mb-2" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+                <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
+                </p>
+                <p class="mb-1" style="font-size: .77rem;">Web Design</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
+                <div class="progress rounded mb-2" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
