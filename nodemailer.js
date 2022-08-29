@@ -1,18 +1,22 @@
+//const nodemailer = require('nodemailer')
+const { transporter } = require('./api/config/nodemailer')
+
 // Nodemailer
 app.post('/', function(req, res){
   const {sujet, email, nomEtPrenom, description} = req.body;
 
   console.log(req.body);
-  const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    auth: {
-      user: 'Guyon.Brandon.dev@gmail.com',
-      pass: 'rseyekjmvzqnrlku'
-    }
-  });
-//rseyekjmvzqnrlku
-//tuukluogrqbefvwz
+//   const transporter = nodemailer.createTransport({
+//     host: 'smtp.gmail.com',
+//     port: 465,
+//     auth: {
+//       user: 'Guyon.Brandon.dev@gmail.com',
+//       pass: 'rseyekjmvzqnrlku'
+//     }
+//   });
+// //rseyekjmvzqnrlku
+// //tuukluogrqbefvwz
+
   let mailData = {
     from: 'Guyon.Brandon.dev@gmail.com',
     to: 'guyonbrandon@outlook.fr',
@@ -36,3 +40,4 @@ app.post('/', function(req, res){
     }
   });
 });
+

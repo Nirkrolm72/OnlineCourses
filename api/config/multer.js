@@ -1,47 +1,50 @@
+// Import de Multer
 const multer = require('multer')
 
-// Définir la config de stockage de multer
+// Ici nous définissons la config de stockage de multer
 const storage = multer.diskStorage({
-    // la destination ou seront par défault, stocker les fichiers 
+    // Ici la destination (ou seront stocker nos fichiers par default)
     destination: (req, file, cb) => {
         cb(null, './public/images')
     },
-
-    // définition du format du nom de l'image à stocker
+    // Ici est définit le format du nom de l'image à stocker
     filename: (req, file, cb) => {
-        const ext = file.originalname,
-            date = Date.now(),
-            completed = date + '_' + ext;
-            
-        console.log('Multer', file, completed)
+        console.log('config multer', file, file.originalname.split('.')[0].toLowerCase())
+        const ext = file.originalname.slice(-3),
 
+        completed = file.originalname.split('.')[0].toLowerCase() + "_" + Date.now() + '.' + ext;        
+        
         file.completed = completed
+
+        // name_timestamp.ext
+
         cb(null, completed)
     }
 })
-
+// Ici seront initialiser les parametre de la config de multer
 const upload = multer({
-    // on reprends la constante déclarer au dessus
+    // Ici nous renseignons le stockage definit au dessu
     storage: storage,
-    // on donne les limits des fichiers
+    // Ici seront renseigner les limits des fichiers (taile, proportion, ...)
     limits: {
-        fileSize: 1 * 4098 * 4098,
         files: 1
     },
-    // filtre qui permet d'indiquer quel types de fichiers est pris en compte
+    // Ici nous avons un filtre qui va nous permetre de configurer les extensions accepter par notre middleware ou autre
     fileFilter: (req, file, cb) => {
         if (
             file.mimetype === "image/png" ||
             file.mimetype === "image/jpg" ||
-            file.mimetype === "image/gif" ||
-            file.mimetype === "image/jpeg"
+            file.mimetype === "image/jpeg"||
+            file.mimetype === "image/gif"
         ) {
             cb(null, true)
         } else {
             cb(null, false)
-            cb(new Error('le fichier doit être au format png, jpg, jpeg ou gif'))
+            cb(new Error('Le fichier doit être au format png, jpg, jpeg ou gif.'))
         }
     }
 })
 
+
+// Ici nous exportons upload afin de pouvoir l'appeler dans notre router
 module.exports = upload

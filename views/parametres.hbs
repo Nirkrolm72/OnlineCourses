@@ -1,42 +1,47 @@
 <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-    <div class="container-fluid">
-      <button class="navbar-toggler" id="offcanvasExample" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="fas fa-bars"></i></button>
-{{#if user}}
-      <a class="navbar-brand" href="/" type="button">OnlineCourses</a>
-      <ul class="navbar-nav ms-auto d-flex flex-row">
-        <li class="nav-item me-3 me-lg-0">
-          <a class="nav-link" href="{{user.github}}" target="_blank">
-            <i class="fab fa-github"></i>
-          </a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link me-3 me-lg-0 dropdown-toggle arrow" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-            <i class="flag flag-france m-0"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <li>
-              <a class="dropdown-item" href="#" style="color: black !important;"><i class="flag flag-france"></i>Français
-                <i class="fa fa-check text-success ms-2"></i></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-              <a class="dropdown-item" href="#" style="color: black !important;"><i class="flag flag-uk"></i>English</a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-            <img src="{{user.avatar}}" class="rounded-circle" height="22" alt="" loading="lazy" />
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="/profil"  style="color: black !important;">Mon profil</a></li>
-            <li><a class="dropdown-item" href="/deconnexion" style="color: black !important;">Déconnexion</a></li>
-          </ul>
-        </li>
+  <div class="container-fluid">
+    <button class="navbar-toggler" id="offcanvasExample" type="button" data-mdb-toggle="collapse"
+      data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"
+      data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i
+        class="fas fa-bars"></i></button>
+    {{#if user}}
+    <a class="navbar-brand" href="/" type="button">OnlineCourses</a>
+    <ul class="navbar-nav ms-auto d-flex flex-row">
+      <li class="nav-item me-3 me-lg-0">
+        <a class="nav-link" href="{{user.github}}" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link me-3 me-lg-0 dropdown-toggle arrow" href="#" id="navbarDropdown" role="button"
+          data-mdb-toggle="dropdown" aria-expanded="false">
+          <i class="flag flag-france m-0"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+          <li>
+            <a class="dropdown-item" href="#" style="color: black !important;"><i class="flag flag-france"></i>Français
+              <i class="fa fa-check text-success ms-2"></i></a>
+          </li>
+          <li>
+            <hr class="dropdown-divider" />
+          </li>
+          <a class="dropdown-item" href="#" style="color: black !important;"><i class="flag flag-uk"></i>English</a>
+      </li>
+    </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink"
+        role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+        <img src="{{user.avatar}}" class="rounded-circle" height="22" alt="" loading="lazy" />
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+        <li><a class="dropdown-item" href="/profil" style="color: black !important;">Mon profil</a></li>
+        <li><a class="dropdown-item" href="/deconnexion" style="color: black !important;">Déconnexion</a></li>
       </ul>
-    </div>
-  </nav>  
+    </li>
+    </ul>
+  </div>
+</nav>
 
 <section style="background-color: #eee;">
   <div class="container py-5">
@@ -56,8 +61,8 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="{{user.avatar}}" alt="avatar"
-              class="rounded-circle img-fluid" style="width: 150px; box-shadow: 5px 5px 15px 5px #000000;">
+            <img src="{{user.avatar}}" alt="avatar" class="rounded-circle img-fluid"
+              style="width: 150px; box-shadow: 5px 5px 15px 5px #000000;">
             <h5 class="my-3">{{user.prenom}} {{user.nom}}</h5>
             <p class="text-muted mb-1">{{user.fonction}}</p>
             <p class="text-muted mb-4">{{user.ville}}, {{user.pays}}</p>
@@ -139,7 +144,8 @@
         </div>
         {{!-- Bouton Modifier --}}
         <div class="d-flex justify-content-center">
-          <button type="button" class="btn btn-secondary btn-sm me-3" data-bs-toggle="modal" data-bs-target="#exampleModal3">Modifier</button>
+          <button type="button" class="btn btn-secondary btn-sm me-3" data-bs-toggle="modal"
+            data-bs-target="#exampleModal3">Modifier</button>
         </div>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -154,8 +160,8 @@
                   <div class="mb-3">
                     <input type="text" class="form-control" placeholder="Changer le nom et le prénom">
                   </div>
-                    <div class="mb-3">
-                      <input type="text" class="form-control" placeholder="Changer l'e-mail">
+                  <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Changer l'e-mail">
                   </div>
                   <div class="mb-3">
                     <input type="text" class="form-control" placeholder="Changer le mot de passe">
@@ -166,17 +172,18 @@
                   <div class="mb-3">
                     <input type="text" class="form-control" placeholder="Changer l'adresse">
                   </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-danger">Modifier</button>
+                  </div>
                 </form>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-danger">Modifier</button>
-              </div>
+
             </div>
           </div>
         </div>
-      {{!-- Fin Bouton modifier --}}
-{{/if}}
+        {{!-- Fin Bouton modifier --}}
+        {{/if}}
       </div>
     </div>
   </div>

@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const router = express.Router();
 const app = express();
 const {engine} = require('express-handlebars');
 const expressSession = require('express-session');
@@ -56,9 +57,11 @@ const { getSeeCourses } = require('./api/controllers/seeCoursesControllers');
 const { visiteur } = require('./api/controllers/visiteurControllers');
 const { mdpOublie } = require('./api/controllers/mdp_oublieControllers');
 const { contact } = require('./api/controllers/contactController');
+const { sendMailContact } = require('./api/controllers/nodemailerContactControllers');
+const { forgotPassword } = require('./api/controllers/mdp_oublieControllers');
 
 // Middleware
-//const multer = require('./api/middlewares/multer');
+const multer = require('./api/config/multer');
 
 require('./api/database/database');
 
@@ -120,6 +123,7 @@ app.get('/', function(req, res){
   res.render('home');
 });
 
+
 const upload = require('./api/config/multer');
 const { isAdmin } = require('./api/middlewares/admin.middleware');
 const {isVisiteur} = require('./api/middlewares/visiteur.middleware');
@@ -128,7 +132,7 @@ app.use('/connexion', connexion_routes);
 app.post('/connexion', connexion_routes, connectUser);
 
 app.use('/inscription', inscription_routes);
-app.post('/inscription', inscription_routes, inscripUser);
+app.post('/inscription',inscription_routes, inscripUser);
 
 app.use('/admin', isAdmin, admin_routes);
 app.put('/admin', isAdmin, admin_routes, updateUser);
@@ -143,17 +147,19 @@ app.post('/cours', isAdmin, cours_routes, postCours);
 app.use('/parametres', parametres_routes);
 
 app.use('/profil', profil_routes, getProfilUser);
-app.post('/profil', profil_routes, updateProfil);
+app.post('/profil', upload.single('avatar'),profil_routes, updateProfil);
 
 app.get('/seeCourses', isVisiteur, seeCourses_routes, getSeeCourses);
 
 app.use('/mdpOublie', mdpOublie_routes);
+app.post('/mdpOublie', mdpOublie_routes, forgotPassword);
 
 app.use('/user', isAdmin, user_routes);
 
 app.get('/deconnexion', deconnexion_routes, deconnexion);
 
 app.use('/contact', contact_routes);
+app.post('/contact', contact_routes, sendMailContact);
 
 app.use('*', function (req, res) {
   res.status(404).render("404", {
