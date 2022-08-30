@@ -11,6 +11,7 @@ const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const methodOverride = require('method-override');
 const nodemailer = require('nodemailer');
+const path = require('path');
 //const multer = require('multer');
 
 // Routes
@@ -135,7 +136,7 @@ app.use('/connexion', connexion_routes);
 app.post('/connexion', connexion_routes, connectUser);
 
 app.use('/inscription', inscription_routes);
-app.post('/inscription',inscription_routes, inscriptionControllers.inscripUser);
+app.post('/inscription', upload.single('avatar'),inscription_routes, inscriptionControllers.inscripUser);
 
 app.use('/admin', isAdmin, admin_routes);
 app.put('/admin', isAdmin, admin_routes, updateUser);
@@ -145,13 +146,14 @@ app.delete('/admin',isAdmin, admin_routes, deleteUser);
 app.use('/cours', isAdmin, cours_routes);
 app.post('/cours', isAdmin, cours_routes, postCours);
 
-//app.use('/visiteur', visiteur_routes);
+app.use('/visiteur', visiteur_routes);
 
 app.use('/parametres', parametres_routes);
 
 
 app.get('/profil', profil_routes, getProfilUser);
-app.post('/profil', profil_routes, updateProfil);
+app.post('/profil' ,profil_routes, updateProfil);
+app.put('/profil/:id', upload.single('avatar'), updateProfil);
 
 
 app.get('/seeCourses', isVisiteur, seeCourses_routes, getSeeCourses);

@@ -28,41 +28,11 @@
 </div>
 <!-- Sidebar -->
 
-  <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-    <div class="container-fluid">
-      <button class="navbar-toggler" id="offcanvasExample" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="fas fa-bars"></i></button>
+ {{#if user.isVisiteur}}
+  {{>navConnected}}
 
-      <a class="navbar-brand" id="offcanvasExample" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">Menu</a>
-      <ul class="navbar-nav ms-auto d-flex flex-row">
-        <li class="nav-item dropdown">
-          <a class="nav-link me-3 me-lg-0 dropdown-toggle arrow" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-            <i class="flag flag-france m-0"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <li>
-              <a class="dropdown-item" href="#" style="color: black !important;"><i class="flag flag-france"></i>Français
-                <i class="fa fa-check text-success ms-2"></i></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-              <a class="dropdown-item" href="#" style="color: black !important;"><i class="flag flag-uk"></i>English</a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-            <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="22" alt="" loading="lazy" />
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="/profil"  style="color: black !important;">Mon profil</a></li>
-            <li><a class="dropdown-item" href="#" style="color: black !important">Paramètres</a></li>
-            <li><a class="dropdown-item" href="#" style="color: black !important;">Déconnexion</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </nav>   
+{{#if user.isAdmin}}
+  {{>navAdmin}}
 </header>
 
 <!--Main layout-->
@@ -86,18 +56,21 @@
       <td>
         <div class="d-flex align-items-center">
           <div class="ms-3">
-            <p class="fw-bold mb-1">Apprendre le développement Web</p>
+            <p class="fw-bold mb-1">{{this.titre}}</p>
           </div>
         </div>
       </td>
       <td>
-        <p class="text-muted mb-0">John Doe</p>
+        <p class="text-muted mb-0">{{this.auteur}}</p>
       </td>
       <td>
-        <p class="text-muted mb-0">Apprenez le développement web front-end</p>
+        <p class="text-muted mb-0">{{this.description}}</p>
       </td>
       <td>
-        <button type="button" class="btn btn-primary btn-sm me-3">Voir</button>
+       
+        
+        <button type="submit" class="btn btn-primary btn-sm me-3">Voir</button>
+        
         {{!-- Bouton Modifier --}}
         <button type="button" class="btn btn-secondary btn-sm me-3" data-bs-toggle="modal" data-bs-target="#exampleModal3">Modifier</button>
         <!-- Modal -->
@@ -150,11 +123,13 @@
         </div>
       </div>
       {{!-- Fin bouton supprimer --}}
-
+      
     </tr>
   </tbody>
 </table>
   </div>
 
 </main>
+{{/if}}
+{{/if}}
 <!--Main layout-->

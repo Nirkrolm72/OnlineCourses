@@ -13,9 +13,12 @@ const transporter = nodemailer.createTransport({
 
 var rand, mailOptions, host, link;
 
+
+
 exports.inscription = (req, res) => {
     res.render('inscription', { title: 'Inscription', layout: 'inscription' });
 }
+
 
 exports.inscripUser = async (req, res) => {
     const saltRounds = 10;
@@ -30,7 +33,6 @@ exports.inscripUser = async (req, res) => {
     }
 
     console.log(req.body);
-    console.log(req.file);
 
     bcrypt.hash(password, saltRounds, function (err, hash) {
         db.query(`INSERT INTO users (nom, prenom, email, password, avatar, isAdmin, isVisiteur, isVerified) VALUES ('${nom}', '${prenom}', '${email}', '${hash}', '${avatar}', 0, 0, 0);`, data, (err, rows, fields) => {
@@ -41,7 +43,7 @@ exports.inscripUser = async (req, res) => {
             else {
 
                 const user = db.query(`SELECT * FROM users where email = "${req.body.email}";`)
-
+                console.log(user);
 
 
                 rand = Math.floor((Math.random() * 100) + 54);
@@ -50,8 +52,8 @@ exports.inscripUser = async (req, res) => {
 
                 mailOptions = {
                     from: 'Guyon.Brandon.dev@gmail.com',
-                    to: req.body.email,
-                    //to: 'guyonbrandon@outlook.fr',
+                    //to: user[0].email,
+                    to: 'guyonbrandon@outlook.fr',
                     subject: "Veuillez confirmez votre Email svp.",
                     rand: rand,
                     html: `
@@ -116,15 +118,10 @@ exports.verificationMailPost = async (req, res) => {
     const user = await db.query(`SELECT * FROM users WHERE id = '${req.params.id}';`)
 
     if (user) {
-        await db.query(`UPDATE users SET isVerified = '1', isVisiteur = '1' WHERE id = '${req.params.id}';`)
+        await db.query(`UPDATE users SET isVerified = 1, isVisiteur = 1 WHERE id = '${req.params.id}';`);
 
-        res.render('connexion', {
-            success: 'Votre compte a bien été vérifié !'
-        })
+        res.render('connexion', { success: 'Votre compte a bien été vérifié !'})
     } else {
         res.redirect('/connexion');
     }
 }
-
-
-

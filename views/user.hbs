@@ -99,7 +99,7 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-
+                  
                       <div class="mb-3">
                         <input type="text" name="prenom" class="form-control" placeholder="Prénom"
                           value="{{user.prenom}}">
@@ -107,6 +107,15 @@
                       <div class="mb-3">
                         <input type="text" name="email" class="form-control" placeholder="E-Mail"
                           value="{{user.email}}">
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="">Admin</label>
+                        <input type="checkbox" id="isAdmin{{ user.id }}" name="isAdmin" />
+                        <label for="">Visiteur</label>
+                        <input type="checkbox" id="isVisiteur{{ user.id }}" name="isVisiteur" />
+                        <label for="">Verified</label>
+                        <input type="checkbox" id="isVerified{{ user.id }}" name="isVerified" />
                       </div>
             </form>
   </div>
@@ -169,7 +178,8 @@
   const vst{{ user.id }} = {{ isVisiteur }} 
   if ( vst{{ user.id }} === 1 ) isVisiteur{{ user.id }}.checked = true
 
-  const isVerified{{ user.id }} = document.getElementById('isVisiteur{{ user.id }}')
+  // isVerified
+  const isVerified{{ user.id }} = document.getElementById('isVerified{{ user.id }}')
   const vfd{{ user.id }} = {{ isVerified }} 
   if ( vfd{{ user.id }} === 1 ) isVerified{{ user.id }}.checked = true
 
