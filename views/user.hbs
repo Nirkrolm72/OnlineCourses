@@ -108,15 +108,6 @@
                         <input type="text" name="email" class="form-control" placeholder="E-Mail"
                           value="{{user.email}}">
                       </div>
-
-                      <div class="mb-3">
-                        <label for="">Admin</label>
-                        <input type="checkbox" id="isAdmin{{ user.id }}" name="isAdmin" />
-                        <label for="">Visiteur</label>
-                        <input type="checkbox" id="isVisiteur{{ user.id }}" name="isVisiteur" />
-                        <label for="">Verified</label>
-                        <input type="checkbox" id="isVerified{{ user.id }}" name="isVerified" />
-                      </div>
             </form>
   </div>
   <div class="modal-footer">
@@ -177,6 +168,10 @@
   const isVisiteur{{ user.id }} = document.getElementById('isVisiteur{{ user.id }}')
   const vst{{ user.id }} = {{ isVisiteur }} 
   if ( vst{{ user.id }} === 1 ) isVisiteur{{ user.id }}.checked = true
+
+  const isVerified{{ user.id }} = document.getElementById('isVisiteur{{ user.id }}')
+  const vfd{{ user.id }} = {{ isVerified }} 
+  if ( vfd{{ user.id }} === 1 ) isVerified{{ user.id }}.checked = true
 
 </script>
 

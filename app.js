@@ -29,6 +29,7 @@ const deconnexion_routes = require('./routes/deconnexion');
 const contact_routes = require('./routes/contact');
 
 
+
 // Déstructuration de process.env
 const { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_USER, PORT_NODE } = process.env;
 
@@ -48,7 +49,7 @@ const SMTPTransport = require('nodemailer/lib/smtp-transport');
 // Controllers
 const { getProfilUser, updateProfil} = require('./api/controllers/profilControllers');
 const { getUser } = require('./api/controllers/parametresControllers');
-const { inscripUser } = require('./api/controllers/inscriptionControllers');
+const inscriptionControllers = require('./api/controllers/inscriptionControllers');
 const { postCours} = require('./api/controllers/coursControllers');
 const { updateUser, deleteUser} = require('./api/controllers/adminControllers');
 const { connectUser } = require('./api/controllers/connexionControllers');
@@ -57,8 +58,8 @@ const { getSeeCourses } = require('./api/controllers/seeCoursesControllers');
 const { visiteur } = require('./api/controllers/visiteurControllers');
 const { mdpOublie } = require('./api/controllers/mdp_oublieControllers');
 const { contact } = require('./api/controllers/contactController');
-const { sendMailContact } = require('./api/controllers/nodemailerContactControllers');
-const { forgotPassword } = require('./api/controllers/mdp_oublieControllers');
+const nodemailerControllers = require('./api/controllers/nodemailerControllers');
+
 
 // Middleware
 const multer = require('./api/config/multer');
@@ -128,11 +129,13 @@ const upload = require('./api/config/multer');
 const { isAdmin } = require('./api/middlewares/admin.middleware');
 const {isVisiteur} = require('./api/middlewares/visiteur.middleware');
 
+
+
 app.use('/connexion', connexion_routes);
 app.post('/connexion', connexion_routes, connectUser);
 
 app.use('/inscription', inscription_routes);
-app.post('/inscription',inscription_routes, inscripUser);
+app.post('/inscription',inscription_routes, inscriptionControllers.inscripUser);
 
 app.use('/admin', isAdmin, admin_routes);
 app.put('/admin', isAdmin, admin_routes, updateUser);
@@ -146,20 +149,25 @@ app.post('/cours', isAdmin, cours_routes, postCours);
 
 app.use('/parametres', parametres_routes);
 
-app.use('/profil', profil_routes, getProfilUser);
-app.post('/profil', upload.single('avatar'),profil_routes, updateProfil);
+
+app.get('/profil', profil_routes, getProfilUser);
+app.post('/profil', profil_routes, updateProfil);
+
 
 app.get('/seeCourses', isVisiteur, seeCourses_routes, getSeeCourses);
 
-app.use('/mdpOublie', mdpOublie_routes);
-app.post('/mdpOublie', mdpOublie_routes, forgotPassword);
 
 app.use('/user', isAdmin, user_routes);
 
 app.get('/deconnexion', deconnexion_routes, deconnexion);
 
 app.use('/contact', contact_routes);
-app.post('/contact', contact_routes, sendMailContact);
+app.post('/contact', contact_routes, nodemailerControllers.sendMailContact);
+
+app.post('/verification', nodemailerControllers.sendVerif);
+
+app.get('/verification/:id', inscriptionControllers.verificationMail);
+app.post('/verification/:id', inscriptionControllers.verificationMailPost);
 
 app.use('*', function (req, res) {
   res.status(404).render("404", {

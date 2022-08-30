@@ -20,6 +20,8 @@ exports.connectUser = (req, res) => {
         bcrypt.compare(password, data[0].password, function (err, result){
             if(result === true){
                 { setSession(req, res, email) };
+
+            
                 
             }
             else{
