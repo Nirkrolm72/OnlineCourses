@@ -1,11 +1,13 @@
 // Import de Multer
-const multer = require('multer')
+const multer = require('multer');
+const path = require('path');
 
 // Ici nous définissons la config de stockage de multer
 const storage = multer.diskStorage({
     // Ici la destination (ou seront stocker nos fichiers par default)
     destination: (req, file, cb) => {
-        cb(null, './public/images')
+        cb(null, './assets/images')
+        //cb(null, path.join(__dirname, '../../assets/images'));
     },
     // Ici est définit le format du nom de l'image à stocker
     filename: (req, file, cb) => {
@@ -35,7 +37,8 @@ const upload = multer({
             file.mimetype === "image/png" ||
             file.mimetype === "image/jpg" ||
             file.mimetype === "image/jpeg"||
-            file.mimetype === "image/gif"
+            file.mimetype === "image/gif" ||
+            file.mimetype === "image/webp"
         ) {
             cb(null, true)
         } else {
@@ -48,3 +51,4 @@ const upload = multer({
 
 // Ici nous exportons upload afin de pouvoir l'appeler dans notre router
 module.exports = upload
+

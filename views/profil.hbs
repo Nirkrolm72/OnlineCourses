@@ -18,8 +18,7 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="../assets/images/{{../this.image}}" alt="avatar"
-              class="rounded-circle img-fluid" style="width: 150px;">
+            <img src="/assets/images/{{user.avatar}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
             <h5 class="my-3">{{user.prenom}} {{user.nom}}</h5>
             <p class="text-muted mb-1">{{user.metier}}</p>
             <p class="text-muted mb-4">{{user.ville}}, {{user.pays}}</p>
@@ -93,9 +92,7 @@
         </div>
 
         <!-- Button trigger modal -->
-        <button type="submit" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Modifier
-        </button>
+        <button type="submit" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Modifier</button>
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

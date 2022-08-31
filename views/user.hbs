@@ -29,7 +29,7 @@
     </div>
   </div>
   <!-- Sidebar -->
-{{>navAdmin}}
+  {{>navAdmin}}
 </header>
 
 <!--Main layout-->
@@ -76,21 +76,23 @@
           </td>
 
           <td>
-            {{!-- <p class="text-muted mb-0">{{this.is_admin}}</p> --}}
-            <label for="">Admin</label>
-            <input type="checkbox" id="isAdmin{{ user.id }}" name="isAdmin" />
-            <label for="">Visiteur</label>
-            <input type="checkbox" id="isVisiteur{{ user.id }}" name="isVisiteur" />
-            <label for="">Verified</label>
-            <input type="checkbox" id="isVerified{{ user.id }}" name="isVerified" />
+
+            <input class="form-check-input" type="checkbox" id="isAdmin{{ this.id }}" name="isAdmin">
+            <label class="form-check-label" for="isAdmin{{ this.id }}">isAdmin {{ user.isAdmin }}</label>
+
+            <input class="form-check-input" type="checkbox" id="isVerified{{ this.id }}" name="isVerified">
+            <label class="form-check-label" for="flexCheckChecked">isVerified {{ user.isVerified }}</label>
+
+            <input class="form-check-input" type="checkbox" id="isVisiteur{{ this.id }}" name="isVisiteur">
+            <label class="form-check-label" for="flexCheckChecked">isVisiteur {{ user.isVisiteur }}</label>
           </td>
           <td>
             {{!-- Bouton Modifier --}}
             <button type="button" class="btn btn-secondary btn-sm me-3" data-bs-toggle="modal"
-              data-bs-target="#exampleModal">Modifier</button>
+              data-bs-target="#exampleModal-{{this.id}}">Modifier</button>
             <!-- Modal -->
             <form action="/user/{{this.id}}?_method=PUT" method="post">
-              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              <div class="modal fade" id="exampleModal-{{this.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -99,7 +101,7 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                  
+
                       <div class="mb-3">
                         <input type="text" name="prenom" class="form-control" placeholder="Prénom"
                           value="{{user.prenom}}">
@@ -110,12 +112,14 @@
                       </div>
 
                       <div class="mb-3">
-                        <label for="">Admin</label>
-                        <input type="checkbox" id="isAdmin{{ user.id }}" name="isAdmin" />
-                        <label for="">Visiteur</label>
-                        <input type="checkbox" id="isVisiteur{{ user.id }}" name="isVisiteur" />
-                        <label for="">Verified</label>
-                        <input type="checkbox" id="isVerified{{ user.id }}" name="isVerified" />
+                        <input class="form-check-input" type="checkbox" id="isAdmin{{ this.id }}" name="isAdmin">
+                        <label class="form-check-label" for="isAdmin{{ this.id }}">isAdmin {{ user.isAdmin }}</label>
+
+                        <input class="form-check-input" type="checkbox" id="isVerified{{ this.id }}" name="isVerified">
+                        <label class="form-check-label" for="flexCheckChecked">isVerified {{ user.isVerified }}</label>
+
+                        <input class="form-check-input" type="checkbox" id="isVisiteur{{ this.id }}" name="isVisiteur">
+                        <label class="form-check-label" for="flexCheckChecked">isVisiteur {{ user.isVisiteur }}</label>
                       </div>
             </form>
   </div>
@@ -131,8 +135,8 @@
   {{!-- Bouton supprimer --}}
   <form action="/user/{{this.id}}?_method=DELETE" method="post">
     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-      data-bs-target="#exampleModal2">Supprimer</button>
-    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      data-bs-target="#exampleModal2-{{this.id}}">Supprimer</button>
+    <div class="modal fade" id="exampleModal2-{{this.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -175,13 +179,12 @@
 
   // isVisiteur 
   const isVisiteur{{ user.id }} = document.getElementById('isVisiteur{{ user.id }}')
-  const vst{{ user.id }} = {{ isVisiteur }} 
-  if ( vst{{ user.id }} === 1 ) isVisiteur{{ user.id }}.checked = true
+  const vst{{ user.id }} = { { isVisiteur } }
+  if (vst{ { user.id } } === 1 ) isVisiteur{ { user.id } }.checked = true
 
   // isVerified
   const isVerified{{ user.id }} = document.getElementById('isVerified{{ user.id }}')
-  const vfd{{ user.id }} = {{ isVerified }} 
-  if ( vfd{{ user.id }} === 1 ) isVerified{{ user.id }}.checked = true
+  const vfd{{ user.id }} = { { isVerified } }
+  if (vfd{ { user.id } } === 1 ) isVerified{ { user.id } }.checked = true
 
 </script>
-

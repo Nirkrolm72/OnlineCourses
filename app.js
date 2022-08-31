@@ -12,7 +12,7 @@ const bcrypt = require('bcrypt');
 const methodOverride = require('method-override');
 const nodemailer = require('nodemailer');
 const path = require('path');
-//const multer = require('multer');
+const multer = require('multer');
 
 // Routes
 const home_routes = require('./routes/home');
@@ -48,7 +48,7 @@ const { response } = require('express');
 const SMTPTransport = require('nodemailer/lib/smtp-transport');
 
 // Controllers
-const { getProfilUser, updateProfil} = require('./api/controllers/profilControllers');
+const { getProfilUser, updateProfil, refreshProfil} = require('./api/controllers/profilControllers');
 const { getUser } = require('./api/controllers/parametresControllers');
 const inscriptionControllers = require('./api/controllers/inscriptionControllers');
 const { postCours} = require('./api/controllers/coursControllers');
@@ -63,7 +63,7 @@ const nodemailerControllers = require('./api/controllers/nodemailerControllers')
 
 
 // Middleware
-const multer = require('./api/config/multer');
+//const multer = require('./api/config/multer');
 
 require('./api/database/database');
 
@@ -136,7 +136,7 @@ app.use('/connexion', connexion_routes);
 app.post('/connexion', connexion_routes, connectUser);
 
 app.use('/inscription', inscription_routes);
-app.post('/inscription', upload.single('avatar'),inscription_routes, inscriptionControllers.inscripUser);
+app.post('/inscription',inscription_routes, inscriptionControllers.inscripUser);
 
 app.use('/admin', isAdmin, admin_routes);
 app.put('/admin', isAdmin, admin_routes, updateUser);
@@ -150,16 +150,16 @@ app.use('/visiteur', visiteur_routes);
 
 app.use('/parametres', parametres_routes);
 
-
 app.get('/profil', profil_routes, getProfilUser);
-app.post('/profil' ,profil_routes, updateProfil);
-app.put('/profil/:id', upload.single('avatar'), updateProfil);
+app.post('/profil',profil_routes, updateProfil);
+app.put('/profil/:id',upload.single('avatar'), updateProfil);
 
 
 app.get('/seeCourses', isVisiteur, seeCourses_routes, getSeeCourses);
 
 
 app.use('/user', isAdmin, user_routes);
+app.post('/user:id', isAdmin, user_routes, updateUser);
 
 app.get('/deconnexion', deconnexion_routes, deconnexion);
 
@@ -171,11 +171,11 @@ app.post('/verification', nodemailerControllers.sendVerif);
 app.get('/verification/:id', inscriptionControllers.verificationMail);
 app.post('/verification/:id', inscriptionControllers.verificationMailPost);
 
-app.use('*', function (req, res) {
-  res.status(404).render("404", {
-      layout: '404'
-  });
-});
+// app.use('*', function (req, res) {
+//   res.status(404).render("404", {
+//       layout: '404'
+//   });
+// });
 
 // Le serveur écoute sur le port 3000
 app.listen(PORT_NODE, () =>{
