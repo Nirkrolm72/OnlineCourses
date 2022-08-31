@@ -42,16 +42,18 @@ exports.sendMailContact = (req, res) => {
 
 exports.sendVerif = (req, res) => {
 
-    rand = Math.floor((Math.random() * 100) + 54);
+    rand = Math.floor((Math.random() * 100) + 54)
     host = req.get('host');
     link = "http://" + req.get('host') + "verify?id=" + rand;
+    
 
     mailOptions = {
-        to: 'guyonbrandon@outlook.fr',
+        to: 'guyonbrandon72@gmail.com',
         subject: "Veuillez comfirmer votre email",
         html: `
             <h2>Bonjour,</h2><br>
-            <h5>Veuillez comfirmer votre adresse mail, cliquer <a href=" ` + link + ` ">ici</a></h5><br>`
+            <h5>Veuillez comfirmer votre adresse mail, cliquer <a href="  `+ link +`  ">ici</a></h5><br>
+        `
 
     }
     console.log(mailOptions);

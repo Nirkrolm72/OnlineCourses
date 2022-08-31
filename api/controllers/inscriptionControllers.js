@@ -24,50 +24,51 @@ exports.inscripUser = async (req, res) => {
     const saltRounds = 10;
     const { nom, prenom, email, password, avatar } = req.body;
 
-    var data = {
-        'nom': req.body.nom,
-        'prenom': req.body.prenom,
-        'email': req.body.email,
-        'password': req.body.password,
-        'avatar': req.body.avatar
-    }
+    // var data = {
+    //     'nom': req.body.nom,
+    //     'prenom': req.body.prenom,
+    //     'email': req.body.email,
+    //     'password': req.body.password,
+    //     'avatar': req.body.avatar
+    // }
 
     console.log(req.body);
 
     bcrypt.hash(password, saltRounds, function (err, hash) {
-        db.query(`INSERT INTO users (nom, prenom, email, password, avatar, isAdmin, isVisiteur, isVerified) VALUES ('${nom}', '${prenom}', '${email}', '${hash}', '${avatar}', 0, 0, 0);`, data, (err, rows, fields) => {
+        db.query(`INSERT INTO users (nom, prenom, email, password, avatar, isAdmin, isVisiteur, isVerified) VALUES ('${nom}', '${prenom}', '${email}', '${hash}', '${avatar}', 0, 0, 0);`, (err, rows, fields) => {
             if (err) {
                 console.log(err.message);
                 res.send(err);
             }
             else {
 
-                const user = db.query(`SELECT * FROM users where email = "${req.body.email}";`)
-                console.log(user);
+                const user =  db.query(`SELECT * FROM users where email = "${req.body.email}";`)
+                
 
+                
 
                 rand = Math.floor((Math.random() * 100) + 54);
                 host = req.get('host');
                 link = "http://" + req.get('host') + "/verification/" + rand;
 
+                
                 mailOptions = {
                     from: 'Guyon.Brandon.dev@gmail.com',
-                    //to: user[0].email,
-                    to: 'guyonbrandon@outlook.fr',
+                    to: email,
                     subject: "Veuillez confirmez votre Email svp.",
                     rand: rand,
                     html: `
                             <h2>Bonjour,</h2><br>
                             <h5>Pour activer votre compte utilisateur, veuillez cliquer sur le lien ci-dessous</h5><br>
-                            <a href=" ` + link + ` ">Cliquez ici pour activer votre compte</a><br>`
+                            <a href=` + link + `>Cliquez ici pour activer votre compte</a><br>`
 
                 }
+                
                 console.log('Données de mailOption :', mailOptions)
 
                 transporter.sendMail(mailOptions, (err, res, next) => {
                     if (err) {
-                        console.log(err)
-                        res.end("error")
+                        throw err
                     } else {
                         console.log("Message Envoyer")
                         next()
@@ -92,14 +93,15 @@ exports.verificationMail = async (req, res) => {
 
     const user = await db.query(`SELECT * FROM users WHERE email = "${mailOptions.to}"`)
     console.log('Récup mail :', user);
+    console.log(mailOptions.to);
 
     if ((req.protocol + "://" + req.get('host')) == ("http://" + host)) {
         console.log("Domain is matched. Information is from Authentic email");
 
         if (req.params.id == mailOptions.rand) {
-            console.log("email is verified: ", user[0]);
+            console.log("email is verified: ", user);
             res.render('verifMail', {
-                user: user[0]
+                user: user
             })
         } else {
             res.render('verifMail', {
@@ -114,11 +116,13 @@ exports.verificationMail = async (req, res) => {
 }
 
 exports.verificationMailPost = async (req, res) => {
+    const { id } = req.params;
+    console.log('Verif mail post :', req.body);
 
-    const user = await db.query(`SELECT * FROM users WHERE id = '${req.params.id}';`)
+    const user = await db.query(`SELECT * FROM users WHERE id = '${id}';`)
 
     if (user) {
-        await db.query(`UPDATE users SET isVerified = 1, isVisiteur = 1 WHERE id = '${req.params.id}';`);
+        await db.query(`UPDATE users SET isVerified = 1, isVisiteur = 1 WHERE id='${id}';`);
 
         res.render('connexion', { success: 'Votre compte a bien été vérifié !'})
     } else {

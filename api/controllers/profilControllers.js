@@ -30,7 +30,7 @@ exports.updateProfil = async (req, res) => {
         const img = await db.query(`SELECT avatar from users WHERE id=${id}`);
 
         if(img[0].image !== "linuxbash.png"){
-            pathImg = path.resolve("assets/images/" + img[0].image)
+            pathImg = path.resolve("/assets/images/" + img[0].image)
             fs.unlink(pathImg, (err) => {
                 if (err) throw err;
 

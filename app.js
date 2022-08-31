@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const router = express.Router();
-const app = express();
+
 const {engine} = require('express-handlebars');
 const expressSession = require('express-session');
 const MySQLStore = require('express-mysql-session')(expressSession);
@@ -13,6 +13,8 @@ const methodOverride = require('method-override');
 const nodemailer = require('nodemailer');
 const path = require('path');
 const multer = require('multer');
+
+const app = express();
 
 // Routes
 const home_routes = require('./routes/home');
@@ -68,10 +70,11 @@ const nodemailerControllers = require('./api/controllers/nodemailerControllers')
 require('./api/database/database');
 
 
-// Configuration handlebars
+//Configuration handlebars
 app.engine('.hbs', engine({
     extname: '.hbs'
 }));
+
 
 app.set('view engine', '.hbs');
 app.set('views', './views');
