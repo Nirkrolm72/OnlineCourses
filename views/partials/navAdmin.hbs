@@ -3,10 +3,10 @@
 
       <a class="navbar-brand" id="offcanvasExample" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">OnlineCourses</a>
       <ul class="navbar-nav ms-auto d-flex flex-row">
-
+        {{#if user}}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" class="rounded-circle" height="22" alt="" loading="lazy" />
+            <img src="/assets/images/{{user.avatar}}" class="rounded-circle" height="22" alt="" loading="lazy" />
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="/profil"  style="color: black !important;">Mon profil</a></li>
@@ -14,6 +14,7 @@
             <li><a class="dropdown-item" href="/deconnexion" style="color: black !important;">Déconnexion</a></li>
           </ul>
         </li>
+        {{/if}}
       </ul>
     </div>
   </nav> 

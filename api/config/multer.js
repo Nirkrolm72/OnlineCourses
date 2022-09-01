@@ -6,8 +6,8 @@ const path = require('path');
 const storage = multer.diskStorage({
     // Ici la destination (ou seront stocker nos fichiers par default)
     destination: (req, file, cb) => {
-        //cb(null, './public/images')
-        cb(null, path.join(__dirname, '../../assets/images'));
+        cb(null, './public/images')
+        
     },
     // Ici est définit le format du nom de l'image à stocker
     filename: (req, file, cb) => {

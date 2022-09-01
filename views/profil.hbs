@@ -1,5 +1,8 @@
-{{>navConnected}}
-
+{{#if user.isAdmin}}
+  {{>navAdmin}}
+{{else}}
+  {{>navConnected}}
+{{/if}}
 
 <section style="background-color: #eee;">
   <div class="container py-5">
@@ -90,6 +93,7 @@
             </div>
           </div>
         </div>
+
 
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Modifier</button>

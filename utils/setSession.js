@@ -1,5 +1,3 @@
-const { inscripUser } = require("../api/controllers/inscriptionControllers");
-
 exports.setSession = async function (req, res, email) {
     let userget = await db.query(`SELECT * FROM users WHERE email="${email}"`)
     let user = userget[0];

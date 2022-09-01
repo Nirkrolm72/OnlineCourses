@@ -26,12 +26,12 @@ a{
 /************** NAVBAR *********************/
 
 .navbar {
-  position: fixed;
-  top: 0;
+  /* position: fixed;
+  top: 0; */
   width: 100%;
   height: 64px;
   padding: 10px 35px;
-  z-index: 1000;
+  /* z-index: 1000; */
   background-color: white !important;
   
 }

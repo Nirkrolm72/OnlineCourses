@@ -30,7 +30,7 @@ exports.updateProfil = async (req, res) => {
         const img = await db.query(`SELECT avatar from users WHERE id=${id}`);
 
         if(img[0].image !== "linuxbash.png"){
-            pathImg = path.resolve("/assets/images/" + img[0].image)
+            pathImg = path.resolve("../../public/images" + img[0].image)
             fs.unlink(pathImg, (err) => {
                 if (err) throw err;
 
@@ -48,7 +48,7 @@ exports.updateProfil = async (req, res) => {
             console.log(req.file);
         }
 
-
+        
         await db.query(`UPDATE users SET avatar="${req.file.completed}" WHERE id=${id};`);
     }
 
@@ -56,5 +56,3 @@ exports.updateProfil = async (req, res) => {
 
     res.redirect('/profil');
 }
-
-
