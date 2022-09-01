@@ -22,7 +22,7 @@ exports.updateProfil = async (req, res) => {
         await db.query(`UPDATE users SET email="${email}" WHERE id="${id}"`, function (err, data) {
             if (err) throw err;
 
-            res.render('/profil');
+            res.redirect('/profil');
         });
     }
 

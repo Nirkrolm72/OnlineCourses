@@ -22,7 +22,7 @@ const user_routes = require('./routes/users');
 const admin_routes = require('./routes/admin');
 const connexion_routes = require('./routes/connexion');
 const mdpOublie_routes = require('./routes/mdpOublie');
-const cours_routes = require('./routes/cours');
+const creationCours_routes = require('./routes/Creationcours');
 const inscription_routes = require('./routes/inscription');
 const visiteur_routes = require('./routes/visiteur');
 const parametres_routes = require('./routes/parametres');
@@ -30,6 +30,7 @@ const profil_routes = require('./routes/profil');
 const seeCourses_routes = require('./routes/seeCourses');
 const deconnexion_routes = require('./routes/deconnexion');
 const contact_routes = require('./routes/contact');
+const cours_routes = require('./routes/cours');
 
 
 
@@ -52,8 +53,8 @@ const SMTPTransport = require('nodemailer/lib/smtp-transport');
 // Controllers
 const { getProfilUser, updateProfil} = require('./api/controllers/profilControllers');
 const { getUser } = require('./api/controllers/parametresControllers');
-const inscriptionControllers = require('./api/controllers/inscriptionControllers');
-const { postCours} = require('./api/controllers/coursControllers');
+const {inscripUser,verificationMail, verificationMailPost, } = require('./api/controllers/inscriptionControllers');
+const { postCours} = require('./api/controllers/CreationcoursControllers');
 const { updateUser, deleteUser} = require('./api/controllers/adminControllers');
 const { connectUser } = require('./api/controllers/connexionControllers');
 const { deconnexion } = require('./api/controllers/deconnexionControllers');
@@ -62,6 +63,7 @@ const { visiteur } = require('./api/controllers/visiteurControllers');
 const { mdpOublie } = require('./api/controllers/mdp_oublieControllers');
 const { contact } = require('./api/controllers/contactController');
 const nodemailerControllers = require('./api/controllers/nodemailerControllers');
+const { getCours } = require('./api/controllers/coursControllers');
 
 
 // Middleware
@@ -130,6 +132,7 @@ app.get('/', function(req, res){
 
 
 const upload = require('./api/config/multer');
+
 const { isAdmin } = require('./api/middlewares/admin.middleware');
 const {isVisiteur} = require('./api/middlewares/visiteur.middleware');
 
@@ -139,15 +142,17 @@ app.use('/connexion', connexion_routes);
 app.post('/connexion', connexion_routes, connectUser);
 
 app.use('/inscription', inscription_routes);
-app.post('/inscription',inscription_routes, inscriptionControllers.inscripUser);
+app.post('/inscription',inscription_routes, inscripUser);
 
 app.use('/admin', isAdmin, admin_routes);
 app.put('/admin', isAdmin, admin_routes, updateUser);
 app.delete('/admin',isAdmin, admin_routes, deleteUser);
 
 
-app.use('/cours', isAdmin, cours_routes);
-app.post('/cours', isAdmin, cours_routes, postCours);
+app.get('/Creationcours', isAdmin, creationCours_routes);
+app.post('/Creationcours', upload.single('avatar') ,isAdmin, creationCours_routes, postCours);
+
+app.get('/cours', cours_routes ,getCours);
 
 app.use('/visiteur', visiteur_routes);
 
@@ -157,7 +162,7 @@ app.get('/profil', profil_routes, getProfilUser);
 app.post('/profil',profil_routes, updateProfil);
 app.put('/profil/:id',upload.single('avatar'), updateProfil);
 
-app.get('/seeCourses', isAdmin, isVisiteur, seeCourses_routes, getSeeCourses);
+app.get('/seeCourses',isAdmin, isVisiteur, seeCourses_routes, getSeeCourses);
 
 
 app.use('/user', isAdmin, user_routes);
@@ -170,8 +175,8 @@ app.post('/contact', contact_routes, nodemailerControllers.sendMailContact);
 
 app.post('/verification', nodemailerControllers.sendVerif);
 
-app.get('/verification/:id', inscriptionControllers.verificationMail);
-app.post('/verification/:id', inscriptionControllers.verificationMailPost);
+app.get('/verification/:id', verificationMail);
+app.post('/verification/:id', verificationMailPost);
 
 // app.use('*', function (req, res) {
 //   res.status(404).render("404", {
