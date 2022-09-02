@@ -1,11 +1,29 @@
-exports.cours = (req, res) => {
-    res.render('cours', { title: 'Cours', layout: "cours" });
-}
+// exports.cours = async (req, res) => {
+// const { id } = req.params;
+
+//     await db.query(`SELECT titre, description, contenu FROM cours WHERE id="${id}"`), (err, data) => {
+//         if (err) throw err;
+
+
+//         res.render('cours', { title: 'Cours', layout: "cours", db:data[0] });
+//     }
+
+// }
 
 exports.getCours = async (req, res) => {
-    await db.query('SELECT * FROM cours', function(err, result){
-        if(err) throw err;
+    let id = req.params.id;
 
-        res.render('cours', { title: 'Cours', layout: "cours" });
+
+    await db.query(`SELECT titre, description, contenu FROM cours WHERE id='${id}';`, (err, data) => {
+        if (err) throw err;
+        
+
+
+
+        res.render('cours', {layout: "cours",  db: data[0] });
+        console.log("data rep", data)
+
     });
+
 }
+

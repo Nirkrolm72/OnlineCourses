@@ -63,7 +63,7 @@ const { visiteur } = require('./api/controllers/visiteurControllers');
 const { mdpOublie } = require('./api/controllers/mdp_oublieControllers');
 const { contact } = require('./api/controllers/contactController');
 const nodemailerControllers = require('./api/controllers/nodemailerControllers');
-const { getCours } = require('./api/controllers/coursControllers');
+const { getCours, cours } = require('./api/controllers/coursControllers');
 
 
 // Middleware
@@ -150,9 +150,10 @@ app.delete('/admin',isAdmin, admin_routes, deleteUser);
 
 
 app.get('/Creationcours', isAdmin, creationCours_routes);
-app.post('/Creationcours', upload.single('avatar') ,isAdmin, creationCours_routes, postCours);
+app.post('/Creationcours',isAdmin, creationCours_routes, postCours);
 
-app.get('/cours', cours_routes ,getCours);
+// app.use('/cours', cours_routes, cours);
+app.get('/cours/:id', cours_routes, getCours);
 
 app.use('/visiteur', visiteur_routes);
 
@@ -166,7 +167,7 @@ app.get('/seeCourses',isAdmin, isVisiteur, seeCourses_routes, getSeeCourses);
 
 
 app.use('/user', isAdmin, user_routes);
-app.post('/user:id', isAdmin, user_routes, updateUser);
+app.post('/user/:id', isAdmin, user_routes, updateUser);
 
 app.get('/deconnexion', deconnexion_routes, deconnexion);
 

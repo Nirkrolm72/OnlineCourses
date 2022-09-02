@@ -1,8 +1,8 @@
-{{#if user.isAdmin}}
+{{!-- {{#if user.isAdmin}}
 {{>navAdmin}}
 {{else}}
 {{>navConnected}}
-{{/if}}
+{{/if}} --}}
 
 <style>
     .titreDucours{
@@ -22,16 +22,18 @@
     }
 </style>
 
-{{#if user.isVisiteur}}
+{{#if db}}
 <div class="container titreDucours">
-    <h1>{{user.titre}}</h1>    
+    <h1>{{db.titre}}</h1>    
 </div>
 
 <div class="container description">
-    <p>{{user.description}}</p>
+    <p>{{db.description}}</p>
 </div>
 
 <div class="container contenu">
-    <h1>{{user.contenu}}</h1>
+    <h1>{{db.contenu}}</h1>
 </div>
+{{else}}
+<h1> PB DB</h1>
 {{/if}}

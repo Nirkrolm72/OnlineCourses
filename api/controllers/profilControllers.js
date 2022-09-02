@@ -30,29 +30,25 @@ exports.updateProfil = async (req, res) => {
         const img = await db.query(`SELECT avatar from users WHERE id=${id}`);
 
         if(img[0].image !== "linuxbash.png"){
-            pathImg = path.resolve("../../public/images" + img[0].image)
+            pathImg = path.resolve("assets/images/" + img[0].image)
             fs.unlink(pathImg, (err) => {
-                if (err) throw err;
-
-                console.log('Fichier supprimé');
+             
                 
             })
 
-            if(fs.existsSync(pathImg)){
-                console.log('le fichier existe')
-            }
-            else{
-                console.log('le fichier n\'existe pas');
-            }
-
-            console.log(req.file);
         }
 
         
         await db.query(`UPDATE users SET avatar="${req.file.completed}" WHERE id=${id};`);
     }
 
-    
-
-    res.redirect('/profil');
+    res.redirect("/profil");
+    console.log(req.session);
+        // db.query(`SELECT * FROM user WHERE id=${req.session.user.id};`, (err, data) => {
+        //   console.log("user", data)
+        //   req.session.user = {
+        //     ...data[0]
+        //   };
+        //   res.redirect("/profil");
+        // })
 }

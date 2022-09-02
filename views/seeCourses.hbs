@@ -5,9 +5,11 @@
 {{/if}}
 
 
+
+
 <div class="container">
   <h1 style="text-align: center; margin-top: 100px;">Liste des cours</h1>
-
+  {{#if db}}
   {{#each db}}
 
   <table class="table align-middle mb-0 bg-white">
@@ -23,9 +25,9 @@
       <tr>
         <td>
           <div class="d-flex align-items-center">
-            <img src="/assets/images/{{this.avatar}}" alt="avatar" style="width: 45px; height: 45px" class="rounded-circle" />
+            {{!-- <img src="/assets/images/{{this.avatar}}" alt="avatar" style="width: 45px; height: 45px" class="rounded-circle" /> --}}
             <div class="ms-3">
-              <p class="fw-bold mb-1">{{this.prenom}}</p>
+              <p class="fw-bold mb-1">{{this.id}}</p>
             </div>
           </div>
         </td>
@@ -36,15 +38,13 @@
           <p class="fw-normal mb-1">{{this.description}}</p>
         </td>
         <td>
-          <a href="/cours" type="submit" class="btn btn-link btn-sm btn-rounded">Voir</a>
+          <a href='/cours/{{this.id}}' type="submit" class="btn btn-link btn-sm btn-rounded">Voir</a>
         </td>
       </tr>
     </tbody>
   </table>
+  {{else}}
+    <h1>Base de donnée vide</h1>
   {{/each}}
+  {{/if}}
 </div>
-
-{{!-- <h1 style="text-align:center;">Titre du cours : {{this.titre}}</h1>
-<h3 style="text-align:center;">Auteur : {{this.auteur}}</h3>
-<p style="text-align:center;">Description : {{this.description}}</p>
-<p style="text-align:center;">{{this.contenu}}</p> --}}
