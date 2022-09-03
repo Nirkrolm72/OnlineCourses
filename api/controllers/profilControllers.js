@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const { isBuffer } = require('util');
 
 
 exports.profil = (req, res) => {
@@ -22,7 +23,16 @@ exports.updateProfil = async (req, res) => {
         await db.query(`UPDATE users SET email="${email}" WHERE id="${id}"`, function (err, data) {
             if (err) throw err;
 
-            res.redirect('/profil');
+            console.log(req.session);
+            db.query(`SELECT * FROM users WHERE id=${req.session.user.id};`, (err, data) => {
+                if(err) throw err;
+                
+              console.log("user", data)
+              req.session.user = {
+                ...data[0]
+              };
+              res.redirect("/profil");
+            });
         });
     }
 
@@ -40,15 +50,17 @@ exports.updateProfil = async (req, res) => {
 
         
         await db.query(`UPDATE users SET avatar="${req.file.completed}" WHERE id=${id};`);
+
+        console.log(req.session);
+        db.query(`SELECT * FROM users WHERE id=${req.session.user.id};`, (err, data) => {
+            if(err) throw err;
+            
+          console.log("user", data)
+          req.session.user = {
+            ...data[0]
+          };
+          res.redirect("/profil");
+        });
     }
 
-    res.redirect("/profil");
-    console.log(req.session);
-        // db.query(`SELECT * FROM user WHERE id=${req.session.user.id};`, (err, data) => {
-        //   console.log("user", data)
-        //   req.session.user = {
-        //     ...data[0]
-        //   };
-        //   res.redirect("/profil");
-        // })
 }

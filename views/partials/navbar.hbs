@@ -1,17 +1,4 @@
-{{!-- <nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">OnlineCourses</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <a class="btn btn-primary ms-2" href="/connexion">Se connecter</a>
-      <a class="btn btn-primary ms-2" href="/inscription">S'inscrire</a>
-    </div>
-  </div>
-</nav> --}}
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light" id="changeColor">
+{{!-- <nav class="navbar navbar-expand-lg navbar-light bg-light" id="changeColor">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">OnlineCourses</a>
     <button
@@ -51,4 +38,51 @@
     </div>
 
   </div>
+</nav> --}}
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Container wrapper -->
+  <div class="container">
+    <!-- Navbar brand -->
+    <a class="navbar-brand me-2" href="/">OnlineCourses</a>
+
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarButtonsExample"
+      aria-controls="navbarButtonsExample"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarButtonsExample">
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link left" href="#">Formation</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link left" href="/seeCourses">Cours</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link left" href="#">Blog</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+
+      <div class="d-flex align-items-center">
+        <a type="submit" href="/connexion" class="px-3 me-2 left">Connexion</a>
+        <a type="submit" href="/inscription" class="btn btn-primary me-3">Commencer</a>
+      </div>
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
 </nav>
+<!-- Navbar -->

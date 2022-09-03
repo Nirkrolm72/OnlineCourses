@@ -1,39 +1,34 @@
-{{!-- {{#if user.isAdmin}}
+{{#if user.isAdmin}}
 {{>navAdmin}}
 {{else}}
 {{>navConnected}}
-{{/if}} --}}
+{{/if}}
 
 <style>
-    .titreDucours{
+
+    .titreDuCours{
         margin-top: 100px;
         text-align: center;
-        border: 1px solid purple;
-    }
-
-    .description{
-        text-align: center;
-        border: 1px solid purple;
+        background-color: #7451eb;
+        color: white;
     }
 
     .contenu{
-        text-align: center;
-        border: 1px solid purple;
+    
     }
 </style>
 
 {{#if db}}
-<div class="container titreDucours">
-    <h1>{{db.titre}}</h1>    
-</div>
-
-<div class="container description">
-    <p>{{db.description}}</p>
-</div>
+<header class="container-fluid header">
+    <h1 class="titreDuCours">{{db.titre}}</h1>
+    <p class="description">{{db.description}}</p>
+</header>
 
 <div class="container contenu">
-    <h1>{{db.contenu}}</h1>
+    {{{db.contenu}}}
 </div>
+
+
 {{else}}
 <h1> PB DB</h1>
 {{/if}}

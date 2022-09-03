@@ -41,7 +41,7 @@ exports.updateUser = async (req, res) => {
 }
 
 exports.deleteUser = async (req, res) => {
-    const { id } = req.params;
+    const id = req.params.id;
     db.query(`DELETE FROM cours WHERE id="${id}"`, (err, data) => {
         if (err) throw err;
         res.redirect('/admin');

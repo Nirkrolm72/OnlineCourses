@@ -4,8 +4,8 @@ const router = express.Router();
 const profilControllers = require('../api/controllers/profilControllers');
 
 
-router.get('/', profilControllers.getProfilUser);
+router.get('/profil/:id', profilControllers.getProfilUser);
 
-router.put('/:id', profilControllers.updateProfil);
+router.put('/profil/:id', profilControllers.updateProfil);
 
 module.exports = router;

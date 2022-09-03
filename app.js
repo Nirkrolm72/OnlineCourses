@@ -52,8 +52,8 @@ const SMTPTransport = require('nodemailer/lib/smtp-transport');
 
 // Controllers
 const { getProfilUser, updateProfil} = require('./api/controllers/profilControllers');
-const { getUser } = require('./api/controllers/parametresControllers');
-const {inscripUser,verificationMail, verificationMailPost, } = require('./api/controllers/inscriptionControllers');
+const { getUsers, editOneUser } = require('./api/controllers/userControllers');
+const {inscripUser,verificationMail, verificationMailPost } = require('./api/controllers/inscriptionControllers');
 const { postCours} = require('./api/controllers/CreationcoursControllers');
 const { updateUser, deleteUser} = require('./api/controllers/adminControllers');
 const { connectUser } = require('./api/controllers/connexionControllers');
@@ -150,9 +150,9 @@ app.delete('/admin',isAdmin, admin_routes, deleteUser);
 
 
 app.get('/Creationcours', isAdmin, creationCours_routes);
-app.post('/Creationcours',isAdmin, creationCours_routes, postCours);
+app.post('/Creationcours', upload.single('avatar') ,isAdmin, creationCours_routes, postCours);
 
-// app.use('/cours', cours_routes, cours);
+
 app.get('/cours/:id', cours_routes, getCours);
 
 app.use('/visiteur', visiteur_routes);
@@ -163,11 +163,12 @@ app.get('/profil', profil_routes, getProfilUser);
 app.post('/profil',profil_routes, updateProfil);
 app.put('/profil/:id',upload.single('avatar'), updateProfil);
 
-app.get('/seeCourses',isAdmin, isVisiteur, seeCourses_routes, getSeeCourses);
+app.get('/seeCourses',upload.single('avatar'), isAdmin, isVisiteur, seeCourses_routes, getSeeCourses);
 
 
-app.use('/user', isAdmin, user_routes);
-app.post('/user/:id', isAdmin, user_routes, updateUser);
+app.get('/user', upload.single('avatar') ,isAdmin, user_routes);
+app.post('/user', isAdmin, updateUser, user_routes);
+app.put('/user/:id', isAdmin, editOneUser);
 
 app.get('/deconnexion', deconnexion_routes, deconnexion);
 
