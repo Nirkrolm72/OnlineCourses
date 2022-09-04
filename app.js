@@ -14,6 +14,14 @@ const nodemailer = require('nodemailer');
 const path = require('path');
 const multer = require('multer');
 
+// // Swagger Config
+// const swaggerUi = require('swagger-ui-express');
+// const swaggerJsDoc = require('swagger-jsdoc');
+
+// // Générateur swagger
+// const expressOasGenerator = require('express-oas-generator');
+// expressOasGenerator.init(app, {});
+
 const app = express();
 
 // Routes
@@ -31,6 +39,7 @@ const seeCourses_routes = require('./routes/seeCourses');
 const deconnexion_routes = require('./routes/deconnexion');
 const contact_routes = require('./routes/contact');
 const cours_routes = require('./routes/cours');
+const message_routes = require('./routes/message');
 
 
 
@@ -52,7 +61,7 @@ const SMTPTransport = require('nodemailer/lib/smtp-transport');
 
 // Controllers
 const { getProfilUser, updateProfil} = require('./api/controllers/profilControllers');
-const { getUsers, editOneUser } = require('./api/controllers/userControllers');
+const { getUsers, editOneUser, deleteOneUser } = require('./api/controllers/userControllers');
 const {inscripUser,verificationMail, verificationMailPost } = require('./api/controllers/inscriptionControllers');
 const { postCours} = require('./api/controllers/CreationcoursControllers');
 const { updateUser, deleteUser} = require('./api/controllers/adminControllers');
@@ -61,9 +70,10 @@ const { deconnexion } = require('./api/controllers/deconnexionControllers');
 const { getSeeCourses } = require('./api/controllers/seeCoursesControllers');
 const { visiteur } = require('./api/controllers/visiteurControllers');
 const { mdpOublie } = require('./api/controllers/mdp_oublieControllers');
-const { contact } = require('./api/controllers/contactController');
+const { contact , postMessages} = require('./api/controllers/contactController');
 const nodemailerControllers = require('./api/controllers/nodemailerControllers');
 const { getCours, cours } = require('./api/controllers/coursControllers');
+const { getMessages } = require('./api/controllers/messageControllers');
 
 
 // Middleware
@@ -169,11 +179,15 @@ app.get('/seeCourses',upload.single('avatar'), isAdmin, isVisiteur, seeCourses_r
 app.get('/user', upload.single('avatar') ,isAdmin, user_routes);
 app.post('/user', isAdmin, updateUser, user_routes);
 app.put('/user/:id', isAdmin, editOneUser);
+app.delete('/user/:id', isAdmin, deleteOneUser);
+
+app.get('/messages', isAdmin, message_routes, getMessages);
 
 app.get('/deconnexion', deconnexion_routes, deconnexion);
 
 app.use('/contact', contact_routes);
-app.post('/contact', contact_routes, nodemailerControllers.sendMailContact);
+app.get('/contact', contact_routes, getMessages);
+app.post('/contact', contact_routes, nodemailerControllers.sendMailContact, postMessages);
 
 app.post('/verification', nodemailerControllers.sendVerif);
 

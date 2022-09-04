@@ -77,10 +77,9 @@ exports.updateUser = async (req, res) => {
           res.redirect("/user");
         });
 }
-
+// nom ='${req.body.nom}', email = '${req.body.email}
 exports.editOneUser = async (req, res) => {
-    let sql = `UPDATE users SET nom ='${req.body.nom}', email = '${req.body.email}', 
-    isAdmin = '${(req.body.isAdmin === 'on' ? '1' : '0')}', 
+    let sql = `UPDATE users SET isAdmin = '${(req.body.isAdmin === 'on' ? '1' : '0')}', 
     isVerified = '${(req.body.isVerified === 'on' ? '1' : '0')}', 
     isVisiteur = '${(req.body.isVisiteur === 'on' ? '1' : '0')}' WHERE id = '${req.params.id}';`
 
@@ -91,7 +90,7 @@ exports.editOneUser = async (req, res) => {
     res.redirect('/user');
 }
 
-exports.deleteUser = async (req, res) => {
+exports.deleteOneUser = async (req, res) => {
     const { id } = req.params;
 
     // Supression de l'utilisateur par rapport à son ID

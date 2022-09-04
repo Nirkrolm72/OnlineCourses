@@ -3,6 +3,7 @@
 {{else}}
 {{>navConnected}}
 {{/if}}
+
 <section style="background-color: #eee;">
   <div class="container py-5">
     <div class="row">
@@ -23,7 +24,6 @@
             <img src="/assets/images/{{user.avatar}}" alt="avatar" class="rounded-circle img-fluid"
               style="width: 150px;">
             <h5 class="my-3">{{user.prenom}} {{user.nom}}</h5>
-            <p class="text-muted mb-1">{{user.metier}}</p>
             <p class="text-muted mb-4">{{user.ville}}, {{user.pays}}</p>
             <div class="d-flex justify-content-center mb-2">
               <a type="submit" href="/deconnexion" class="btn btn-danger">Déconnexion</a>
@@ -67,7 +67,26 @@
               </div>
               <div class="col-sm-9">
                 <p class="text-muted mb-0">{{user.adresse}}</p>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Code Postal</p>
               </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{user.codePostal}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Pays</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{user.pays}}</p>
+              </div>
+            </div>
+              
             </div>
           </div>
         </div>
@@ -96,6 +115,15 @@
                   <div class="mb-3">
                     <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Adresse">
                   </div>
+
+                  <div class="mb-3">
+                    <input type="text" class="form-control" id="codePostal" name="adresse" placeholder="Code Postal">
+                  </div>
+
+                  <div class="mb-3">
+                    <input type="text" class="form-control" id="pays" name="pays" placeholder="Pays">
+                  </div>
+
 
                   <div class="mb-3">
                     <input type="file" class="form-control" id="avatar" name="avatar" value="Choisir un avatar">
