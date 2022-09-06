@@ -207,4 +207,4 @@ app.listen(PORT_NODE, () =>{
     console.log('Le serveur est lancé sur le port 3000');
 });
 
-module.exports = { db };
+module.exports = { db, app };

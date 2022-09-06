@@ -6,7 +6,7 @@ const coursControllers = require('../api/controllers/coursControllers');
 
 
 
-// router.use('/cours', coursControllers.cours);
+//router.get('/cours', coursControllers.cours);
 router.get('/cours/:id', coursControllers.getCours);
 
 // router.get('/cours/:id', (req, res) => {

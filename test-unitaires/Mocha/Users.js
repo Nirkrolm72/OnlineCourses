@@ -1,5 +1,5 @@
 const assert = require('assert');
-const {db} = require('../api/database/database');
+const {db} = require('../../api/database/database');
 
 describe("CRUD Users", function (){
     let com = {};

@@ -9,5 +9,6 @@ router.get('/', connexionControllers.connexion);
 //     console.log('Coucou');
 // }
 
+router.get('/connexion', connexionControllers.connectUser);
 
 module.exports = router;

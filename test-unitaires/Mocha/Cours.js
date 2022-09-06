@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { db } = require('../api/database/database');
+const { db } = require('../../api/database/database');
 
 describe("CRUD COURS", function () {
     let com = {};
@@ -30,7 +30,7 @@ describe("CRUD COURS", function () {
         });
     });
 
-    it("DELETE USERS BY ID", () => {
+    it("DELETE COURS BY ID", () => {
         db.query(`DELETE FROM cours WHERE id='${com.id}'`, function (err, data) {
             if (err) throw err;
 

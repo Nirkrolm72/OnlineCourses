@@ -4,8 +4,11 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "nodemon --exec 'mocha'",
-    "dev": "nodemon"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "MODE=prod node app.js",
+    "dev": "MODE=dev nodemon app.js",
+    "mocha": "MODE=test nodemon --exec 'mocha ./test-unitaires/Mocha/'",
+    "chai": "MODE=test nodemon --exec 'mocha ./test-unitaires/Chai/'"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +20,7 @@
     "body-parser": "^1.20.0",
     "bootstrap": "^5.2.0",
     "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
     "ckeditor5": "^34.2.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.1",
@@ -39,6 +43,7 @@
     "passport-google-oauth2": "^0.2.0",
     "passport-google-oidc": "^0.1.0",
     "path": "^0.12.7",
+    "should": "^13.2.3",
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.5.0"
   }
