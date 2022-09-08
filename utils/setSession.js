@@ -1,7 +1,7 @@
 exports.setSession = async function (req, res, email) {
     let userget = await db.query(`SELECT * FROM users WHERE email="${email}"`)
     let user = userget[0];
-    
+    // console.log(user);
     
     req.session.user = {
       id: user.id,
@@ -13,6 +13,7 @@ exports.setSession = async function (req, res, email) {
       isVisiteur: user.isVisiteur,
       isVerified: user.isVerified
     };
+    // console.log("setsesss", req.session.user);
   
     res.redirect('/profil')
   }
