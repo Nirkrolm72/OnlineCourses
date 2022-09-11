@@ -1,3 +1,5 @@
+const { db } = require('../database/database');
+
 require('dotenv').config()
 const { MODE } = process.env
 
@@ -57,11 +59,11 @@ exports.getSeeCourses = async (req, res) => {
             
             db.query(`UPDATE users SET image="${req.file.completed}" WHERE id=${id};`);
     
-            console.log(req.session);
+            //console.log(req.session);
             db.query(`SELECT * FROM users WHERE id=${req.session.user.id};`, (err, data) => {
                 if(err) throw err;
                 
-              console.log("user", data)
+              //console.log("user", data)
               req.session.user = {
                 ...data[0]
               };
@@ -72,4 +74,22 @@ exports.getSeeCourses = async (req, res) => {
         res.render('seeCourses', {title: 'Cours', layout: 'cours', db:data});
     });
 
+}
+
+exports.getAllCours = async (req, res) => {
+    await db.query(`select titre, description, prenom from cours inner join users on cours.id = users.id;`, (err, data) =>{
+        if(err) throw err;
+
+        res.render('admin', { layout: "admin", db: data });
+    });
+}
+
+exports.deleteCours = async (req, res) => {
+    const { id } = req.params;
+
+    await db.query(`DELETE from cours WHERE id=${id}`, function (err, data) {
+        if(err) throw err;
+
+        res.redirect('/admin');
+    })
 }

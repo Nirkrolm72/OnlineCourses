@@ -5,9 +5,7 @@
     <div class="position-sticky">
       <div class="list-group list-group-flush mx-3 mt-4">
         <a href="/admin" class="list-group-item list-group-item-action py-2 ripple" aria-current="true"><i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Dashboard</span></a>
-        <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i class="fas fa-calendar fa-fw me-3"></i><span>Calendrier</span></a>
         <a href="/user" class="list-group-item list-group-item-action py-2 ripple"><i class="fas fa-users fa-fw me-3"></i><span>Utilisateurs</span></a>
-        <a href="/messages" class="list-group-item list-group-item-action py-2 ripple"><i class="fas fa-users fa-fw me-3"></i><span>Messages</span></a>
       </div>
     </div>
   </nav>
@@ -73,7 +71,92 @@
 <main style="margin-top: 58px;">
   <div class="container pt-4">
 
+{{#if db}}
+{{#each db}}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Titre</th>
+      <th scope="col">Auteur</th>
+      <th scope="col">Description</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>{{this.titre}}</th>
+      <td>{{this.prenom}}</td>
+      <td>{{this.description}}</td>
+      <td>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal-{{this.id}}">Modifier</button>
+
+        <!-- Modal -->
+        <form action="/admin/{{this.id}}?_method=PUT" method="post">
+          <div class="modal fade" id="exampleModal-{{this.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modifier</h5>
+                  <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="mb-3">
+                      <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre">
+                  </div>
+
+                  <div class="mb-3">
+                      <input type="text" class="form-control" id="description" name="description" placeholder="Description">
+                  </div>
+                </div>
+              
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fermer</button>
+                  <button type="submit" class="btn btn-primary">Modifier</button>
+        </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+<td>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-danger" data-mdb-toggle="modal" data-mdb-target="#exampleModa2-{{this.id}}">
+          Supprimer
+        </button>
+
+        <!-- Modal -->
+        <form action="/admin/{{this.id}}?_method=DELETE" method="post">
+        <div class="modal fade" id="exampleModa2-{{this.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Supprimer</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <h5>Souhaitez-vous vraiment supprimer</h5>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+  </tbody>
+</table>
     
   </div>
+  {{/each}}
+  {{!-- Sinon on affiche un message --}}
+  {{else}}
+  <h1 style="text-align: center;">Base de donnée vide</h1>
+  {{/if}}
 </main>
 <!--Main layout-->

@@ -3,11 +3,21 @@ const bcrypt = require('bcrypt');
 const flash = require('flash');
 const { setSession } = require('../../utils/setSession');
 const { db } = require('../database/database');
+const nodemailer = require('nodemailer');
 const { MODE } = process.env
+
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    auth: {
+        user: 'Guyon.Brandon.dev@gmail.com',
+        pass: 'rseyekjmvzqnrlku'
+    }
+});
 
 exports.connectUser = (req, res) => {
     const { email, password } = req.body
-    console.log("REQ BODY LOGIN", req.body);
+    //console.log("REQ BODY LOGIN", req.body);
     db.query(`SELECT password, email FROM users WHERE email="${email}"`, function (err, data) {
         if (err) throw err;
 
@@ -15,7 +25,7 @@ exports.connectUser = (req, res) => {
             return res.render('connexion',{ layout: 'cours', flash: 'Ce compte n\'existe pas' });
         
         bcrypt.compare(password, data[0].password, async function (err, result) {
-            if (err) return res.render('connexion', { layout: 'cours', flash: 'Une erreur est survenu !' });
+            if (err) return res.render('connexion', { layout: 'connexion', flash: 'Une erreur est survenu !' });
             if (result) {
                 setSession(req, res, email);
 
@@ -38,12 +48,12 @@ exports.connectUser = (req, res) => {
                     if (MODE === 'test') {
                         return res.json({ msg: 'ok login' })
                     } else {
-                        return res.render('connexion', { layout: 'cours', flash: 'Une erreur est survenu !' });
+                        return res.render('connexion', { layout: 'connexion', flash: 'Une erreur est survenu !' });
                     }
                 })
             }
             else {
-                return res.render('connexion', { layout: 'cours', flash: 'Email ou mot de passe incorrect' });
+                return res.render('connexion', { layout: 'connexion', flash: 'Email ou mot de passe incorrect' });
             }
         });
 
@@ -94,8 +104,7 @@ exports.inscripUser = async (req, res) => {
                     }
                 })
 
-                res.render('connexion', {
-                    success: 'Votre compte à bien été créé merci de vérifier vos emails !'
+                res.render('connexion', { layout: 'cours', success: 'Votre compte à bien été créé merci de vérifier vos emails !'
                 })
 
 
@@ -106,8 +115,6 @@ exports.inscripUser = async (req, res) => {
     });
 
 }
-
-
 
 exports.deconnexion = (req, res) => {
     req.session.destroy(() => {

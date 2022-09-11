@@ -17,11 +17,11 @@ exports.getUsers = async (req, res) => {
             
             db.query(`UPDATE users SET avatar="${req.file.completed}" WHERE id=${id};`);
     
-            console.log(req.session);
+            //console.log(req.session);
             db.query(`SELECT * FROM users WHERE id=${req.session.user.id};`, (err, data) => {
                 if(err) throw err;
                 
-              console.log("user", data)
+              //console.log("user", data)
               req.session.user = {
                 ...data[0]
               };
@@ -74,11 +74,12 @@ exports.editOneUser = async (req, res) => {
     isVerified = '${(req.body.isVerified === 'on' ? '1' : '0')}', 
     isVisiteur = '${(req.body.isVisiteur === 'on' ? '1' : '0')}' WHERE id = '${req.params.id}';`
 
-    await db.query(sql);
+    await db.query(sql, function(err, data){
+        if(err) throw err;
+        res.redirect('/user');
+    })
 
-    console.log(req.body);
-
-    res.redirect('/user');
+    
 }
 
 exports.deleteOneUser = async (req, res) => {

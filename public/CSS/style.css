@@ -170,7 +170,7 @@ animation-delay: -0.4s;
 }
 
 .cours:hover{
-  transform: scale(1.3);
+  transform: scale(1);
   background: #2196f3;
   color: white;
 }
@@ -308,14 +308,14 @@ animation-delay: -0.4s;
 
 
 #email{
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 #email::placeholder{
   color: black;
 }
 
 #password{
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 
@@ -342,14 +342,14 @@ animation-delay: -0.4s;
 /************** INSCRIPTION *********************/
 
 #prenom{
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 #prenom::placeholder{
   color: black;
 }
 
 #nom{
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 #nom::placeholder{
   color: black;
