@@ -108,7 +108,7 @@ exports.inscripUser = async (req, res) => {
                 })
 
 
-                console.log('Insertion effectuée avec succès');
+                consolec.log('Insertion effectuée avec succès');
                 //res.redirect('/connexion');
             }
         });

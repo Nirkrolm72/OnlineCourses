@@ -3,6 +3,7 @@ const chaiHttp = require('chai-http'),
     should = chai.should(),
     expect = chai.expect,
     { app, db } = require('../../app'),
+
     path = require('path');
 
 chai.use(chaiHttp);
@@ -16,15 +17,14 @@ describe("CHAI // CONTROLLER // COURS", function () {
     it("CHAI // POST // LOGIN", (done) => {
         chai
             .request(app)
-            .post('/connexion')
+            .post('/connecUser')
             .set("Accept", "application/json")
             .send({ email: "guyonbrandon@outlook.fr", password: "admin" })
             .end((err, res) => {
                 cookieSession = res.res.headers['set-cookie'][0].split(';')[0]
                 if (err) return done(err);
-
+                
                 res.should.have.status(200);
-                console.log("LOGIN EFFECTUE")
                 done();
             });
     });
@@ -36,14 +36,15 @@ describe("CHAI // CONTROLLER // COURS", function () {
         chai
             .request(app)
             // On précise la route
-            .get(`/cours/:id`)
+            .get(`/cours/${id}`)
+            .set("Accept", "application/json")
+            .set('Cookie', cookieSession)
             // Et enfin nous allons pouvoir checker le format de notre réponse
             .end((err, res) => {
 
                 if (err) return done(err);
 
                 // Ici on demande à ce que res.body.cours doit être un 'array'
-
 
                 //res.body.db.should.be.a("array");
                 res.body.dbCours.should.be.a('array');
@@ -56,22 +57,21 @@ describe("CHAI // CONTROLLER // COURS", function () {
 
 
     it("CHAI // POST // COURS", (done) => {
-        console.log('chai post', cookieSession)
         chai
             .request(app)
             .post('/Creationcours')
             .set("Accept", "application/json")
             .set('Cookie', cookieSession)
             .field("Content-Type", "multipart/form-data")
-            .field("titre", "Apprendre le langage Bash")
-            .field("description", "Apprenez les fondamentaux du langage Bash")
+            .field("titre", "Apprendre le langage Angular")
+            .field("description", "Apprenez les fondamentaux du langage Angular")
             .field("contenu", "Ceci est un test avec le langage Bash")
-            .attach("avatar", path.resolve(__dirname, "../../public/images/linuxbash.png"))
+            .attach("avatar", path.resolve(__dirname, "../../public/ressources/angular.png"))
             .end((err, res) => {
                 if (err) return done(err);
-                //console.log(res.body)
-                res.body.abc.should.be.a("object");
-                id = res.body.abc
+                
+                res.body.id.should.be.a('number');
+                id = res.body.id
                 res.should.have.status(200);
                 done();
             });
