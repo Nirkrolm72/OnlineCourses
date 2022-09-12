@@ -5,7 +5,7 @@ const { MODE } = process.env
 
 exports.postCours = (req, res) => {
     const { titre, description, contenu, image } = req.body;
-    const { id_user } = req.session.user.id;
+    //const { id_user } = req.session.user.id;
     //console.log("serd", req.session);
     db.query(`INSERT INTO cours (titre, description ,contenu, id_user, image) VALUES ('${titre}', '${description}', '${contenu}', '${req.session.user.id}', '${req.file.completed}');`, (err, data, field) => {
         if (err) throw err;

@@ -1,6 +1,3 @@
-const assert = require('assert');
-
-
 const chaiHttp = require('chai-http'),
     chai = require('chai'),
     should = chai.should(),
@@ -21,12 +18,13 @@ describe("CHAI // CONTROLLER // COURS", function () {
             .request(app)
             .post('/connexion')
             .set("Accept", "application/json")
-            .send({ email: "guyonbryan@gmail.com", password: "admin" })
+            .send({ email: "guyonbrandon@outlook.fr", password: "admin" })
             .end((err, res) => {
                 cookieSession = res.res.headers['set-cookie'][0].split(';')[0]
-                console.log('test res login', cookieSession)
                 if (err) return done(err);
+
                 res.should.have.status(200);
+                console.log("LOGIN EFFECTUE")
                 done();
             });
     });
@@ -38,7 +36,7 @@ describe("CHAI // CONTROLLER // COURS", function () {
         chai
             .request(app)
             // On précise la route
-            .get(`cours/1`)
+            .get(`/cours/:id`)
             // Et enfin nous allons pouvoir checker le format de notre réponse
             .end((err, res) => {
 
@@ -72,8 +70,8 @@ describe("CHAI // CONTROLLER // COURS", function () {
             .end((err, res) => {
                 if (err) return done(err);
                 //console.log(res.body)
-                res.body.id.should.be.a("number");
-                id = res.body.id
+                res.body.abc.should.be.a("object");
+                id = res.body.abc
                 res.should.have.status(200);
                 done();
             });
@@ -89,7 +87,7 @@ describe("CHAI // CONTROLLER // COURS", function () {
             .field("titre", "Apprendre le python")
             .field("description", "Apprendre le langage python")
             .field("contenu", "Ceci est un test avec le langage python")
-            .attach("avatar", path.resolve(__dirname, "../../public/images/python.png"))
+            .attach("avatar", path.resolve(__dirname, "../../public/images/linuxbash.png"))
             .end((err, res) => {
                 if (err) return done(err);
                 res.should.have.status(200);
