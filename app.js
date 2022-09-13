@@ -86,6 +86,7 @@ app.use(
 
 
 app.use('*', (req, res, next) => {
+  console.log(req.session)
   res.locals.user = req.session.user;
   next();
 })

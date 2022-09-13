@@ -17,13 +17,14 @@ describe("CHAI // CONTROLLER // COURS", function () {
     it("CHAI // POST // LOGIN", (done) => {
         chai
             .request(app)
-            .post('/connecUser')
+            .post('/connexion')
             .set("Accept", "application/json")
-            .send({ email: "guyonbrandon@outlook.fr", password: "admin" })
+            .send({ email: "guyonbryan@gmail.com", password: "admin" })
             .end((err, res) => {
-                cookieSession = res.res.headers['set-cookie'][0].split(';')[0]
-                if (err) return done(err);
                 
+                if (err) return done(err);
+                cookieSession = res.res.headers['set-cookie'][0].split(';')[0]
+                console.log(cookieSession)
                 res.should.have.status(200);
                 done();
             });
@@ -57,6 +58,7 @@ describe("CHAI // CONTROLLER // COURS", function () {
 
 
     it("CHAI // POST // COURS", (done) => {
+        console.log("POST COURS CHAI", cookieSession)
         chai
             .request(app)
             .post('/Creationcours')
@@ -66,11 +68,12 @@ describe("CHAI // CONTROLLER // COURS", function () {
             .field("titre", "Apprendre le langage Angular")
             .field("description", "Apprenez les fondamentaux du langage Angular")
             .field("contenu", "Ceci est un test avec le langage Bash")
-            .attach("avatar", path.resolve(__dirname, "../../public/ressources/angular.png"))
+            .attach("avatar", path.resolve(__dirname, "/home/dev8/Bureau/OnlineCourses/OnlineCourses/public/Ressources/angular.png"))
             .end((err, res) => {
                 if (err) return done(err);
                 
-                res.body.id.should.be.a('number');
+                console.log("vgdfgfhgfhgfh", res.body)
+                res.body.should.be.a('object');
                 id = res.body.id
                 res.should.have.status(200);
                 done();
@@ -80,7 +83,7 @@ describe("CHAI // CONTROLLER // COURS", function () {
     it("CHAI // PUT // COURS", (done) => {
         chai
             .request(app)
-            .put(`/cours/${id}`)
+            .put(`/admin/${id}`)
             .set("Accept", "application/json")
             .set('Cookie', cookieSession)
             .field("Content-Type", "multipart/form-data")
@@ -100,7 +103,7 @@ describe("CHAI // CONTROLLER // COURS", function () {
     it(" CHAI // DELETE // COURS ID", (done) => {
         chai
             .request(app)
-            .delete(`/cours/${id}`)
+            .delete(`/admin/${id}`)
             .set("Accept", "application/json")
             .set('Cookie', cookieSession)
             .end((err, res) => {

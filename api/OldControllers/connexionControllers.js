@@ -1,7 +1,6 @@
 require('dotenv').config()
 const bcrypt = require('bcrypt');
 const flash = require('flash');
-const { setSession } = require('../../utils/setSession');
 const { db } = require('../database/database');
 const { user } = require('./userControllers');
 const { MODE } = process.env
@@ -9,8 +8,6 @@ const { MODE } = process.env
 exports.connexion = (req, res) => {
     res.render('connexion', { title: 'Connexion', layout: 'connexion' });
 }
-
-//const setSession = require("./utils/setSession");
 
 exports.connectUser = (req, res) => {
     const { email, password } = req.body
@@ -23,7 +20,6 @@ exports.connectUser = (req, res) => {
         bcrypt.compare(password, data[0].password, async function (err, result) {
             if (err) return res.render('connexion', { layout: 'connexion', flash: 'Une erreur est survenu !' });
             if (result) {
-                setSession(req, res, email);
 
                 db.query(`SELECT * FROM users WHERE email="${data[0].email}"`, (err, userget) => {
                     let user = userget[0];

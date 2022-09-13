@@ -7,7 +7,7 @@ const { getUsers, updateUser, deleteOneUser } = require('./UserControllers');
 // PROFIL
 const {getProfilUser, updateProfil } = require('./ProfilControllers');
 // COURS + CRUD
-const { getCours, postCours, getSeeCourses, getAllCours, deleteCours } = require('./CoursControllers')
+const { getCours, postCours, getSeeCourses, getAllCours, updateCours ,deleteCours } = require('./CoursControllers')
 // ADMIN
 const { admin } = require('./AdminControllers');
 // MAIL
@@ -22,7 +22,7 @@ module.exports = {
     // User + CRUD
     getUsers, updateUser, deleteOneUser, getProfilUser, updateProfil,
     // Cours + CRUD
-    getCours, postCours, getSeeCourses, getAllCours, deleteCours,
+    getCours, postCours, getSeeCourses, getAllCours, updateCours ,deleteCours,
     // Admin
     admin,
     // Mail

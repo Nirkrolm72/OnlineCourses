@@ -1,4 +1,5 @@
-exports.admin = (req, res) => {
-    res.render('admin', { title: 'admin', layout: "admin" });
+exports.admin = async (req, res) => {
+
+   res.render('admin', { title: 'admin', layout: "admin" });
 }
 

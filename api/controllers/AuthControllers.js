@@ -1,7 +1,6 @@
 require('dotenv').config()
 const bcrypt = require('bcrypt');
 const flash = require('flash');
-const { setSession } = require('../../utils/setSession');
 const { db } = require('../database/database');
 const nodemailer = require('nodemailer');
 const { MODE } = process.env
@@ -27,7 +26,7 @@ exports.connectUser = (req, res) => {
         bcrypt.compare(password, data[0].password, async function (err, result) {
             if (err) return res.render('connexion', { layout: 'connexion', flash: 'Une erreur est survenu !' });
             if (result) {
-                setSession(req, res, email);
+                
 
                 db.query(`SELECT * FROM users WHERE email="${data[0].email}"`, (err, userget) => {
                     let user = userget[0];
@@ -44,11 +43,12 @@ exports.connectUser = (req, res) => {
                         isVisiteur: user.isVisiteur,
                         isVerified: user.isVerified
                     };
+
                     //console.log("before res login", req.session)
                     if (MODE === 'test') {
                         return res.json({ msg: 'ok login' })
                     } else {
-                        return res.render('connexion', { layout: 'connexion', flash: 'Une erreur est survenu !' });
+                        return res.render('profil', { layout: 'connexion', flash: 'Une erreur est survenu !' });
                     }
                 })
             }
@@ -108,7 +108,7 @@ exports.inscripUser = async (req, res) => {
                 })
 
 
-                consolec.log('Insertion effectuée avec succès');
+                console.log('Insertion effectuée avec succès');
                 //res.redirect('/connexion');
             }
         });
