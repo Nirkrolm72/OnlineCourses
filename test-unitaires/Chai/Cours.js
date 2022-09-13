@@ -68,7 +68,7 @@ describe("CHAI // CONTROLLER // COURS", function () {
             .field("titre", "Apprendre le langage Angular")
             .field("description", "Apprenez les fondamentaux du langage Angular")
             .field("contenu", "Ceci est un test avec le langage Bash")
-            .attach("avatar", path.resolve(__dirname, "/home/dev8/Bureau/OnlineCourses/OnlineCourses/public/Ressources/angular.png"))
+            .attach("avatar", path.resolve(__dirname, "/home/dev8/Documents/OnlineCourses/public/Ressources/angular.png"))
             .end((err, res) => {
                 if (err) return done(err);
                 

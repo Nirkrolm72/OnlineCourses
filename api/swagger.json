@@ -1,0 +1,164 @@
+{
+    "definitions": {
+      
+    },
+    "info": {
+      "title": "projet-dwwm",
+      "version": "1.0.0",
+      "license": {
+        "name": "ISC"
+      },
+      "description": "Specification JSONs: [v2](/api-spec/v2), [v3](/api-spec/v3)."
+    },
+    "paths": {
+      "/connexion": {
+        "post": {
+            "summary": "/connexion",
+            "description": "",
+            "parameters": [
+                {
+                    "name": "email",
+                    "in": "formData",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "password",
+                    "in": "formData",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "successful operation"
+                }
+            
+            
+          },
+          "tags": [
+            "Auth"
+            
+          ]
+        }
+      },
+      "/user": {
+        "get": {
+          "summary": "/user",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            
+          ],
+          "responses": {
+            
+          },
+          "tags": [
+            
+          ]
+        }
+      },
+      "/user/{id}": {
+        "put": {
+          "summary": "/user/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {
+            
+          },
+          "tags": [
+            
+          ]
+        },
+        "delete": {
+          "summary": "/user/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {
+            
+          },
+          "tags": [
+            
+          ]
+        }
+      },
+      "/admin": {
+        "get": {
+          "summary": "/admin",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            
+          ],
+          "responses": {
+            
+          },
+          "tags": [
+            
+          ]
+        }
+      },
+      "/admin/{id}": {
+        "delete": {
+          "summary": "/admin/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {
+            
+          },
+          "tags": [
+            
+          ]
+        },
+        "put": {
+          "summary": "/admin/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {
+            
+          },
+          "tags": [
+            
+          ]
+        }
+      }
+    },
+    "swagger": "2.0",
+    "tags": [
+      
+    ]
+  }

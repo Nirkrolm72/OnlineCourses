@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "MODE=prod node app.js",
     "dev": "MODE=dev nodemon app.js",
+    "swagger": "MODE=test nodemon app.js",
     "mocha": "MODE=test nodemon --exec 'mocha ./test-unitaires/Mocha/'",
     "chai": "MODE=test nodemon --exec 'mocha ./test-unitaires/Chai/'"
   },

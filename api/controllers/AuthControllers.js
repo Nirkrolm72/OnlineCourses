@@ -53,8 +53,11 @@ exports.connectUser = (req, res) => {
                 })
             }
             else {
+                if (MODE === 'test') {
+                    return res.json({ msg: 'Le Login est NOK' })
+                } else {
                 return res.render('connexion', { layout: 'connexion', flash: 'Email ou mot de passe incorrect' });
-            }
+                }}
         });
 
     });

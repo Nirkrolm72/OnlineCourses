@@ -17,6 +17,14 @@ const assert = require('assert');
 
 const app = express();
 
+// Swagger
+const swaggerUi = require('swagger-ui-express'),
+swaggerDocument = require('./api/swagger.json')
+
+const expressOasGenerator = require('express-oas-generator');
+expressOasGenerator.init(app, {})
+
+
 
 
 // Déstructuration de process.env
@@ -97,9 +105,13 @@ app.use('*', (req, res, next) => {
 //   });
 // });
 
+app.use('/api/v3', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const ROUTER = require('./router/router');
 app.use("/", ROUTER)
+
+//// Route pour API Swagger
+
 // Le serveur écoute sur le port 3000
 app.listen(PORT_NODE, () =>{
     console.log('Le serveur est lancé sur le port 3000');
