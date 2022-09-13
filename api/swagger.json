@@ -48,14 +48,103 @@
           "consumes": [
             "application/json"
           ],
-          "parameters": [
-            
-          ],
+  
           "responses": {
-            
+            "200": {
+              "description": "OK",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "flash": {
+                    "type":"string",
+                    "exemple": "Get User"
+                  },
+                  "message": {
+                    "type": "string",
+                    "exemple": "Success get"
+                  },
+                  "User": {
+                    "type": "array",
+                    "item": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "nom": {
+                          "type": "string"
+                        },
+                        "prenom": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "password": {
+                          "type": "string"
+                        },
+                        "avatar": {
+                          "type": "string"
+                        },
+                        "isAdmin": {
+                          "type": "number"
+                        },
+                        "isVisiteur": {
+                          "type": "number"
+                        },
+                        "isVerified": {
+                          "type": "number"
+                        },
+                        "mobile": {
+                          "type": "string"
+                        },
+                        "adresse": {
+                          "type": "string"
+                        },
+                        "codePostal": {
+                          "type": "string"
+                        },
+                        "pays": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "nom",
+                        "prenom",
+                        "email",
+                        "password",
+                        "avatar",
+                        "mobile",
+                        "adresse",
+                        "codePostal",
+                        "pays"
+                      ]
+                    },
+                    "exemple": [
+                      {
+                        "id": 8,
+                        "nom": "Guyon",
+                        "prenom": "Brandon",
+                        "email": "guyonbrandon@gmail.com",
+                        "password": "admin",
+                        "avatar": "linuxbash.png",
+                        "mobile": "0620495469",
+                        "adresse:": "8 rue des pommes",
+                        "codePostal": 72980,
+                        "pays": "France"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
           },
           "tags": [
-            
+            "Users"
+          ],
+          "produces": [
+            "application/json"
           ]
         }
       },
@@ -76,7 +165,7 @@
             
           },
           "tags": [
-            
+            "Users"
           ]
         },
         "delete": {
@@ -95,7 +184,7 @@
             
           },
           "tags": [
-            
+            "Users"
           ]
         }
       },
@@ -112,7 +201,7 @@
             
           },
           "tags": [
-            
+            "Cours"
           ]
         }
       },
@@ -133,7 +222,7 @@
             
           },
           "tags": [
-            
+            "Cours"
           ]
         },
         "put": {
@@ -152,7 +241,7 @@
             
           },
           "tags": [
-            
+            "Cours"
           ]
         }
       }

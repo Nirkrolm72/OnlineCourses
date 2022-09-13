@@ -1,10 +1,19 @@
-exports.getUsers = async (req, res) => {
-    await db.query('SELECT id, nom, prenom, email, avatar, isAdmin, isVisiteur, isVerified FROM users', function (err, data) {
-        if (err) throw err;
+require('dotenv').config()
+const { MODE } = process.env
 
+
+exports.getUsers = async (req, res) => {
+    const data = {
+        flash: 'get article',
+        message: "sucess get",
+    }
+    
+    await db.query('SELECT id, nom, prenom, email, password ,avatar, isAdmin, isVisiteur, isVerified, mobile, adresse, codePostal, pays FROM users', function (err, data) {
+        if (err) throw err;
+        
         if(req.file){
             const img = db.query(`SELECT avatar from users WHERE id=${id}`);
-    
+            console.log("coucou");
             if(img[0].image !== "linuxbash.png"){
                 pathImg = path.resolve("assets/images/" + img[0].image)
                 fs.unlink(pathImg, (err) => {
@@ -29,7 +38,9 @@ exports.getUsers = async (req, res) => {
             });
         }
 
-        res.render('user', { title: 'Utilisateur', layout: "user", db: data });
+        if (MODE === "test") res.json(data)
+
+        else res.render('user', { title: 'Utilisateur', layout: "user", db: data });
     });
 }
 
