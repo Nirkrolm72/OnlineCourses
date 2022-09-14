@@ -79,12 +79,16 @@ exports.getSeeCourses = async (req, res) => {
 }
 
 exports.getAllCours = async (req, res) => {
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    let data = {
+        flash: 'get cours',
+        message: "success get cours",
+    }
     await db.query(`select prenom, titre, description from cours inner join users on cours.id_user = users.id;`, (err, data) => {
         if (err) throw err;
-        console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbbb", data);
 
-        res.render('admin', { layout: "admin", db: data });
+        if (MODE === "test") res.json(data)
+
+        else res.render('admin', { title: 'Admin', layout: "admin", db: data });
     });
 }
 
@@ -95,20 +99,35 @@ exports.updateCours = async (req, res) => {
     const { id } = req.params;
     const { titre, description, contenu } = req.body;
 
-    await db.query(`UPDATE cours SET titre="${titre}", description="${description}", contenu="${contenu}"`, function (err, data) {
+    await db.query(`UPDATE cours SET titre="${titre}", description="${description}", contenu="${contenu}" WHERE id="${id}"`, function (err, data) {
         if(err) throw err;
+        
+        
+        //res.redirect('/admin');
+        if (MODE === "test") res.json({message: "success update"})
+            
+        else res.render('admin', { title: 'Admin', layout: "admin"});
 
-        res.redirect('/admin');
+        
     })
+    //res.render('admin', { title: 'Admin', layout: "admin"});
 }
 
 exports.deleteCours = async (req, res) => {
-    console.log("ohe jsuis la");
     const { id } = req.params;
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+    let data = {
+        flash: 'delete cours',
+        message: "success delete cours",
+    }
+    
     await db.query(`DELETE from cours WHERE id=${id}`, function (err, data) {
         if (err) throw err;
-
-        res.redirect('/admin');
+        
+            if (MODE === "test") res.json(data)
+        
+            else res.render('admin', { title: 'Admin', layout: "admin"});
+        
+        //res.redirect('/admin');
     })
 }

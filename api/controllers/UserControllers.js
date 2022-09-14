@@ -7,34 +7,33 @@ exports.getUsers = async (req, res) => {
         flash: 'get article',
         message: "sucess get",
     }
-    
+
     await db.query('SELECT id, nom, prenom, email, password ,avatar, isAdmin, isVisiteur, isVerified, mobile, adresse, codePostal, pays FROM users', function (err, data) {
         if (err) throw err;
-        
-        if(req.file){
+
+        if (req.file) {
             const img = db.query(`SELECT avatar from users WHERE id=${id}`);
-            console.log("coucou");
-            if(img[0].image !== "linuxbash.png"){
+            if (img[0].image !== "linuxbash.png") {
                 pathImg = path.resolve("assets/images/" + img[0].image)
                 fs.unlink(pathImg, (err) => {
-                 
-                    
+
+
                 })
-    
+
             }
-    
-            
+
+
             db.query(`UPDATE users SET avatar="${req.file.completed}" WHERE id=${id};`);
-    
+
             //console.log(req.session);
             db.query(`SELECT * FROM users WHERE id=${req.session.user.id};`, (err, data) => {
-                if(err) throw err;
-                
-              //console.log("user", data)
-              req.session.user = {
-                ...data[0]
-              };
-              res.redirect("/profil");
+                if (err) throw err;
+
+                //console.log("user", data)
+                req.session.user = {
+                    ...data[0]
+                };
+                res.redirect("/profil");
             });
         }
 
@@ -46,61 +45,82 @@ exports.getUsers = async (req, res) => {
 
 
 exports.updateUser = async (req, res) => {
+    console.log("coucou")
     const { id } = req.params;
-    const { nom, prenom, email } = req.body;
+    const { nom, prenom, email, mobile, adresse, codePostal, pays } = req.body;
 
-    if (req.body.prenom) {
-        await db.query(`UPDATE users SET prenom="${prenom}" WHERE id=${id};`, function (err, data) {
-            if (err) throw err;
-            res.redirect('/user');
-        });
-    }
-    else if (req.body.nom) {
-        await db.query(`UPDATE users SET nom="${nom}" WHERE id=${id};`, function (err, data) {
-            if (err) throw err;
-            res.redirect('/user');
-        });
-    }
-    else if (req.body.email) {
-        await db.query(`UPDATE users SET email="${email}" WHERE id=${id};`, function (err, data) {
-            if (err) throw err;
-            res.redirect('/user');
-        });
-    }
 
-        console.log(req.session);
-        db.query(`SELECT * FROM users WHERE id=${req.session.user.id};`, (err, data) => {
-            if(err) throw err;
+    if (req.body.prenom) await db.query(`UPDATE users SET prenom="${prenom}" WHERE id="${id}";`);
+    
+    if (req.body.nom) await db.query(`UPDATE users SET nom="${nom}" WHERE id="${id}";`);
+    
+    if (req.body.email) await db.query(`UPDATE users SET email="${email}" WHERE id="${id}";`)
+
+    if (req.body.mobile) await db.query(`UPDATE users SET mobile="${mobile}" WHERE id="${id}";`)
+           
+    if (req.body.adresse) await db.query(`UPDATE users SET adresse="${adresse}" WHERE id="${id}";`)
             
-          console.log("user", data)
-          req.session.user = {
+
+    if (req.body.codePostal) await db.query(`UPDATE users SET codePostal="${codePostal}" WHERE id="${id}";`)
+
+    if (req.body.pays) await db.query(`UPDATE users SET pays="${pays}" WHERE id="${id}";`)
+
+    console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+
+    db.query(`SELECT * FROM users WHERE id=${req.session.user.id};`, (err, data) => {
+        if (err) throw err;
+
+        req.session.user = {
             ...data[0]
-          };
-          res.redirect("/user");
-        });
+        }
+
+        console.log('azerty')
+        if (MODE === "test") {
+            console.log("aaaaaaaaaaaaaaaaaaaaaaaaa");
+            res.json({ message: "success update" })
+
+        } else {
+            console.log("bbbbbbbbbbbbbbbbbbbbbbbbb");
+            res.render('user', { title: 'Utilisateur', layout: "user" });
+        } console.log("cccccccccccccccccccccccc");
+    });
+
+
 }
+
+
+
+
+
+
 
 exports.editOneUser = async (req, res) => {
     let sql = `UPDATE users SET isAdmin = '${(req.body.isAdmin === 'on' ? '1' : '0')}', 
-    isVerified = '${(req.body.isVerified === 'on' ? '1' : '0')}', 
+        isVerified = '${(req.body.isVerified === 'on' ? '1' : '0')}', 
     isVisiteur = '${(req.body.isVisiteur === 'on' ? '1' : '0')}' WHERE id = '${req.params.id}';`
 
-    await db.query(sql, function(err, data){
-        if(err) throw err;
+    await db.query(sql, function (err, data) {
+        if (err) throw err;
         res.redirect('/user');
     })
 
-    
+
 }
 
 exports.deleteOneUser = async (req, res) => {
     const { id } = req.params;
-
+    const data = {
+        flash: 'Delete User',
+        message: "sucess delete",
+    }
     // Supression de l'utilisateur par rapport à son ID
     await db.query(`DELETE FROM users WHERE id=${id}`, function (err, data) {
         if (err) throw err;
 
         // Redirection vers la page user
-        res.redirect('/user');
+        //res.redirect('/user');
+        if (MODE === "test") res.json(data)
+
+        else res.render('user', { title: 'Utilisateur', layout: "user"});
     });
 }
