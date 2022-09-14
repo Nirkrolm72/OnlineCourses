@@ -3,7 +3,7 @@ const { home, connexion, profil ,contact, Creationcours, inscription, seeCourses
 // AUTH
 const { connectUser, inscripUser, deconnexion } = require('./AuthControllers')
 // USER + CRUD
-const { getUsers, updateUser, deleteOneUser } = require('./UserControllers');
+const { getUsers, updateUser, deleteOneUser, editOneUser } = require('./UserControllers');
 // PROFIL
 const {getProfilUser, updateProfil } = require('./ProfilControllers');
 // COURS + CRUD
@@ -20,7 +20,7 @@ module.exports = {
     // Auth
     connectUser, inscripUser, deconnexion,
     // User + CRUD
-    getUsers, updateUser, deleteOneUser, getProfilUser, updateProfil,
+    getUsers, updateUser, deleteOneUser, getProfilUser, updateProfil, editOneUser,
     // Cours + CRUD
     getCours, postCours, getSeeCourses, getAllCours, updateCours ,deleteCours,
     // Admin

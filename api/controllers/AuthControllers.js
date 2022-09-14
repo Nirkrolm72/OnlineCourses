@@ -24,7 +24,7 @@ exports.connectUser = (req, res) => {
             return res.render('connexion',{ layout: 'cours', flash: 'Ce compte n\'existe pas' });
         
         bcrypt.compare(password, data[0].password, async function (err, result) {
-            if (err) return res.render('connexion', { layout: 'connexion', flash: 'Une erreur est survenu !' });
+            if (err) return res.render('profil', { layout: 'profil', flash: 'Une erreur est survenu !' });
             if (result) {
                 
 
@@ -48,7 +48,7 @@ exports.connectUser = (req, res) => {
                     if (MODE === 'test') {
                         return res.json({ msg: 'ok login' })
                     } else {
-                        return res.render('profil', { layout: 'connexion', flash: 'Une erreur est survenu !' });
+                        return res.render('profil', { layout: 'profil', flash: 'Une erreur est survenu !' });
                     }
                 })
             }

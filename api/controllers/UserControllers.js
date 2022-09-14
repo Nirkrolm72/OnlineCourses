@@ -64,7 +64,7 @@ exports.updateUser = async (req, res) => {
     if (req.body.codePostal) await db.query(`UPDATE users SET codePostal="${codePostal}" WHERE id="${id}";`)
 
     if (req.body.pays) await db.query(`UPDATE users SET pays="${pays}" WHERE id="${id}";`)
-
+    
     console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
 
     db.query(`SELECT * FROM users WHERE id=${req.session.user.id};`, (err, data) => {
@@ -89,11 +89,6 @@ exports.updateUser = async (req, res) => {
 }
 
 
-
-
-
-
-
 exports.editOneUser = async (req, res) => {
     let sql = `UPDATE users SET isAdmin = '${(req.body.isAdmin === 'on' ? '1' : '0')}', 
         isVerified = '${(req.body.isVerified === 'on' ? '1' : '0')}', 
@@ -103,22 +98,19 @@ exports.editOneUser = async (req, res) => {
         if (err) throw err;
         res.redirect('/user');
     })
-
-
 }
 
 exports.deleteOneUser = async (req, res) => {
     const { id } = req.params;
     const data = {
         flash: 'Delete User',
-        message: "sucess delete",
+        message: "success delete",
     }
     // Supression de l'utilisateur par rapport à son ID
     await db.query(`DELETE FROM users WHERE id=${id}`, function (err, data) {
         if (err) throw err;
 
         // Redirection vers la page user
-        //res.redirect('/user');
         if (MODE === "test") res.json(data)
 
         else res.render('user', { title: 'Utilisateur', layout: "user"});

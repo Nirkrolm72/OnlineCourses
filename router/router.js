@@ -54,12 +54,15 @@ router.route('/cours/:id')
         .get(getCours);
 
 
+router.use(isAdmin)
 router.route('/Creationcours').get(Creationcours)
         .post(upload.single('avatar'), postCours)
 
 // User + CRUD
 router.route('/user').get(getUsers)
-router.route('/user/:id').put(updateUser).delete(deleteOneUser) 
+router.route('/user/:id')
+        .put(updateUser)
+        .delete(deleteOneUser) 
 
 // Admin
 router.use(isAdmin)

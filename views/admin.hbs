@@ -1,163 +1,162 @@
 <!--Main Navigation-->
 <header>
-  <!-- Sidebar -->
-  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
-    <div class="position-sticky">
-      <div class="list-group list-group-flush mx-3 mt-4">
-        <a href="/admin" class="list-group-item list-group-item-action py-2 ripple" aria-current="true"><i
-            class="fas fa-tachometer-alt fa-fw me-3"></i><span>Dashboard</span></a>
-        <a href="/user" class="list-group-item list-group-item-action py-2 ripple"><i
-            class="fas fa-users fa-fw me-3"></i><span>Utilisateurs</span></a>
-      </div>
-    </div>
-  </nav>
-  <!-- Sidebar -->
+	<!-- Sidebar -->
+	<nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+		<div class="position-sticky">
+			<div class="list-group list-group-flush mx-3 mt-4">
+				<a href="/admin" class="list-group-item list-group-item-action py-2 ripple" aria-current="true"><i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Dashboard</span></a>
+				<a href="/user" class="list-group-item list-group-item-action py-2 ripple"><i class="fas fa-users fa-fw me-3"></i><span>Utilisateurs</span></a>
+				<a href="/Creationcours" class="list-group-item list-group-item-action py-2 ripple"><i class="fa-solid fa-paintbrush-pencil"></i><span>Création d'un cours</span></a>
+			</div>
+		</div>
+	</nav>
+	<!-- Sidebar -->
 
-  <!-- Navbar -->
-  <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-    <!-- Container wrapper -->
-    <div class="container-fluid">
-      <a class="navbar-brand me-2" href="/">OnlineCourses</a>
-      <!-- Toggle button -->
-      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu"
-        aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
+	<!-- Navbar -->
+	<nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+		<!-- Container wrapper -->
+		<div class="container-fluid">
+			<a class="navbar-brand me-2" href="/">OnlineCourses</a>
+			<!-- Toggle button -->
+			<button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu"
+				aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+				<i class="fas fa-bars"></i>
+			</button>
 
 
-      <!-- Collapsible wrapper -->
-      <div class="collapse navbar-collapse" id="navbarButtonsExample">
-        <!-- Left links -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link left" href="#">Formation</a></li>
-          <li class="nav-item"><a class="nav-link left" href="/seeCourses">Cours</a></li>
-          <li class="nav-item"><a class="nav-link left" href="#">Blog</a></li>
-        </ul>
-        <!-- Left links -->
+			<!-- Collapsible wrapper -->
+			<div class="collapse navbar-collapse" id="navbarButtonsExample">
+				<!-- Left links -->
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link left" href="#">Formation</a></li>
+					<li class="nav-item"><a class="nav-link left" href="/seeCourses">Cours</a></li>
+					<li class="nav-item"><a class="nav-link left" href="#">Blog</a></li>
+				</ul>
+				<!-- Left links -->
 
-        <div class="d-flex align-items-center">
-          <ul class="navbar-nav ms-auto d-flex flex-row">
+				<div class="d-flex align-items-center">
+					<ul class="navbar-nav ms-auto d-flex flex-row">
 
-            {{#if user}}
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink"
-                role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                <img src="/assets/images/{{user.avatar}}" class="rounded-circle" height="22" alt="Profil Picture"
-                  loading="lazy" />
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="/profil" style="color: black !important;">Mon profil</a></li>
-                <li><a class="dropdown-item" href="/admin" style="color: black !important;">Dashboard</a></li>
-                <li><a class="dropdown-item" href="/parametres" style="color: black !important">Paramètres</a></li>
-                <li><a class="dropdown-item" href="/deconnexion" style="color: black !important;">Déconnexion</a></li>
-              </ul>
-            </li>
-            {{/if}}
-          </ul>
-        </div>
-      </div>
-      <!-- Collapsible wrapper -->
-    </div>
-    <!-- Container wrapper -->
-  </nav>
-  <!-- Navbar -->
+						{{#if user}}
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink"
+								role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+								<img src="/assets/images/{{user.avatar}}" class="rounded-circle" height="22" alt="Profil Picture"
+									loading="lazy" />
+							</a>
+							<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item" href="/profil" style="color: black !important;">Mon profil</a></li>
+								<li><a class="dropdown-item" href="/admin" style="color: black !important;">Dashboard</a></li>
+								<li><a class="dropdown-item" href="/parametres" style="color: black !important">Paramètres</a></li>
+								<li><a class="dropdown-item" href="/deconnexion" style="color: black !important;">Déconnexion</a></li>
+							</ul>
+						</li>
+						{{/if}}
+					</ul>
+				</div>
+			</div>
+			<!-- Collapsible wrapper -->
+		</div>
+		<!-- Container wrapper -->
+	</nav>
+	<!-- Navbar -->
 </header>
 <!--Main Navigation-->
 
 <!--Main layout-->
 <main style="margin-top: 58px;">
-  <div class="container pt-4">
+	<div class="container pt-4">
 
-    {{#if db}}
-    {{#each db}}
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Titre</th>
-          <th scope="col">Auteur</th>
-          <th scope="col">Description</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th>{{this.titre}}</th>
-          <td>{{this.prenom}}</td>
-          <td>{{this.description}}</td>
-          <td>
+		{{#if db}}
+		{{#each db}}
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Titre</th>
+					<th scope="col">Auteur</th>
+					<th scope="col">Description</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>{{this.titre}}</th>
+					<td>{{this.prenom}}</td>
+					<td>{{this.description}}</td>
+					<td>
 
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-mdb-toggle="modal"
-              data-mdb-target="#exampleModal-{{this.id}}">Modifier</button>
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary" data-mdb-toggle="modal"
+							data-mdb-target="#exampleModal-{{this.id}}">Modifier</button>
 
-            <!-- Modal -->
-            <form action="/admin/{{this.id}}?_method=PUT" method="post">
-              <div class="modal fade" id="exampleModal-{{this.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Modifier</h5>
-                      <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="mb-3">
-                        <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre">
-                      </div>
+						<!-- Modal -->
+						<form action="/admin/{{this.id}}?_method=PUT" method="post">
+							<div class="modal fade" id="exampleModal-{{this.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Modifier</h5>
+											<button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<div class="mb-3">
+												<input type="text" class="form-control" id="titre" name="titre" placeholder="Titre">
+											</div>
 
-                      <div class="mb-3">
-                        <input type="text" class="form-control" id="description" name="description"
-                          placeholder="Description">
-                      </div>
-                    </div>
+											<div class="mb-3">
+												<input type="text" class="form-control" id="description" name="description"
+													placeholder="Description">
+											</div>
+										</div>
 
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fermer</button>
-                      <button type="submit" class="btn btn-primary">Modifier</button>
-            </form>
-  </div>
-  </div>
-  </div>
-  </div>
-  </td>
-  <td>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-danger" data-mdb-toggle="modal" data-mdb-target="#exampleModa2-{{this.id}}">
-      Supprimer
-    </button>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fermer</button>
+											<button type="submit" class="btn btn-primary">Modifier</button>
+						</form>
+	</div>
+	</div>
+	</div>
+	</div>
+	</td>
+	<td>
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-danger" data-mdb-toggle="modal" data-mdb-target="#exampleModa2-{{this.id}}">
+			Supprimer
+		</button>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModa2-{{this.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Supprimer</h5>
-            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <h5>Souhaitez-vous vraiment supprimer</h5>
-          </div>
-          <form action="/admin/{{this.id}}?_method=DELETE" method="post">
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fermer</button>
-              <button type="submit" class="btn btn-danger">Supprimer</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </td>
-  </tr>
-  <tr>
-    </tbody>
-    </table>
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModa2-{{this.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Supprimer</h5>
+						<button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<h5>Souhaitez-vous vraiment supprimer</h5>
+					</div>
+					<form action="/admin/{{this.id}}?_method=DELETE" method="post">
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fermer</button>
+							<button type="submit" class="btn btn-danger">Supprimer</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</td>
+	</tr>
+	<tr>
+		</tbody>
+		</table>
 
-    </div>
-    {{/each}}
-    {{!-- Sinon on affiche un message --}}
-    {{else}}
-    <h1 style="text-align: center;">Base de donnée de merde vide</h1>
-    {{/if}}
+		</div>
+		{{/each}}
+		{{!-- Sinon on affiche un message --}}
+		{{else}}
+		<h1 style="text-align: center;">Base de donnée de merde vide</h1>
+		{{/if}}
 </main>
 <!--Main layout-->
