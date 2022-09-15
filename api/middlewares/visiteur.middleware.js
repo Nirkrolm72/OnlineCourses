@@ -6,3 +6,4 @@ module.exports = {
       ( user.isVisiteur === req.session.user.isVisiteur && user.isVisiteur === 0 ) ? res.redirect('/connexion') : next();
     }
 }
+

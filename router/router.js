@@ -19,6 +19,7 @@ const {isAdmin, isVisiteur} = require('../api/middlewares');
 // Multer
 const upload = require('../api/config/multer');
 const { application } = require('express');
+const { JsonWebTokenError } = require('jsonwebtoken');
 
 // Page Home
 router.route('/').get(home)
@@ -79,7 +80,20 @@ router.route('/admin/:id')
 
 
 // MAIL
+router.get('/verification/:token',(req, res) => {
+        const {token} = req.params;
 
+        jwt.verification(token, 'MaCleSecrete', function(err, decoded){
+                if(err){
+                        console.log(err);
+                        res.send('Email de verification echoué, le lien est invalide');
+                }
+                else{
+                        
+                        res.send('Email de verification success');
+                }
+        })
+})
 
 // // /******************Page 404*********************/
 // router.use('*', function (req, res) {
