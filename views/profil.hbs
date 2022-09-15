@@ -29,7 +29,7 @@
               <a type="submit" href="/deconnexion" class="btn btn-danger">Déconnexion</a>
             </div>
           </div>
-        </div>  
+        </div>
       </div>
       <div class="col-lg-8">
         <div class="card mb-4">
@@ -67,79 +67,93 @@
               </div>
               <div class="col-sm-9">
                 <p class="text-muted mb-0">{{user.adresse}}</p>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Code Postal</p>
               </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">{{user.codePostal}}</p>
+              <hr>
+
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Ville</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{user.ville}}</p>
+                </div>
+                <hr>
+
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Code Postal</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{user.codePostal}}</p>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Pays</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{user.pays}}</p>
+                  </div>
+                </div>
+                <hr>
               </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Pays</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">{{user.pays}}</p>
-              </div>
-            </div>
-              
-            </div>
-          </div>
-        </div>
-
-
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal"
-          data-bs-target="#exampleModal">Modifier</button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modifier</h5>
-                <button type="submit" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form action="/profil/{{user.id}}?_method=PUT" method="POST" enctype="multipart/form-data">
-                  <div class="mb-3">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-                  </div>
-                  <div class="mb-3">
-                    <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Téléphone">
-                  </div>
-                  <div class="mb-3">
-                    <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Adresse">
-                  </div>
-
-                  <div class="mb-3">
-                    <input type="text" class="form-control" id="codePostal" name="adresse" placeholder="Code Postal">
-                  </div>
-
-                  <div class="mb-3">
-                    <input type="text" class="form-control" id="pays" name="pays" placeholder="Pays">
-                  </div>
-
-
-                  <div class="mb-3">
-                    <input type="file" class="form-control" id="avatar" name="avatar" value="Choisir un avatar">
-                  </div>
-
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                    <button type="submit" class="btn btn-primary">Modifier</button>
-                  </div>
-                </form>
-
-              </div>
-
-
             </div>
           </div>
-        </div>
-        {{/if}}
+
+
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Modifier</button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modifier</h5>
+                  <button type="submit" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="/profil/{{user.id}}?_method=PUT" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                      <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="mb-3">
+                      <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Téléphone">
+                    </div>
+
+                    <div class="mb-3">
+                      <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Adresse">
+                    </div>
+
+                    <div class="mb-3">
+                      <input type="text" class="form-control" id="ville" name="ville" placeholder="Ville">
+                    </div>
+
+                    <div class="mb-3">
+                      <input type="text" class="form-control" id="codePostal" name="codePostal" placeholder="Code Postal">
+                    </div>
+
+                    <div class="mb-3">
+                      <input type="text" class="form-control" id="pays" name="pays" placeholder="Pays">
+                    </div>
+
+
+                    <div class="mb-3">
+                      <input type="file" class="form-control" id="avatar" name="avatar" value="Choisir un avatar">
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                      <button type="submit" class="btn btn-primary">Modifier</button>
+                    </div>
+                  </form>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          {{/if}}
 </section>

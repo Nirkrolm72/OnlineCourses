@@ -21,7 +21,7 @@ exports.connectUser = (req, res) => {
         if (err) throw err;
 
         if (!data[0])
-            return res.render('connexion',{ layout: 'cours', flash: 'Ce compte n\'existe pas' });
+            return res.render('connexion',{ layout: 'connexion', flash: 'Ce compte n\'existe pas' });
         
         bcrypt.compare(password, data[0].password, async function (err, result) {
             if (err) return res.render('profil', { layout: 'profil', flash: 'Une erreur est survenu !' });
@@ -41,14 +41,20 @@ exports.connectUser = (req, res) => {
                         avatar: user.avatar,
                         isAdmin: user.isAdmin,
                         isVisiteur: user.isVisiteur,
-                        isVerified: user.isVerified
+                        isVerified: user.isVerified,
+                        mobile: user.mobile,
+                        adresse: user.adresse,
+                        ville: user.ville,
+                        codePostal: user.codePostal,
+                        pays: user.pays
                     };
 
-                    //console.log("before res login", req.session)
                     if (MODE === 'test') {
                         return res.json({ msg: 'ok login' })
                     } else {
-                        return res.render('profil', { layout: 'profil', flash: 'Une erreur est survenu !' });
+                        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+                        //return res.render('profil', { layout: 'profil'});
+                        res.redirect('/profil');
                     }
                 })
             }
@@ -65,12 +71,12 @@ exports.connectUser = (req, res) => {
 
 exports.inscripUser = async (req, res) => {
     const saltRounds = 10;
-    const { nom, prenom, email, password, avatar, mobile, adresse, codePostal, pays } = req.body;
+    const { nom, prenom, email, password, avatar, mobile, adresse, ville ,codePostal, pays } = req.body;
 
     console.log(req.body);
 
     bcrypt.hash(password, saltRounds, function (err, hash) {
-        db.query(`INSERT INTO users (nom, prenom, email, password, avatar, isAdmin, isVisiteur, isVerified, mobile, adresse, codePostal, pays) VALUES ('${nom}', '${prenom}', '${email}', '${hash}', '${avatar}', 0, 0, 0, '${mobile}', '${adresse}', '${codePostal}', '${pays}');`, (err, rows, fields) => {
+        db.query(`INSERT INTO users (nom, prenom, email, password, avatar, isAdmin, isVisiteur, isVerified, mobile, adresse, ville ,codePostal, pays) VALUES ('${nom}', '${prenom}', '${email}', '${hash}', '${avatar}', 0, 0, 0, '${mobile}', '${adresse}', '${ville}' ,'${codePostal}', '${pays}');`, (err, rows, fields) => {
             if (err) {
                 console.log(err.message);
                 res.send(err);
@@ -107,7 +113,7 @@ exports.inscripUser = async (req, res) => {
                     }
                 })
 
-                res.render('connexion', { layout: 'cours', success: 'Votre compte à bien été créé merci de vérifier vos emails !'
+                res.render('connexion', { layout: 'connexion', success: 'Votre compte à bien été créé merci de vérifier vos emails !'
                 })
 
 

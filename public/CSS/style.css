@@ -307,15 +307,8 @@ animation-delay: -0.4s;
 /************** CONNEXION *********************/
 
 
-#email{
-  /* border: 1px solid black; */
-}
 #email::placeholder{
   color: black;
-}
-
-#password{
-  /* border: 1px solid black; */
 }
 
 
@@ -341,16 +334,10 @@ animation-delay: -0.4s;
 
 /************** INSCRIPTION *********************/
 
-#prenom{
-  /* border: 1px solid black; */
-}
 #prenom::placeholder{
   color: black;
 }
 
-#nom{
-  /* border: 1px solid black; */
-}
 #nom::placeholder{
   color: black;
 }

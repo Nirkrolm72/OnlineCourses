@@ -15,7 +15,7 @@ exports.admin = (req, res) => {
 }
 
 exports.profil = (req, res) => {
-    res.render('profil', { title: 'Profil', layout: 'profil' });
+    res.render('profil', { title: 'Profil', layout: 'profil'});
 }
 
 exports.Creationcours = (req, res) => {

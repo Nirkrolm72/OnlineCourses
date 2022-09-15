@@ -7,7 +7,7 @@ const router = express.Router();
 const db = require('../api/database/database');
 
 // // Import des controllers
-const { home, connexion, editOneUser ,profil, contact, Creationcours, 
+const { home, connexion, editOneUser ,profil ,contact, Creationcours, 
     inscription, seeCourses, user, connectUser, inscripUser, 
     deconnexion, getUsers, updateUser, deleteOneUser, getCours, postCours, 
     getSeeCourses, getAllCours, admin, verificationMail, verificationMailPost, sendMailContact, 
@@ -18,6 +18,7 @@ const {isAdmin, isVisiteur} = require('../api/middlewares');
 
 // Multer
 const upload = require('../api/config/multer');
+const { application } = require('express');
 
 // Page Home
 router.route('/').get(home)
@@ -42,12 +43,14 @@ router.route('/deconnexion')
         .get(deconnexion)
 
 // Profil
+//router.use(isAdmin, isVisiteur)
 router.route('/profil')
-        .get(profil)
+        .get(getProfilUser)
 router.route('/profil/:id')
         .put(upload.single('avatar'), updateProfil)
 
 // Cours + CRUD
+router.use(isVisiteur)
 router.route('/seeCourses')
         .get(getSeeCourses)
 router.route('/cours/:id')
@@ -59,9 +62,10 @@ router.route('/Creationcours').get(Creationcours)
         .post(upload.single('avatar'), postCours)
 
 // User + CRUD
+router.use(isAdmin)
 router.route('/user').get(getUsers)
 router.route('/user/:id')
-        .put(updateUser)
+        .put(editOneUser)
         .delete(deleteOneUser) 
 
 // Admin
