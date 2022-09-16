@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
 
 exports.connectUser = (req, res) => {
 	const { email, password } = req.body
-	//console.log("REQ BODY LOGIN", req.body);
+	
 	db.query(`SELECT password, email FROM users WHERE email="${email}"`, function (err, data) {
 		if (err) throw err;
 
@@ -45,7 +45,7 @@ exports.connectUser = (req, res) => {
 						isVerified: user.isVerified,
 						mobile: user.mobile,
 						adresse: user.adresse,
-						//ville: user.ville,
+						ville: user.ville,
 						codePostal: user.codePostal,
 						pays: user.pays
 					};
@@ -53,7 +53,7 @@ exports.connectUser = (req, res) => {
 					if (MODE === 'test') {
 						return res.json({ msg: 'ok login' })
 					} else {
-						db.query(`UPDATE users SET isVisiteur=1, isVerified=1 WHERE id="${id}";`, function (err, data) {
+						db.query(`UPDATE users SET isVisiteur=1, isVerified=1 WHERE id="${req.session.user.id}";`, function (err, data) {
 							if(err) throw err;
 							res.redirect('/profil');
 						})
@@ -80,7 +80,7 @@ exports.inscripUser = async (req, res) => {
 	console.log(req.body);
 
 	bcrypt.hash(password, saltRounds, function (err, hash) {
-		db.query(`INSERT INTO users (nom, prenom, email, password, avatar, isAdmin, isVisiteur, isVerified, mobile, adresse ,codePostal, pays) VALUES ('${nom}', '${prenom}', '${email}', '${hash}', '${avatar}', 0, 0, 0, '${mobile}', '${adresse}' ,'${codePostal}', '${pays}');`, (err, rows, fields) => {
+		db.query(`INSERT INTO users (nom, prenom, email, password, avatar, isAdmin, isVisiteur, isVerified, mobile, adresse, ville ,codePostal, pays) VALUES ('${nom}', '${prenom}', '${email}', '${hash}', '${avatar}', 0, 0, 0, '${mobile}', '${adresse}', '${ville}' ,'${codePostal}', '${pays}');`, (err, rows, fields) => {
 			if (err) {
 				console.log(err.message);
 				res.send(err);
