@@ -95,13 +95,7 @@
           </div>
         </div>
         <td id="status"> 
-    
-          <label for="">Admin</label>
-          <input type="checkbox" id="isAdmin{{ user.id }}" name="isAdmin" />
-          <label for="">Verified</label>
-          <input type="checkbox" id="isVerified{{ user.id }}" name="isVerified" />
-          <label for="">Visiteur</label>
-          <input type="checkbox" id="isVisiteur{{ user.id }}" name="isVisiteur" />
+
         </td>
       <td>
 
@@ -179,11 +173,19 @@
 
 <script>
   
+  let status = document.getElementById('status');
+  let badgeAdmin = document.createElement('span');
+  
+  badgeAdmin.setAttribute('class', 'badge text-bg-primary');
+  badgeAdmin.innerHTML = 'Admin'
+
+  badgeAdmin.appendChild(content);
+  document.body.appendChild(badgeAdmin); 
+
   // isAdmin
   const isAdmin = document.getElementById('isAdmin{{ user.id }}')
   const adm{{ user.id }} = { { isAdmin } }
   if (adm{ { user.id } } === 1 ) isAdmin{ { user.id } }.checked = true
-
 
   // isVisiteur 
   const isVisiteur{{ user.id }} = document.getElementById('isVisiteur{{ user.id }}')
@@ -194,5 +196,8 @@
   const isVerified{{ user.id }} = document.getElementById('isVerified{{ user.id }}')
   const vfd{{ user.id }} = { { isVerified } }
   if (vfd{ { user.id } } === 1 ) isVerified{ { user.id } }.checked = true 
+
+
+
 
 </script>

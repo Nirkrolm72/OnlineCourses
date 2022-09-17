@@ -23,11 +23,8 @@ const { JsonWebTokenError } = require('jsonwebtoken');
 
 // Page Home
 router.route('/').get(home)
-
-// Page contact
-router.route('/contact').get(contact)
-    .post(sendMailContact)
-
+        .post(sendMailContact)
+    
 // Auth
 router.route('/connexion')
         .get(connexion)
@@ -81,6 +78,7 @@ router.route('/admin/:id')
 
 // MAIL
 router.get('/verification/:token',(req, res) => {
+        
         const {token} = req.params;
 
         jwt.verification(token, 'MaCleSecrete', function(err, decoded){

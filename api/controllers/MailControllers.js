@@ -1,3 +1,5 @@
+const nodemailer = require('nodemailer');
+
 exports.verificationMail = async (req, res) => {
     console.log('Controller Page Verification: ', rand)
 
@@ -44,6 +46,14 @@ exports.verificationMailPost = async (req, res) => {
 exports.sendMailContact = (req, res) => {
     const { sujet, email, nomEtPrenom, description } = req.body;
 
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        auth: {
+            user: 'Guyon.Brandon.dev@gmail.com',
+            pass: 'rseyekjmvzqnrlku'
+        }
+    });
 
     let mailData = {
         from: 'Guyon.Brandon.dev@gmail.com',

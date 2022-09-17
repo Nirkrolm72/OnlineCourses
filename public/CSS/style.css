@@ -103,19 +103,34 @@ align-items: center;
 /************** FIN NAVBAR *********************/
 
 /************** HEADER *********************/
-header{
+
+.header{
   position: relative;
+  height: 100vh;
+  background: url('../Ressources/header.jpg');
+
 }
 
+.overlay{
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
 
 .text-white{
   margin-top: 100px;
+  font-weight: bold;
   z-index: 11;
 }
 
 .main_text{
   width: 600px;
-  font-size: 75px;
+  font-size: 50px;
+  font-weight: bold;
   color: white;
   text-align: center;
 }
