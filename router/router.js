@@ -93,6 +93,8 @@ router.get('/verification/:token',(req, res) => {
         })
 })
 
+
+
 // // /******************Page 404*********************/
 // router.use('*', function (req, res) {
 //     res.status(404).render("404", {

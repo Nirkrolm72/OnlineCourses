@@ -95,7 +95,7 @@
           </div>
         </div>
         <td id="status"> 
-
+          
         </td>
       <td>
 
@@ -172,18 +172,9 @@
 <!--Main layout-->
 
 <script>
-  
-  let status = document.getElementById('status');
-  let badgeAdmin = document.createElement('span');
-  
-  badgeAdmin.setAttribute('class', 'badge text-bg-primary');
-  badgeAdmin.innerHTML = 'Admin'
-
-  badgeAdmin.appendChild(content);
-  document.body.appendChild(badgeAdmin); 
 
   // isAdmin
-  const isAdmin = document.getElementById('isAdmin{{ user.id }}')
+  const isAdmin{{ user.id }} = document.getElementById('isAdmin{{ user.id }}')
   const adm{{ user.id }} = { { isAdmin } }
   if (adm{ { user.id } } === 1 ) isAdmin{ { user.id } }.checked = true
 

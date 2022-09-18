@@ -116,3 +116,4 @@ exports.deleteOneUser = async (req, res) => {
         else res.render('user', { title: 'Utilisateur', layout: "user"});
     });
 }
+
