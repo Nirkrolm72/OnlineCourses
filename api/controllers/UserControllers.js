@@ -8,7 +8,7 @@ exports.getUsers = async (req, res) => {
         message: "sucess get",
     }
 
-    await db.query('SELECT id, nom, prenom, email, password ,avatar, isAdmin, isVisiteur, isVerified, mobile, adresse, codePostal, pays FROM users', function (err, data) {
+    await db.query('SELECT * FROM users', function (err, data) {
         if (err) throw err;
 
         if (req.file) {
@@ -16,7 +16,6 @@ exports.getUsers = async (req, res) => {
             if (img[0].image !== "linuxbash.png") {
                 pathImg = path.resolve("assets/images/" + img[0].image)
                 fs.unlink(pathImg, (err) => {
-                    next()
 
                 })
 
@@ -29,7 +28,6 @@ exports.getUsers = async (req, res) => {
             db.query(`SELECT * FROM users WHERE id=${req.session.user.id};`, (err, data) => {
                 if (err) throw err;
 
-                //console.log("user", data)
                 req.session.user = {
                     ...data[0]
                 };
@@ -45,9 +43,9 @@ exports.getUsers = async (req, res) => {
 
 
 exports.updateUser = async (req, res) => {
-    console.log("coucou")
+    
     const { id } = req.params;
-    const { nom, prenom, email, mobile, adresse, codePostal, pays } = req.body;
+    const { nom, prenom, email, mobile, adresse, ville, codePostal, pays } = req.body;
 
 
     if (req.body.prenom) await db.query(`UPDATE users SET prenom="${prenom}" WHERE id="${id}";`);
@@ -93,7 +91,7 @@ exports.editOneUser = async (req, res) => {
 
     await db.query(sql, function (err, data) {
         if (err) throw err;
-        res.redirect('/user');
+        else res.redirect('/user');
     })
 }
 

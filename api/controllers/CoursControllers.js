@@ -63,7 +63,7 @@ exports.getSeeCourses = async (req, res) => {
 
             db.query(`UPDATE users SET image="${req.file.completed}" WHERE id=${id};`);
 
-            //console.log(req.session);
+            // Mise à jour de la session
             db.query(`SELECT * FROM users WHERE id=${req.session.user.id};`, (err, data) => {
                 if (err) throw err;
 
@@ -93,8 +93,6 @@ exports.getAllCours = async (req, res) => {
         else res.render('admin', { title: 'Admin', layout: "admin", db: data });
     });
 }
-
-// select prenom, titre, description FROM cours INNER JOIN users ON users.id = cours.id_user;
 
 
 exports.updateCours = async (req, res) => {

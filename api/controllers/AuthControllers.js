@@ -7,16 +7,20 @@ const jwt = require('jsonwebtoken');
 const { MODE } = process.env
 
 const transporter = nodemailer.createTransport({
-	host: 'smtp.gmail.com',
-	port: 465,
+	host: 'smtp-mail.outlook.com',
+	secureConnection: false,
+	port: 587,
 	auth: {
-		user: 'Guyon.Brandon.dev@gmail.com',
-		pass: 'rseyekjmvzqnrlku'
+		user: 'guyonbrandon@outlook.fr',
+		pass: 'br26an07don1997' //rseyekjmvzqnrlku
+	},
+	tls: {
+		ciphers: 'SSLv3'
 	}
 });
 
 exports.connectUser = (req, res) => {
-	const { email, password } = req.body
+	const { email, password } = req.body;
 
 	db.query(`SELECT password, email FROM users WHERE email="${email}"`, function (err, data) {
 		if (err) throw err;
@@ -31,8 +35,6 @@ exports.connectUser = (req, res) => {
 
 				db.query(`SELECT * FROM users WHERE email="${data[0].email}"`, (err, userget) => {
 					let user = userget[0];
-
-					// console.log(user);
 
 					req.session.user = {
 						id: user.id,
@@ -92,7 +94,7 @@ exports.inscripUser = async (req, res) => {
 			link = "http://" + req.get('host') + "/verification/" + rand;
 
 			mailOptions = {
-				from: 'Guyon.Brandon.dev@gmail.com',
+				from: 'guyonbrandon@outlook.fr',
 				to: email,
 				subject: "Veuillez confirmez votre Email svp.",
 				rand: rand,
@@ -109,14 +111,12 @@ exports.inscripUser = async (req, res) => {
 			transporter.sendMail(mailOptions, (err, res, next) => {
 				if (err) {
 					console.log(err)
-					//res.end("error")
 				} else {
 					console.log("Message Envoyer")
 					next()
 				}
 			})
-			res.render('connexion', {
-				success: 'Votre compte à bien été créé merci de vérifier vos emails !'
+			res.render('connexion', {layout:'connexion', success: 'Votre compte à bien été créé merci de vérifier vos emails !'
 			})
 		})
 	});

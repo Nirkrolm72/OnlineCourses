@@ -49,19 +49,19 @@ router.route('/profil/:id')
         .put(upload.single('avatar'), updateProfil)
 
 // Cours + CRUD
-router.use(isVisiteur)
+//router.use(isVisiteur)
 router.route('/seeCourses')
         .get(getSeeCourses)
 router.route('/cours/:id')
         .get(getCours);
 
 
-router.use(isAdmin)
+//router.use(isAdmin)
 router.route('/Creationcours').get(Creationcours)
         .post(upload.single('avatar'), postCours)
 
 // User + CRUD
-router.use(isAdmin)
+//router.use(isAdmin)
 router.route('/user')
         .get(getUsers)
 
@@ -70,9 +70,10 @@ router.route('/user/:id')
         .delete(deleteOneUser)
 
 // Admin
-router.use(isAdmin)
+//router.use(isAdmin)
 router.route('/admin')
         .get(getAllCours)
+
 router.route('/admin/:id')
         .put(updateCours)
         .delete(deleteCours)
@@ -82,9 +83,9 @@ router.route('/admin/:id')
 // router.route('/verification')
 //     .post(sendVerif)
 
-// router.route('/verification/:id')
-//         .get(verificationMail)
-//         .post(verificationMailPost)
+/*router.route('/verification/:id')
+        .get(verificationMail)
+        .post(verificationMailPost)*/
 
 // router.get('/verification/:token', (req, res) => {
 

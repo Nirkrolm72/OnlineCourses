@@ -6,7 +6,7 @@ describe("CRUD Users", function (){
 
     // Fonction que ce lance avant chaque test
     beforeEach((done) => {
-        db.query(`INSERT INTO users SET nom="Guyon", prenom="Bryan", email="guyonbryan@gmail.com", password="$2b$10$YmJihHJKhhZCzikydGpsX.rxX9HBiD1rWCKMXPKGv.TNV04K1njh6", avatar="linuxbash.png", isAdmin=1, isVisiteur=1, isVerified=1, mobile="0620495405", adresse="8 rue des tilleuls", codePostal=72650, pays="France"`, function(err, data, fields){
+        db.query(`INSERT INTO users SET nom="Guyon", prenom="Bryan", email="guyonbryan@gmail.com", password="$2b$10$YmJihHJKhhZCzikydGpsX.rxX9HBiD1rWCKMXPKGv.TNV04K1njh6", avatar="linuxbash.png", isAdmin=1, isVisiteur=1, isVerified=1, mobile="0620495405", adresse="8 rue des tilleuls", ville="Saint Saturnin" ,codePostal=72650, pays="France"`, function(err, data, fields){
             if(err) throw err;
             com.id = data.insertId;
             assert.strictEqual('number', typeof data.insertId)
