@@ -7,14 +7,14 @@ const router = express.Router();
 const db = require('../api/database/database');
 
 // // Import des controllers
-const { home, connexion, editOneUser ,profil ,contact, Creationcours, 
-    inscription, seeCourses, user, connectUser, inscripUser, 
-    deconnexion, getUsers, updateUser, deleteOneUser, getCours, postCours, 
-    getSeeCourses, getAllCours, admin, verificationMail, verificationMailPost, sendMailContact, 
-    deleteCours, updateCours ,sendVerif, verifMail, getProfilUser, updateProfil, mdpOublie } = require("../api/controllers");
+const { home, connexion, editOneUser, profil, contact, Creationcours,
+        inscription, seeCourses, user, connectUser, inscripUser,
+        deconnexion, getUsers, updateUser, deleteOneUser, getCours, postCours,
+        getSeeCourses, getAllCours, admin, verificationMail, verificationMailPost, sendMailContact,
+        deleteCours, updateCours, sendVerif, verifMail, getProfilUser, updateProfil, mdpOublie } = require("../api/controllers");
 
 // Import des middlewares
-const {isAdmin, isVisiteur} = require('../api/middlewares');
+const { isAdmin, isVisiteur } = require('../api/middlewares');
 
 // Multer
 const upload = require('../api/config/multer');
@@ -22,9 +22,10 @@ const { application } = require('express');
 const { JsonWebTokenError } = require('jsonwebtoken');
 
 // Page Home
-router.route('/').get(home)
+router.route('/')
+        .get(home)
         .post(sendMailContact)
-    
+
 // Auth
 router.route('/connexion')
         .get(connexion)
@@ -61,37 +62,46 @@ router.route('/Creationcours').get(Creationcours)
 
 // User + CRUD
 router.use(isAdmin)
-router.route('/user').get(getUsers)
+router.route('/user')
+        .get(getUsers)
+
 router.route('/user/:id')
         .put(editOneUser)
-        .delete(deleteOneUser) 
+        .delete(deleteOneUser)
 
 // Admin
 router.use(isAdmin)
 router.route('/admin')
         .get(getAllCours)
 router.route('/admin/:id')
-        .delete(deleteCours)
         .put(updateCours)
-
+        .delete(deleteCours)
 
 
 // MAIL
-router.get('/verification/:token',(req, res) => {
-        
-        const {token} = req.params;
+// router.route('/verification')
+//     .post(sendVerif)
 
-        jwt.verification(token, 'MaCleSecrete', function(err, decoded){
-                if(err){
-                        console.log(err);
-                        res.send('Email de verification echoué, le lien est invalide');
-                }
-                else{
-                        
-                        res.send('Email de verification success');
-                }
-        })
-})
+// router.route('/verification/:id')
+//         .get(verificationMail)
+//         .post(verificationMailPost)
+
+// router.get('/verification/:token', (req, res) => {
+
+//         const { token } = req.params;
+
+//         jwt.verification(token, 'MaCleSecrete', function (err, decoded) {
+//                 if (err) {
+//                         console.log(err);
+//                         res.send('Email de verification echoué, le lien est invalide');
+//                 }
+//                 else {
+
+//                         res.send('Email de verification success');
+//                 }
+//         })
+// })
+
 
 
 

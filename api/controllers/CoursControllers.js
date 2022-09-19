@@ -1,4 +1,5 @@
 const { db } = require('../database/database');
+const mysql = require('mysql');
 
 require('dotenv').config()
 const { MODE } = process.env
@@ -6,11 +7,12 @@ const { MODE } = process.env
 
 exports.postCours = (req, res) => {
     const { titre, description, contenu } = req.body;
+    
     const { id_user } = req.session.user.id;
     const image = req.file ? req.file.filename : false;
 
     db.query(`INSERT INTO cours (titre, description ,contenu, id_user, image)
-              VALUES ('${titre}', '${description}', '${contenu}' ,'${req.session.user.id}', '${image}');`,
+              VALUES ('${titre}', '${description}', ${mysql.escape(contenu)} ,'${req.session.user.id}', '${image}');`,
               (err, data, field) => {
             if (err) throw err;
 
@@ -99,7 +101,7 @@ exports.updateCours = async (req, res) => {
     const { id } = req.params;
     const { titre, description, contenu } = req.body;
 
-    await db.query(`UPDATE cours SET titre="${titre}", description="${description}", contenu="${contenu}" WHERE id="${id}"`, function (err, data) {
+    await db.query(`UPDATE cours SET titre="${titre}", description="${description}", contenu="${mysql.escape(contenu)}" WHERE id="${id}"`, function (err, data) {
         if(err) throw err;
         
         
@@ -128,6 +130,6 @@ exports.deleteCours = async (req, res) => {
         
             else res.render('admin', { title: 'Admin', layout: "admin"});
         
-        //res.redirect('/admin');
+        //else res.redirect('/admin');
     })
 }

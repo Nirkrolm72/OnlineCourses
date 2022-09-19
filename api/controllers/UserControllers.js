@@ -16,7 +16,7 @@ exports.getUsers = async (req, res) => {
             if (img[0].image !== "linuxbash.png") {
                 pathImg = path.resolve("assets/images/" + img[0].image)
                 fs.unlink(pathImg, (err) => {
-
+                    next()
 
                 })
 
@@ -59,13 +59,13 @@ exports.updateUser = async (req, res) => {
     if (req.body.mobile) await db.query(`UPDATE users SET mobile="${mobile}" WHERE id="${id}";`)
            
     if (req.body.adresse) await db.query(`UPDATE users SET adresse="${adresse}" WHERE id="${id}";`)
-            
+    
+    if (req.body.ville) await db.query(`UPDATE users SET ville="${ville}" WHERE id="${id}";`)
 
     if (req.body.codePostal) await db.query(`UPDATE users SET codePostal="${codePostal}" WHERE id="${id}";`)
 
     if (req.body.pays) await db.query(`UPDATE users SET pays="${pays}" WHERE id="${id}";`)
     
-    console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
 
     db.query(`SELECT * FROM users WHERE id=${req.session.user.id};`, (err, data) => {
         if (err) throw err;
@@ -74,15 +74,12 @@ exports.updateUser = async (req, res) => {
             ...data[0]
         }
 
-        console.log('azerty')
         if (MODE === "test") {
-            console.log("aaaaaaaaaaaaaaaaaaaaaaaaa");
             res.json({ message: "success update" })
 
         } else {
-            console.log("bbbbbbbbbbbbbbbbbbbbbbbbb");
             res.render('user', { title: 'Utilisateur', layout: "user" });
-        } console.log("cccccccccccccccccccccccc");
+        } 
     });
 
 
