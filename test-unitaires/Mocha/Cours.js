@@ -20,6 +20,7 @@ describe("CRUD COURS", function () {
 
             assert.strictEqual('object', typeof data);
         });
+       
     });
 
     it("UPDATE COURS BY ID", () => {

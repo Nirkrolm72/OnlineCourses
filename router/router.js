@@ -11,15 +11,14 @@ const { home, connexion, editOneUser, profil, contact, Creationcours,
         inscription, seeCourses, user, connectUser, inscripUser,
         deconnexion, getUsers, updateUser, deleteOneUser, getCours, postCours,
         getSeeCourses, getAllCours, admin, verificationMail, verificationMailPost, sendMailContact,
-        deleteCours, updateCours, sendVerif, verifMail, getProfilUser, updateProfil, mdpOublie } = require("../api/controllers");
+        deleteCours, updateCours, sendVerif, verifMail, getProfilUser, updateProfil, mdpOublie, updatePassword } = require("../api/controllers");
 
 // Import des middlewares
 const { isAdmin, isVisiteur } = require('../api/middlewares');
 
 // Multer
 const upload = require('../api/config/multer');
-const { application } = require('express');
-const { JsonWebTokenError } = require('jsonwebtoken');
+
 
 // Page Home
 router.route('/')
@@ -42,26 +41,27 @@ router.route('/deconnexion')
         .get(deconnexion)
 
 // Profil
-//router.use(isAdmin, isVisiteur)
+router.use(isAdmin, isVisiteur)
 router.route('/profil')
         .get(getProfilUser)
 router.route('/profil/:id')
         .put(upload.single('avatar'), updateProfil)
 
 // Cours + CRUD
-//router.use(isVisiteur)
+router.use(isVisiteur)
 router.route('/seeCourses')
         .get(getSeeCourses)
 router.route('/cours/:id')
         .get(getCours);
 
 
-//router.use(isAdmin)
-router.route('/Creationcours').get(Creationcours)
+router.use(isAdmin)
+router.route('/Creationcours')
+        .get(Creationcours)
         .post(upload.single('avatar'), postCours)
 
 // User + CRUD
-//router.use(isAdmin)
+router.use(isAdmin)
 router.route('/user')
         .get(getUsers)
 
@@ -70,7 +70,7 @@ router.route('/user/:id')
         .delete(deleteOneUser)
 
 // Admin
-//router.use(isAdmin)
+router.use(isAdmin)
 router.route('/admin')
         .get(getAllCours)
 
@@ -80,29 +80,6 @@ router.route('/admin/:id')
 
 
 // MAIL
-// router.route('/verification')
-//     .post(sendVerif)
-
-/*router.route('/verification/:id')
-        .get(verificationMail)
-        .post(verificationMailPost)*/
-
-// router.get('/verification/:token', (req, res) => {
-
-//         const { token } = req.params;
-
-//         jwt.verification(token, 'MaCleSecrete', function (err, decoded) {
-//                 if (err) {
-//                         console.log(err);
-//                         res.send('Email de verification echoué, le lien est invalide');
-//                 }
-//                 else {
-
-//                         res.send('Email de verification success');
-//                 }
-//         })
-// })
-
 
 
 

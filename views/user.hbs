@@ -91,22 +91,20 @@
           </div>
         </th>
         <td>
-            <label for="">Admin</label>
-            <input type="checkbox" id="isAdmin{{ user.id }}" name="isAdmin" />
-            <label for="">Verified</label>
-            <input type="checkbox" id="isVerified{{ user.id }}" name="isVerified" />
-            <label for="">Visiteur</label>
-            <input type="checkbox" id="isVisiteur{{ user.id }}" name="isVisiteur" />
+          <label for="">Admin</label>
+          <input type="checkbox" id="isAdmin{{ user.id }}" name="isAdmin" />
+          <label for="">Verified</label>
+          <input type="checkbox" id="isVerified{{ user.id }}" name="isVerified" />
+          <label for="">Visiteur</label>
+          <input type="checkbox" id="isVisiteur{{ user.id }}" name="isVisiteur" />
         </td>
         <td>
           <!-- Button trigger modal -->
           <button type="button" class="btn btn-primary" data-mdb-toggle="modal"
-            data-mdb-target="#exampleModal-{{this.id}}">
-            Modifier
-          </button>
+            data-mdb-target="#exampleModal-{{this.id}}">Modifier</button>
 
           <!-- Modal -->
-          <form action="/admin/{{this.id}}?_method=PUT" method="post">
+          <form action="/user/{{this.id}}?_method=PUT" method="post">
             <div class="modal fade" id="exampleModal-{{this.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
               aria-hidden="true">
               <div class="modal-dialog">
@@ -139,7 +137,7 @@
           </button>
 
           <!-- Modal -->
-          <form action="/admin/{{this.id}}?_method=DELETE" method="post">
+          <form action="/user/{{this.id}}?_method=DELETE" method="post">
             <div class="modal fade" id="exampleModal1-{{this.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
               aria-hidden="true">
               <div class="modal-dialog">
@@ -170,7 +168,6 @@
   {{/if}}
 </main>
 <!--Main layout-->
-
 <script>
 
   // isAdmin

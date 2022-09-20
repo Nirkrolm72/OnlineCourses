@@ -11,7 +11,7 @@ const { getCours, postCours, getSeeCourses, getAllCours, updateCours ,deleteCour
 // ADMIN
 const { admin } = require('./AdminControllers');
 // MAIL
-const { verificationMail, verificationMailPost, sendMailContact, sendVerif, verifMail } = require('./MailControllers');
+const { verificationMail, verificationMailPost, sendMailContact, sendVerif, verifMail, updatePassword } = require('./MailControllers');
 
 
 module.exports = {

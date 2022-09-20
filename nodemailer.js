@@ -5,7 +5,6 @@ const { transporter } = require('./api/config/nodemailer')
 app.post('/', function(req, res){
   const {sujet, email, nomEtPrenom, description} = req.body;
 
-  console.log(req.body);
 //   const transporter = nodemailer.createTransport({
 //     host: 'smtp.gmail.com',
 //     port: 465,

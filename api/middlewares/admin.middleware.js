@@ -6,4 +6,3 @@ module.exports = {
       ( user.isAdmin === req.session.user.isAdmin && user.isAdmin === 0 ) ? res.redirect('/connexion') : next();
     }
 }
-

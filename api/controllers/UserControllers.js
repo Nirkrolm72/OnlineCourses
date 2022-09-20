@@ -24,7 +24,7 @@ exports.getUsers = async (req, res) => {
 
             db.query(`UPDATE users SET avatar="${req.file.completed}" WHERE id=${id};`);
 
-            //console.log(req.session);
+            // Mise à jour de la session
             db.query(`SELECT * FROM users WHERE id=${req.session.user.id};`, (err, data) => {
                 if (err) throw err;
 
@@ -101,14 +101,17 @@ exports.deleteOneUser = async (req, res) => {
         flash: 'Delete User',
         message: "success delete",
     }
+    
     // Supression de l'utilisateur par rapport à son ID
     await db.query(`DELETE FROM users WHERE id=${id}`, function (err, data) {
+        
         if (err) throw err;
-
+        
         // Redirection vers la page user
         if (MODE === "test") res.json(data)
-
-        else res.render('user', { title: 'Utilisateur', layout: "user"});
+        
+        else res.redirect('/user')
+        
     });
 }
 

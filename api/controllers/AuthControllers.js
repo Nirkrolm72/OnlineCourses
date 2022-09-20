@@ -7,15 +7,17 @@ const jwt = require('jsonwebtoken');
 const { MODE } = process.env
 
 const transporter = nodemailer.createTransport({
-	host: 'smtp-mail.outlook.com',
+	service: "Outlook365",
+	host: 'smtp.office365.com',
 	secureConnection: false,
 	port: 587,
 	auth: {
 		user: 'guyonbrandon@outlook.fr',
-		pass: 'br26an07don1997' //rseyekjmvzqnrlku
+		pass: 'Br26@n07don1997//' //rseyekjmvzqnrlku
 	},
 	tls: {
-		ciphers: 'SSLv3'
+		ciphers: 'SSLv3',
+		rejectUnauthorized: false
 	}
 });
 
@@ -29,7 +31,7 @@ exports.connectUser = (req, res) => {
 			return res.render('connexion', { layout: 'connexion', flash: 'Ce compte n\'existe pas' });
 
 		bcrypt.compare(password, data[0].password, async function (err, result) {
-			if (err) return res.render('profil', { layout: 'profil', flash: 'Une erreur est survenu !' });
+			if (err) return res.render('connexion', { layout: 'connexion', flash: 'Une erreur est survenu !' });
 			if (result) {
 
 
@@ -55,7 +57,7 @@ exports.connectUser = (req, res) => {
 					if (MODE === 'test') {
 						return res.json({ msg: 'ok login' })
 					} else {
-						return res.render('profil', { layout: 'profil' });
+						return res.redirect('/profil');
 
 					}
 				})
@@ -78,46 +80,14 @@ exports.inscripUser = async (req, res) => {
 	const saltRounds = 10;
 	const { nom, prenom, email, password, avatar, mobile, adresse, ville, codePostal, pays } = req.body;
 
-	console.log(req.body);
-
 	bcrypt.hash(password, saltRounds, function (err, hash) {
 		db.query(`INSERT INTO users (nom, prenom, email, password, avatar, isAdmin, isVisiteur, isVerified, mobile, adresse, ville ,codePostal, pays) VALUES ('${nom}', '${prenom}', '${email}', '${hash}', '${avatar}', 0, 0, 0, '${mobile}', '${adresse}', '${ville}', '${codePostal}', '${pays}');`, (err, rows, fields) => {
 			if (err) {
 				console.log(err.message);
 				res.send(err);
 			}
-			const user = db.query(`SELECT * FROM users where email = "${req.body.email}";`)
-
-
-			rand = Math.floor((Math.random() * 100) + 54);
-			host = req.get('host');
-			link = "http://" + req.get('host') + "/verification/" + rand;
-
-			mailOptions = {
-				from: 'guyonbrandon@outlook.fr',
-				to: email,
-				subject: "Veuillez confirmez votre Email svp.",
-				rand: rand,
-				html: `
-						<h2>Bonjour,</h2><br>
-						<h5>Nous vous remercions de vous êtes inscrit sur OnlineCourses.fr</h5><br>
-						<h5>Pour activer votre compte utilisateur, veuillez cliquer sur le lien ci-dessous</h5><br>
-						<a href=" ` + link + ` ">Cliquez ici pour activer votre compte</a><br>
-						<h5>A très bientôt</h5>
-						<h5>A très vite sur OnlineCourses</h5>`
-			}
-			console.log('Données de mailOption :', mailOptions)
-
-			transporter.sendMail(mailOptions, (err, res, next) => {
-				if (err) {
-					console.log(err)
-				} else {
-					console.log("Message Envoyer")
-					next()
-				}
-			})
-			res.render('connexion', {layout:'connexion', success: 'Votre compte à bien été créé merci de vérifier vos emails !'
-			})
+			
+			res.render('connexion', {layout:'connexion', success: 'Votre compte à bien été créé merci de vérifier vos emails !'})
 		})
 	});
 

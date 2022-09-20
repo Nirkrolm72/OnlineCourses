@@ -31,7 +31,7 @@ exports.postCours = (req, res) => {
 
 exports.getCours = (req, res) => {
     let id = req.params.id;
-
+    console.log('1111111111111111111111111111111111111111111')
 
     db.query(`SELECT titre, description, contenu FROM cours where id='${id}';`, (err, data) => {
         if (err) throw err;
@@ -81,21 +81,23 @@ exports.getSeeCourses = async (req, res) => {
 }
 
 exports.getAllCours = async (req, res) => {
-    let data = {
+
+    let data1 = {
         flash: 'get cours',
         message: "success get cours",
     }
-    await db.query(`select prenom, titre, description from cours inner join users on cours.id_user = users.id;`, (err, data) => {
-        if (err) throw err;
 
-        if (MODE === "test") res.json(data)
+    await db.query(`select cours.id, prenom, titre, description from cours inner join users on cours.id_user = users.id;`, (err, data) => {
+        if (err) throw err;
+        
+        if (MODE === "test") res.json(data1)
 
         else res.render('admin', { title: 'Admin', layout: "admin", db: data });
     });
 }
 
 
-exports.updateCours = async (req, res) => {
+exports.updateCours = async (req, res) => {
     const { id } = req.params;
     const { titre, description, contenu } = req.body;
 
@@ -120,14 +122,17 @@ exports.deleteCours = async (req, res) => {
         flash: 'delete cours',
         message: "success delete cours",
     }
+
     
-    await db.query(`DELETE from cours WHERE id=${id}`, function (err, data) {
+    await db.query(`DELETE from cours WHERE id="${id}";`, function (err, data) {
         if (err) throw err;
         
-            if (MODE === "test") res.json(data)
+        if (MODE === "test"){ 
+           
+            res.json(data)
         
-            else res.render('admin', { title: 'Admin', layout: "admin"});
+        }
+        else res.redirect('/admin');
         
-        //else res.redirect('/admin');
     })
 }

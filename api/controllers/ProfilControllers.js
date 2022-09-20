@@ -23,7 +23,6 @@ exports.updateProfil = async (req, res) => {
         await db.query(`UPDATE users SET email="${email}" WHERE id="${id}"`, function (err, data) {
             if (err) throw err;
 
-            console.log(req.session);
             db.query(`SELECT * FROM users WHERE id=${req.session.user.id};`, (err, data) => {
                 if(err) throw err;
                 
@@ -51,7 +50,7 @@ exports.updateProfil = async (req, res) => {
         
         await db.query(`UPDATE users SET avatar="${req.file.completed}" WHERE id=${id};`);
 
-        console.log(req.session);
+        
         db.query(`SELECT * FROM users WHERE id=${req.session.user.id};`, (err, data) => {
             if(err) throw err;
             
