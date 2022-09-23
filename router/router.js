@@ -59,6 +59,9 @@ router.use(isAdmin)
 router.route('/Creationcours')
         .get(Creationcours)
         .post(upload.single('avatar'), postCours)
+router.route('/Creationcours/contenu/:id')
+        .get(getCours) 
+        .put(updateCours)
 
 // User + CRUD
 router.use(isAdmin)
@@ -66,7 +69,7 @@ router.route('/user')
         .get(getUsers)
 
 router.route('/user/:id')
-        .put(editOneUser)
+        .put(updateUser)
         .delete(deleteOneUser)
 
 // Admin
@@ -84,11 +87,11 @@ router.route('/admin/:id')
 
 
 // // /******************Page 404*********************/
-// router.use('*', function (req, res) {
-//     res.status(404).render("404", {
-//         layout: '404'
-//     });
-// });
+router.use('*', function (req, res) {
+    res.status(404).render("404", {
+        layout: '404'
+    });
+});
 // /****************** Fin Page 404*********************/
 
 

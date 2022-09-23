@@ -4,13 +4,14 @@ const mysql = require('mysql');
 require('dotenv').config()
 const { MODE } = process.env
 
-
+/* Fonction permettant de créer un cours */
 exports.postCours = (req, res) => {
     const { titre, description, contenu } = req.body;
     
     const { id_user } = req.session.user.id;
     const image = req.file ? req.file.filename : false;
 
+    /* On utilise la fonction mysql.escape() pour pouvoir échapé les caractères html */
     db.query(`INSERT INTO cours (titre, description ,contenu, id_user, image)
               VALUES ('${titre}', '${description}', ${mysql.escape(contenu)} ,'${req.session.user.id}', '${image}');`,
               (err, data, field) => {
@@ -21,6 +22,7 @@ exports.postCours = (req, res) => {
                 message: "Success create"
             })
             else {
+                // On affiche un message comme quoi l'insertion a été éffectuée avec succès et on renvoie l'utilisateur vers la page ou on liste les cours
                 console.log('Insertion effectuée avec succès');
                 res.redirect('/seecourses');
             }
@@ -29,9 +31,9 @@ exports.postCours = (req, res) => {
 
 }
 
+/* Fonction permettant de récupérer un cours et de l'affiché dans la page /cours/:id */
 exports.getCours = (req, res) => {
     let id = req.params.id;
-    console.log('1111111111111111111111111111111111111111111')
 
     db.query(`SELECT titre, description, contenu FROM cours where id='${id}';`, (err, data) => {
         if (err) throw err;
@@ -43,6 +45,7 @@ exports.getCours = (req, res) => {
     });
 }
 
+/* Fonction permettant de récupérer et d'afficher les cours */
 exports.getSeeCourses = async (req, res) => {
 
     await db.query(`SELECT id, titre, description, image FROM cours`, (err, data) => {
@@ -80,6 +83,8 @@ exports.getSeeCourses = async (req, res) => {
 
 }
 
+/* Fonction permettant d'afficher la liste des cours dans la page admin
+    On utilise un inner join afin de lier la table cours et la table users */
 exports.getAllCours = async (req, res) => {
 
     let data1 = {
@@ -87,6 +92,7 @@ exports.getAllCours = async (req, res) => {
         message: "success get cours",
     }
 
+    /* On n'oublie pas de spécifié la table pour cours.id afin d'éviter un conflit entre les ID */
     await db.query(`select cours.id, prenom, titre, description from cours inner join users on cours.id_user = users.id;`, (err, data) => {
         if (err) throw err;
         
@@ -96,25 +102,23 @@ exports.getAllCours = async (req, res) => {
     });
 }
 
-
+/* Fonction permettant de mettre à jour un cours */
 exports.updateCours = async (req, res) => {
     const { id } = req.params;
     const { titre, description, contenu } = req.body;
 
-    await db.query(`UPDATE cours SET titre="${titre}", description="${description}", contenu="${mysql.escape(contenu)}" WHERE id="${id}"`, function (err, data) {
-        if(err) throw err;
-        
-        
+    if (req.body.titre) await db.query(`UPDATE cours SET titre="${titre}" WHERE id="${id}";`);   
+    
+    if (req.body.description) await db.query(`UPDATE cours SET description="${description}" WHERE id="${id}";`);
+
+
         //res.redirect('/admin');
         if (MODE === "test") res.json({message: "success update"})
             
-        else res.render('admin', { title: 'Admin', layout: "admin"});
-
-        
-    })
-    //res.render('admin', { title: 'Admin', layout: "admin"});
+        else res.redirect('/admin');
 }
 
+/* Fonction permettant de supprimé un cours dans la base de donnée */
 exports.deleteCours = async (req, res) => {
     const { id } = req.params;
 

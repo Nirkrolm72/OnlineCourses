@@ -13,13 +13,16 @@
         color: white;
     }
 
+    .description{
+        text-align: center;
+    }
     .contenu{
-    
+        border: 1px solid black;
     }
 </style>
 
 {{#if db}}
-<header class="container-fluid header">
+<header class="container header">
     <h1 class="titreDuCours">{{db.titre}}</h1>
     <p class="description">{{db.description}}</p>
 </header>

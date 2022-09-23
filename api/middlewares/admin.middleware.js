@@ -1,3 +1,5 @@
+/* Middleware Admin */
+
 module.exports = {
     isAdmin: async (req, res, next) => {
       if(!req.session.user) return res.redirect('/connexion')

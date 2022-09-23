@@ -1,11 +1,17 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
+    service: "Outlook365",
+    host: 'smtp.office365.com',
+    secureConnection: false,
+    port: 587,
     auth: {
-        user: 'Guyon.Brandon.dev@gmail.com',
-        pass: 'rseyekjmvzqnrlku'
+        user: 'guyonbrandon@outlook.fr',
+        pass: 'Br26@n07don1997//' //rseyekjmvzqnrlku
+    },
+    tls: {
+        ciphers: 'SSLv3',
+        rejectUnauthorized: false
     }
 });
 

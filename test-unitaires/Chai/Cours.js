@@ -19,7 +19,7 @@ describe("CHAI // CONTROLLER // COURS", function () {
             .request(app)
             .post('/connexion')
             .set("Accept", "application/json")
-            .send({ email: "guyonbryan@gmail.com", password: "admin" })
+            .send({ email: "guyonbrandon@outlook.fr", password: "admin" })
             .end((err, res) => {
                 
                 if (err) return done(err);

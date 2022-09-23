@@ -80,6 +80,7 @@ db.connect((err) => {
   
 });
 
+// Déclaration du cookie
 var sessionStore = new MySQLStore(configDB);
 app.use(
   expressSession({
@@ -98,11 +99,6 @@ app.use('*', (req, res, next) => {
   next();
 })
 
-// app.use('*', function (req, res) {
-//   res.status(404).render("404", {
-//       layout: '404'
-//   });
-// });
 
 app.use('/api/v3', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

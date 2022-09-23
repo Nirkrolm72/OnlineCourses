@@ -13,13 +13,15 @@ const transporter = nodemailer.createTransport({
 	port: 587,
 	auth: {
 		user: 'guyonbrandon@outlook.fr',
-		pass: 'Br26@n07don1997//' //rseyekjmvzqnrlku
+		pass: 'Br26@n07don1997//' //rseyekjmvzqnrlku => google
 	},
 	tls: {
 		ciphers: 'SSLv3',
 		rejectUnauthorized: false
 	}
 });
+
+/* Fonction qui permet de se connecter */
 
 exports.connectUser = (req, res) => {
 	const { email, password } = req.body;
@@ -30,6 +32,8 @@ exports.connectUser = (req, res) => {
 		if (!data[0])
 			return res.render('connexion', { layout: 'connexion', flash: 'Ce compte n\'existe pas' });
 
+		/* On compare le mot de passe entré par l'utilisateur avec celui stocké dans la base de donnée
+			Si il y a une erreur on renvoie l'utilisateur vers la page de connxion avec un message d'erreur */
 		bcrypt.compare(password, data[0].password, async function (err, result) {
 			if (err) return res.render('connexion', { layout: 'connexion', flash: 'Une erreur est survenu !' });
 			if (result) {
@@ -54,9 +58,11 @@ exports.connectUser = (req, res) => {
 						pays: user.pays
 					};
 
+					/* Le mode test est pour les tests unitaires */
 					if (MODE === 'test') {
 						return res.json({ msg: 'ok login' })
 					} else {
+						console.log(req.session)
 						return res.redirect('/profil');
 
 					}
@@ -74,12 +80,13 @@ exports.connectUser = (req, res) => {
 	});
 }
 
-var rand, mailOptions, host, link;
 
+/* Fonction permettant d'inscrire un utilisateur */
 exports.inscripUser = async (req, res) => {
-	const saltRounds = 10;
+	const saltRounds = 10; // Permet de choisir la force de hachage plus elle est élévé et plus le mot de passe est difficile à forcer
 	const { nom, prenom, email, password, avatar, mobile, adresse, ville, codePostal, pays } = req.body;
 
+	// On crypte le mot de passe avec bcrypt
 	bcrypt.hash(password, saltRounds, function (err, hash) {
 		db.query(`INSERT INTO users (nom, prenom, email, password, avatar, isAdmin, isVisiteur, isVerified, mobile, adresse, ville ,codePostal, pays) VALUES ('${nom}', '${prenom}', '${email}', '${hash}', '${avatar}', 0, 0, 0, '${mobile}', '${adresse}', '${ville}', '${codePostal}', '${pays}');`, (err, rows, fields) => {
 			if (err) {
@@ -93,6 +100,7 @@ exports.inscripUser = async (req, res) => {
 
 }
 
+/* Fonction de déconnexion, on clear le cookie et on renvoie l'utilisateur vers la page d'accueil */
 exports.deconnexion = (req, res) => {
 	req.session.destroy(() => {
 		res.clearCookie('poti-gato');

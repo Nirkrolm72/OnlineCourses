@@ -2,6 +2,9 @@ const nodemailer = require('nodemailer');
 const db = require('../database/database');
 const jwt = require('jsonwebtoken');
 
+
+
+/* Fonction permettant d'envoyer un mail avec le formulaire de contact */
 exports.sendMailContact = (req, res) => {
     const { sujet, email, nomEtPrenom, description } = req.body;
 
@@ -22,7 +25,7 @@ exports.sendMailContact = (req, res) => {
 
     let mailData = {
         from: 'guyonbrandon@outlook.fr',
-        to: 'guyonbrandon@outlook.fr',
+        to: req.body.email,
         subject: req.body.sujet,
         text: req.body.description,
         html: `

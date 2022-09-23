@@ -7,6 +7,8 @@ const { isBuffer } = require('util');
 //     res.render('profil', { title: 'Profil', layout: 'profil' });
 // }
 
+/* Fonction permettant d'afficher le profil de l'utilisateur en récupérant toutes 
+  les informations définit dans la page inscription par l'utilisateur */
 exports.getProfilUser = async (req, res) => {
     await db.query('SELECT * FROM users', function (err, data) {
         if (err) throw err;
@@ -15,6 +17,7 @@ exports.getProfilUser = async (req, res) => {
     });
 }
 
+/* Fonction permettant de modifier les informations du profil de l'utilisateur */
 exports.updateProfil = async (req, res) => {
     const { id } = req.params;
     const {email} = req.body;
@@ -50,7 +53,7 @@ exports.updateProfil = async (req, res) => {
         
         await db.query(`UPDATE users SET avatar="${req.file.completed}" WHERE id=${id};`);
 
-        
+        // Mis à jour de la session
         db.query(`SELECT * FROM users WHERE id=${req.session.user.id};`, (err, data) => {
             if(err) throw err;
             

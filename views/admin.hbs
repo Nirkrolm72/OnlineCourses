@@ -100,19 +100,23 @@
 								<div class="modal-content">
 									<div class="modal-header">
 										<h5 class="modal-title" id="exampleModalLabel">Modifier</h5>
-										<button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+										<button type="button" class="btn-close" data-mdb-dismiss="modal"
+											aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
 										<div class="mb-3">
-											<input type="text" class="form-control" id="titre" name="titre" placeholder="Titre">
+											<input type="text" class="form-control" id="titre" name="titre"
+												placeholder="Titre">
 										</div>
 
 										<div class="mb-3">
-											<input type="text" class="form-control" id="description" name="description" placeholder="Description">
+											<input type="text" class="form-control" id="description" name="description"
+												placeholder="Description">
 										</div>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fermer</button>
+										<button type="button" class="btn btn-secondary"
+											data-mdb-dismiss="modal">Fermer</button>
 										<button type="submit" class="btn btn-primary">Modifier</button>
 									</div>
 								</div>
@@ -122,28 +126,35 @@
 				</td>
 				<td>
 					<!-- Button trigger modal -->
-					<button type="button" class="btn btn-danger" data-mdb-toggle="modal" data-mdb-target="#exampleModal1-{{this.id}}">Supprimer</button>
+					<button type="button" class="btn btn-danger" data-mdb-toggle="modal"
+						data-mdb-target="#exampleModal1-{{this.id}}">Supprimer</button>
 
 					<!-- Modal -->
 					<form action="/admin/{{this.id}}?_method=DELETE" method="post">
-						<div class="modal fade" id="exampleModal1-{{this.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal fade" id="exampleModal1-{{this.id}}" tabindex="-1"
+							aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
 										<h5 class="modal-title" id="exampleModalLabel">Supprimer</h5>
-										<button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+										<button type="button" class="btn-close" data-mdb-dismiss="modal"
+											aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
 										<h5>Souhaitez-vous vraiment supprimer ?</h5>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fermer</button>
+										<button type="button" class="btn btn-secondary"
+											data-mdb-dismiss="modal">Fermer</button>
 										<button type="submit" class="btn btn-danger">Supprimer</button>
 									</div>
 								</div>
 							</div>
 						</div>
 					</form>
+				</td>
+				<td>
+					<a href="/cours/{{this.id}}" class="btn btn-success">Voir</a>
 				</td>
 		</tbody>
 	</table>

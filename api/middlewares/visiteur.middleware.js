@@ -1,3 +1,5 @@
+/* Middleware Visiteur */
+
 module.exports = {
     isVisiteur: async (req, res, next) => {
       if(!req.session.user) return res.redirect('/connexion');

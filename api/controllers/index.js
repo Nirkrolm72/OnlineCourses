@@ -1,3 +1,6 @@
+// Index.js permet de lister toutes les fonctions qui seront utilisées
+
+
 // HOME
 const { home, connexion, profil ,contact, Creationcours, inscription, seeCourses, user, mdpOublie } = require('./HomeControllers');
 // AUTH
