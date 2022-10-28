@@ -36,6 +36,10 @@ a{
   
 }
 
+.navbar-toggler{
+  color: #000000 !important;
+}
+
 
 .menu1{
 display: flex;
@@ -108,6 +112,7 @@ align-items: center;
   position: relative;
   height: 100vh;
   background: url('../Ressources/header.jpg');
+  background-repeat: no-repeat;
 
 }
 
@@ -133,6 +138,13 @@ align-items: center;
   font-weight: bold;
   color: white;
   text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .main_text{
+    width: 100%;
+    font-size: 30px;
+  }
 }
 
 /************** FIN HEADER *********************/
